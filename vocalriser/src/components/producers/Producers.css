@@ -1,0 +1,39 @@
+.producer-page-container {
+    display: flex;
+}
+
+
+
+.each-producer {
+    display: flex;
+    flex-direction: row;
+    width: 800px;
+    height: 200px;
+    justify-content: baseline;
+    margin-bottom: 10%;
+    
+}
+.producers-container {
+    width: 800px;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    
+    flex-direction: column;
+}
+
+.each-producer-element {
+    margin-right: 15px 
+}
+
+
+.page-change {
+    cursor: pointer;
+    margin-right: 0.5%;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+}

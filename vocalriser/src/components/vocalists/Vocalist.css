@@ -1,0 +1,39 @@
+.vocalist-page-container {
+    display: flex;
+}
+
+
+
+.each-vocalist {
+    display: flex;
+    flex-direction: row;
+    width: 800px;
+    height: 200px;
+    justify-content: baseline;
+    margin-bottom: 10%;
+    
+}
+.vocalists-container {
+    width: 800px;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    
+    flex-direction: column;
+}
+
+.each-vocalist-element {
+    margin-right: 15px 
+}
+
+
+.page-change {
+    cursor: pointer;
+    margin-right: 0.5%;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+}
