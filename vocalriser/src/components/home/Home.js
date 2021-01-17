@@ -2,30 +2,30 @@ import React, { useState, useContext, useEffect } from 'react'
 import { Redirect } from 'react-router-dom';
 import UserContext from '../../contexts/user.context';
 import { requestCurrentUser } from '../helpers/auth.helper'
-
+import PianoPlay from '../piano'
 
 
 let Home = () => {
-    const [user,dispatch] = useContext(UserContext)
+    const [user, dispatch] = useContext(UserContext)
     const [login, setLogin] = useState('waiting')
 
-   useEffect(() => {
-      checkCurrentUser()
-   },[])
+    useEffect(() => {
+        checkCurrentUser()
+    }, [])
 
-   let checkCurrentUser = async () => {
-       console.log(user.token)
-    let result = await requestCurrentUser(user.token)
-    if(result) {
-     setLogin('success')
-    } else {
-     setLogin('failed')
+    let checkCurrentUser = async () => {
+        console.log(user.token)
+        let result = await requestCurrentUser(user.token)
+        if (result.status) {
+            setLogin('success')
+        } else {
+            setLogin('failed')
+        }
     }
-   }
 
     if (login === 'waiting') {
         return (
-            <p>Loading...</p>
+            <PianoPlay width={1000}/>
         )
     }
     else if (login === 'failed') {
@@ -36,7 +36,7 @@ let Home = () => {
     else {
         return (
             <div>
-   Home
+                <PianoPlay  width={1000}/>
             </div>
         )
     }

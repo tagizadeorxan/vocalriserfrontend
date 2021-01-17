@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import { Redirect } from 'react-router-dom';
 import UserContext from '../../contexts/user.context';
 import { requestCurrentUser } from '../helpers/auth.helper'
-
+import PianoPlay from '../piano'
 
 
 const Jobs = () => {
@@ -15,7 +15,7 @@ const Jobs = () => {
 
    let checkCurrentUser = async () => {
     let result = await requestCurrentUser(user.token)
-    if(result) {
+    if(result.status) {
      setLogin('success')
     } else {
      setLogin('failed')
@@ -24,7 +24,7 @@ const Jobs = () => {
 
     if (login === 'waiting') {
         return (
-          <p>loading</p>
+         <PianoPlay width={300} classAdd="loading"/>
         )
     }
     else if (login === 'failed') {

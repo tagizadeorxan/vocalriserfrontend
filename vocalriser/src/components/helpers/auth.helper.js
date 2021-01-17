@@ -1,4 +1,8 @@
+import React, {useContext} from 'react'
 import Utils from '../utils/common.utils'
+
+
+
 
 
 export let requestLogin = async (data) => {
@@ -35,7 +39,12 @@ export let requestLogin = async (data) => {
 }
 
 export let requestCurrentUser = async (token) => {
-    let result;
+  
+    let result = {
+        status: false,
+        data:{},
+        errorMessage:''
+    }
 
     let options = {
         headers: {
@@ -48,10 +57,13 @@ export let requestCurrentUser = async (token) => {
     await fetch(`${Utils.url}/api/v1/users/whoami`, options)
         .then(res => {
             if (res.status === 200) {
-                result = true
-            } else {
-                result = false
-            }
+                result.status = true
+                return res.json()
+            } 
+        })
+        .then(res=> result.data = res)
+        .catch(error => {
+            result.errorMessage = "Please try again later"
         })
 
     return result

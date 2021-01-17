@@ -1,0 +1,34 @@
+.profile-section-one {
+  width: 500px;
+  margin-top: 5%;
+  margin-left: 5%;
+  height: 800px;
+  padding: 2%;
+}
+
+.profile-section-two {
+  margin-top: 5%;
+  margin-left: 5%;
+  height: 800px;
+  width: 1000px;
+  padding: 2%;
+}
+
+.profile-section {
+  display: flex;
+}
+
+.profile-section-one-each {
+  margin-top: 3%;
+  align-items: center;
+}
+
+.profile-section-two-each {
+  margin-top: 2%;
+}
+
+.profile-section-one-each span {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}

@@ -7,24 +7,25 @@
 .each-producer {
     display: flex;
     flex-direction: row;
-    width: 800px;
-    height: 200px;
+    width: 100%;
+    height: 250px;
     justify-content: baseline;
-    margin-bottom: 10%;
+    margin-bottom: 5%;
+    padding:20px;
     
 }
 .producers-container {
-    width: 800px;
+    width: 100%;
     margin-top: 5%;
     margin-left: auto;
     margin-right: auto;
     display: flex;
-    
     flex-direction: column;
 }
 
 .each-producer-element {
-    margin-right: 15px 
+    margin-right: 15px; 
+    margin-top:30px;
 }
 
 

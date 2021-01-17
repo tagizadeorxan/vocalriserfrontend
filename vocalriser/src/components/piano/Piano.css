@@ -1,0 +1,15 @@
+.ReactPiano__Key--active {
+    background: orangered;  /* Change the default active key color to bright red */
+  }
+  
+  .ReactPiano__Key--accidental {
+    background: #394b59;  /* Change accidental keys to be completely black */
+  }
+
+  .piano {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+
+  }
+

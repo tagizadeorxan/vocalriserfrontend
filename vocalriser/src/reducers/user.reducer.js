@@ -20,7 +20,8 @@ const userReducer = (state,action) => {
             }
         case "USER":
             return {
-                ...state
+                ...state,
+                user:action.payload
             }
         case "VOCALISTS":
             return {
@@ -32,7 +33,6 @@ const userReducer = (state,action) => {
                  ...state,
                  producers:action.payload
         }
-        
         default:
             return state
     }

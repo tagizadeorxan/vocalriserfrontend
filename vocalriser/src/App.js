@@ -9,6 +9,7 @@ import Footer from './components/footer'
 import Producers from './components/producers'
 import Jobs from './components/Jobs'
 import Profile from './components/profile'
+import EachProfile from './components/eachprofile'
 import "@blueprintjs/core/lib/css/blueprint.css"
 import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 
@@ -30,6 +31,10 @@ function App() {
 
 <UserProvider>
   <Header />
+
+<Route exact path="/profiles/:id" component={EachProfile}/>
+    
+
   <Route exact path="/">
     <Login />
   </Route>
