@@ -56,13 +56,26 @@ const Vocalists = () => {
     }
 
     const setSearchData = (data) => {
-        let filterVocalists = user.vocalists.filter(v => {
-            for (let key in data) {
-                return v[key].toLowerCase().includes(data[key].toLowerCase())
-            }
-        })
-        setPageSize(Math.ceil(filterVocalists.length === 0 ? filterVocalists.length + 1 / 2 : filterVocalists.length / 2))
-        setVocalists(filterVocalists)
+ 
+        setPageSize(1)
+        if (Object.keys(data).length === 0) {
+            setVocalists(user.vocalists)
+            setPageSize(Math.ceil(user.vocalists.length === 0 ? (user.vocalists.length + 1) / 2 : user.vocalists.length / 2))
+
+        } else {
+            let filterVocalists = user.vocalists.filter(v => {
+                for (let key in data) {
+                    if (!v[key].toLowerCase().includes(data[key].toLowerCase()))
+                        return false
+                }
+                return true
+            })
+
+            setVocalists(filterVocalists)
+            setPageSize(Math.ceil(filterVocalists.length === 0 ? filterVocalists.length + 1 / 2 : filterVocalists.length / 2))
+        }
+
+
     }
 
     let checkCurrentUser = async () => {

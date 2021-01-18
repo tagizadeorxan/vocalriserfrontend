@@ -11,7 +11,7 @@ const Profile = () => {
     const [user, dispatch] = useContext(UserContext)
     const [login, setLogin] = useState('waiting')
     let [selected, setSelected] = useState('video')
-    let [section,setSection] = useState()
+    let [section, setSection] = useState()
 
     useEffect(() => {
         checkCurrentUser()
@@ -33,7 +33,7 @@ const Profile = () => {
 
     if (login === 'waiting') {
         return (
-            <PianoPlay />
+            <PianoPlay width={300} classAdd="loading" />
         )
     }
     else if (login === 'failed') {
@@ -45,7 +45,7 @@ const Profile = () => {
     else {
         return (
             <div className="profile-section">
-                <div onMouseEnter={()=>setSection(1)} onMouseLeave={()=>setSection(0)} className={`bp3-card bp3-elevation-${section === 1? '4':'2'} .modifier profile-section-one`}>
+                <div onMouseEnter={() => setSection(1)} onMouseLeave={() => setSection(0)} className={`bp3-card bp3-elevation-${section === 1 ? '4' : '2'} .modifier profile-section-one`}>
                     <div className="profile-section-one-each">
                         <img alt="user" style={{ width: '100px' }} src="https://www.mountainheavensella.com/wp-content/uploads/2018/12/default-user.png" />
                     </div>
@@ -75,7 +75,7 @@ const Profile = () => {
                                 parseFloat(user.user.raiting) > 4 ? 'success' : 'warning'}`}>{user.user.raiting}</span>}
                     </div>
                 </div>
-                <div onMouseEnter={()=>setSection(2)} onMouseLeave={()=>setSection(0)} className={`bp3-card bp3-elevation-${section === 2? '4':'2'} .modifier profile-section-two`}>
+                <div onMouseEnter={() => setSection(2)} onMouseLeave={() => setSection(0)} className={`bp3-card bp3-elevation-${section === 2 ? '4' : '2'} .modifier profile-section-two`}>
                     <div className="profile-section-two-each">
                         <Waveform url={user.user.track_url} title={user.user.track_title} />
                     </div>

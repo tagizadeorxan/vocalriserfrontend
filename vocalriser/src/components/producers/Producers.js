@@ -57,13 +57,26 @@ const Producers = () => {
 
 
     const setSearchData = (data) => {
-        let filterProducers = user.producers.filter(p => {
-            for (let key in data) {
-                return p[key].toLowerCase().includes(data[key].toLowerCase())
-            }
-        })
-        setPageSize(Math.ceil(filterProducers.length === 0 ? filterProducers.length + 1 / 2 : filterProducers.length / 2))
-        setProducers(filterProducers)
+
+        setPageSize(1)
+        if (Object.keys(data).length === 0) {
+            setProducers(user.producers)
+            setPageSize(Math.ceil(user.producers.length === 0 ? (user.producers.length + 1) / 2 : user.producers.length / 2))
+
+        } else {
+            let filterProducers = user.producers.filter(p => {
+                for (let key in data) {
+                    if (!p[key].toLowerCase().includes(data[key].toLowerCase()))
+                        return false
+                }
+                return true
+            })
+
+            setProducers(filterProducers)
+            setPageSize(Math.ceil(filterProducers.length === 0 ? filterProducers.length + 1 / 2 : filterProducers.length / 2))
+        }
+
+
     }
 
     let checkCurrentUser = async () => {

@@ -7,7 +7,8 @@ let userState = {
     isLogged:false,
     token:localStorage.getItem('vocalrisertoken') || '',
     vocalists:[],
-    producers:[]
+    producers:[],
+    gigs:[]
  }
 
 

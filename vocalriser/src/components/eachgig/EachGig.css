@@ -1,0 +1,13 @@
+.each-gig-container {
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+    flex-direction: column;
+}
+
+.each-gig-element {
+    margin-bottom: 1%;
+}

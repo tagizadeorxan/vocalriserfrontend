@@ -33,6 +33,11 @@ const userReducer = (state,action) => {
                  ...state,
                  producers:action.payload
         }
+        case "GIGS":
+            return {
+                ...state,
+                gigs: action.payload
+            }
         default:
             return state
     }

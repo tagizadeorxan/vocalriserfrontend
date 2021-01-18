@@ -10,6 +10,7 @@ import Producers from './components/producers'
 import Jobs from './components/Jobs'
 import Profile from './components/profile'
 import EachProfile from './components/eachprofile'
+import EachGig from './components/eachgig'
 import "@blueprintjs/core/lib/css/blueprint.css"
 import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 
@@ -27,42 +28,42 @@ function App() {
     <div>
 
 
-   <Router>
+      <Router>
 
-<UserProvider>
-  <Header />
+        <UserProvider>
+          <Header />
 
-<Route exact path="/profiles/:id" component={EachProfile}/>
-    
+          <Route exact path="/profiles/:id" component={EachProfile} />
+          <Route exact path="/gigs/:id" component={EachGig} />
 
-  <Route exact path="/">
-    <Login />
-  </Route>
-  <Route exact path="/home">
-    <Home />
-  </Route>
-  <Route exact path="/registration">
-    <Register />
-  </Route>
-  <Route exact path='/vocalists'>
-    <Vocalists />
-  </Route>
-  <Route exact path='/producers'>
-    <Producers />
-  </Route>
-  <Route exact path='/jobs'>
-    <Jobs />
-  </Route>
-  <Route exact path="/profile">
-    <Profile/>
-  </Route>
-  <Footer />
-</UserProvider>
+          <Route exact path="/">
+            <Login />
+          </Route>
+          <Route exact path="/home">
+            <Home />
+          </Route>
+          <Route exact path="/registration">
+            <Register />
+          </Route>
+          <Route exact path='/vocalists'>
+            <Vocalists />
+          </Route>
+          <Route exact path='/producers'>
+            <Producers />
+          </Route>
+          <Route exact path='/jobs'>
+            <Jobs />
+          </Route>
+          <Route exact path="/profile">
+            <Profile />
+          </Route>
+          <Footer />
+        </UserProvider>
 
-</Router>
+      </Router>
 
     </div>
- 
+
   );
 }
 
