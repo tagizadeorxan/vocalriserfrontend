@@ -1,60 +1,51 @@
 .vocalist-page-container {
-    display: flex;
+  display: flex;
 }
-
-
 
 .each-vocalist {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 250px;
-    justify-content: baseline;
-    margin-bottom: 5%;
-    
-  
-    
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: baseline;
+  margin-bottom: 5%;
 }
+
 .vocalists-container {
-    width: 100%;
-    margin-top: 5%;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    flex-direction: column;
+  width: 800px;
+  margin-top: 5%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .each-vocalist-element {
-    margin-right: 15px; 
-    margin-top:15px;
-
-
+  margin-right: 15px;
+  margin-top: 15px;
 }
 
-
 .page-change {
-    cursor: pointer;
-    margin-right: 0.5%;
+  cursor: pointer;
+  margin-right: 0.5%;
 }
 
 .pagination {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
-
 .loading {
-    animation-name: spin;
-    animation-duration: 5000ms;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-  }
+  animation-name: spin;
+  animation-duration: 5000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
 
-  @keyframes spin {
-    from {
-        transform:rotate(0deg);
-    }
-    to {
-        transform:rotate(360deg);
-    }
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

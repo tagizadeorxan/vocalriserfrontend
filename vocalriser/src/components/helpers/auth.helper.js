@@ -29,7 +29,9 @@ export let requestLogin = async (data) => {
             } else if (res.status === 401) {
                 result.error = res.message
             } else {
-                result.user = res
+                if(res) {
+                    result.user = res
+                }
             }
         })
         .catch(error => {
@@ -56,12 +58,17 @@ export let requestCurrentUser = async (token) => {
     }
     await fetch(`${Utils.url}/api/v1/users/whoami`, options)
         .then(res => {
+            console.log(res)
             if (res.status === 200) {
                 result.status = true
                 return res.json()
             } 
         })
-        .then(res=> result.data = res)
+        .then(res=> {
+            if(res) {
+                result.data = res
+            }
+        })
         .catch(error => {
             result.errorMessage = "Please try again later"
         })

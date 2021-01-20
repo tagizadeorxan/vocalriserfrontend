@@ -1,13 +1,61 @@
 .each-gig-container {
-    width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    justify-content: center;
-    margin-top: 5%;
-    flex-direction: column;
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+  flex-direction: column;
 }
 
 .each-gig-element {
-    margin-bottom: 1%;
+  margin-bottom: 1%;
 }
+
+.bid-area {
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 1%;
+  flex-direction: column;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.each-bid {
+  display: flex;
+  flex-direction: row;
+  height: 250px;
+  justify-content: baseline;
+  margin-bottom: 2%;
+  padding: 20px;
+  position: relative;
+}
+
+.each-bid-element {
+  margin-right: 15px;
+  margin-top: 30px;
+  position: static;
+}
+
+#waveform {
+    width: 350px;
+}
+
+.remove-bid {
+  margin-top: 25%;
+}
+
+
+

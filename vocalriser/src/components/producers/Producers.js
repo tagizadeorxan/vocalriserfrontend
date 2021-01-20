@@ -80,6 +80,7 @@ const Producers = () => {
     }
 
     let checkCurrentUser = async () => {
+        console.log(user.token)
         let result = await requestCurrentUser(user.token)
         if (result.status) {
             setLogin('success')
@@ -108,10 +109,10 @@ const Producers = () => {
 
                         {producers.length > 0 ? producers.slice((currentPage - 1) * 2, currentPage * 2).map((producer, index) => <div key={index}>
                             <blockquote  className="bp3-blockquote each-producer bp3-card bp3-interactive">
-                                <div className="each-producer-element">
+                                <div className="each-producer-element" style={{width:'100px'}}>
                                     <img alt="user" style={{ width: '100px' }} src="https://www.mountainheavensella.com/wp-content/uploads/2018/12/default-user.png" />
                                 </div>
-                                <div className="each-producer-element" style={{ width: '250px' }}>
+                                <div className="each-producer-element" style={{ width: '500px' }}>
                                   <NavLink to={`/profiles/${producer.id}`}> <h1 className="bp3-heading">{producer.first_name} {producer.last_name} </h1></NavLink> 
                                     <span style={{ marginLeft: '1%' }} className="bp3-tag .modifier">{producer.age}</span>
                                     <span style={{ marginLeft: '1%' }} className="bp3-tag .modifier">{producer.gender}</span>

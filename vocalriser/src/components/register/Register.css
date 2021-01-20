@@ -1,19 +1,18 @@
 .register-container {
-    margin-top: 5%;
-    width: 300px;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    justify-content: space-around;
-    flex: 3;
-    flex-direction: column;
-  }
-  
-  .register-general {
-      margin-top: 5%;
-  }
-  
-  .register-error {
-      color:red;
-  }
-  
+  margin-top: 5%;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-around;
+  flex: 3;
+  flex-direction: column;
+}
+
+.register-general {
+  margin-top: 5%;
+}
+
+.register-error {
+  color: red;
+}

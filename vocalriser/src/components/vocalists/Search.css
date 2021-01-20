@@ -1,11 +1,11 @@
 .search-container {
-    display: flex;
-    flex-direction: column;
-    width: 500px;
-    margin-top: 2.5%;
-    margin-left: 1%;
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  margin-top: 2.5%;
+  margin-left: 1%;
 }
 
 .search-container-field {
-    margin-bottom: 5%;
+  margin-bottom: 5%;
 }

@@ -105,7 +105,7 @@ const Jobs = () => {
                                 <div className="each-job-element">
                                     {/* <img alt="user" style={{ width: '100px' }} src="https://www.mountainheavensella.com/wp-content/uploads/2018/12/default-user.png" /> */}
                                 </div>
-                                <div className="each-job-element" style={{ width: '250px' }}>
+                                <div className="each-job-element" style={{ width: '500px' }}>
                                     <Link to={`/gigs/${gig.id}`}> <h1 className="bp3-heading">{gig.name}</h1></Link>
                                     <span style={{ marginLeft: '1%' }} className="bp3-tag .modifier">{gig.bpm}</span>
                                     <span style={{ marginLeft: '1%' }} className="bp3-tag .modifier">{gig.genre}</span>
@@ -117,7 +117,7 @@ const Jobs = () => {
                                             <li onClick={() => panelSelect('budget')} className="bp3-tab" role="tab" aria-selected={selected === 'budget' ? true : false}>Budget</li>
                                         </ul>
                                         <div className="bp3-tab-panel" role="tabpanel" aria-hidden={selected === 'requirements' ? false : true}>
-                                            <span style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp3-tag .modifier">{gig.requirements}</span>
+                                            <span style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp3-tag .modifier">{gig.requirements.substring(0, 30)}...</span>
                                         </div>
                                         <div className="bp3-tab-panel" role="tabpanel" aria-hidden={selected === 'language' ? false : true}>
                                             <span style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp3-tag .modifier">{gig.language}</span>

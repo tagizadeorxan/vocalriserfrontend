@@ -11,12 +11,14 @@ import Jobs from './components/Jobs'
 import Profile from './components/profile'
 import EachProfile from './components/eachprofile'
 import EachGig from './components/eachgig'
+import NoMatch from './components/nomatch'
+
 import "@blueprintjs/core/lib/css/blueprint.css"
 import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 
 import {
   BrowserRouter as Router,
-  Route
+  Route, Switch
 } from "react-router-dom";
 import './App.css';
 
@@ -32,7 +34,7 @@ function App() {
 
         <UserProvider>
           <Header />
-
+          <Switch>
           <Route exact path="/profiles/:id" component={EachProfile} />
           <Route exact path="/gigs/:id" component={EachGig} />
 
@@ -57,6 +59,8 @@ function App() {
           <Route exact path="/profile">
             <Profile />
           </Route>
+          <Route component={NoMatch}/>
+          </Switch>
           <Footer />
         </UserProvider>
 

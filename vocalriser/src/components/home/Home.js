@@ -25,7 +25,7 @@ let Home = () => {
 
     if (login === 'waiting') {
         return (
-            <PianoPlay width={1000}/>
+            <PianoPlay width={300}/>
         )
     }
     else if (login === 'failed') {

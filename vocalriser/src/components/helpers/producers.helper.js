@@ -16,7 +16,11 @@ export let getProducers = async (token) => {
             if (res.status === 200) {
                 return res.json()
             } 
-        }).then(res=> result = res)
+        }).then(res=>{
+            if(res) {
+                result = res
+            }
+        })
          .catch(err =>
              console.log(err)
          )

@@ -1,28 +1,150 @@
 import React, { useContext, useState, useEffect } from 'react'
 import UserContext from '../../contexts/user.context'
 import { requestCurrentUser } from '../helpers/auth.helper'
-import { getGigByID } from '../helpers/gig.helper'
+import { getGigByID, getGigBiddings, removeBid, submitBid, closeGigByID, awardGigByID, getBidExist } from '../helpers/gig.helper'
 import { Redirect } from 'react-router-dom';
 import Waveform from '../waveform'
 import PianoPlay from '../piano'
 import './EachGig.css'
+import { NavLink } from 'react-router-dom'
+import Utils from '../utils/common.utils'
 
 const EachGig = (props) => {
     const [user, dispatch] = useContext(UserContext)
     const [login, setLogin] = useState('waiting')
     const [viewedGig, setViewGig] = useState()
-
+    const [bidError, setBidError] = useState('')
+    const [bidExist, setBidExist] = useState(false)
+    const [biddings, setBiddings] = useState([])
+    const [userBid, setUserBid] = useState()
+    const bidRef = React.createRef()
+    const [selected, setSelected] = useState('genres')
 
     useEffect(() => {
         checkCurrentUser()
     }, [])
 
+    const panelSelect = (type) => {
+        setSelected(type)
+    }
+
+    const handleBid = async () => {
+
+        setBidError('')
+        if (bidRef.current.value > viewedGig.budgetMax) {
+            setBidError('max')
+        } else if (bidRef.current.value < viewedGig.budgetMin) {
+            setBidError('min')
+        } else {
+            setBidError('')
+            let refresh = await handleRefreshBid()
+            let bidExist = await getBidExist(user.user.id, user.token)
+
+            if (bidExist) {
+                setBiddings(refresh)
+            } else {
+                let bid = {
+                    gig_id: viewedGig.id,
+                    user_id: user.user.id,
+                    amount: bidRef.current.value,
+                    full_name: `${user.user.first_name} ${user.user.last_name}`,
+                    track_url: user.user.track_url,
+                    track_title: user.user.track_title,
+                    soundslike: user.user.soundslike
+                }
+
+                let result = await submitBid(bid, user.token)
+
+                if (result) {
+                    window.location.reload(true)
+                }
+            }
+        }
+    }
+
+
+    const handleRefreshGig = async () => {
+        let result = false;
+        let viewedGig = await getGigByID(props.match.params.id, user.token)
+        if (viewedGig) {
+            result = viewedGig
+        }
+        return result
+    }
+
+    const closeGig = async () => {
+        let refresh = await handleRefreshGig()
+        if (refresh) {
+            if (refresh.active === 0) {
+                setViewGig(refresh)
+            } else {
+
+                let result = await closeGigByID(viewedGig.id, user.token)
+                if (result) {
+                    let updatedGig = { ...viewedGig, active: 0 }
+                    setViewGig(updatedGig)
+                }
+            }
+        }
+    }
+
+    const awardGig = async (user_id) => {
+        let refresh = await handleRefreshGig()
+        if (refresh) {
+            if (viewedGig.active === 2) {
+                console.log("ora")
+                setViewGig(refresh)
+            } else {
+
+                let result = await awardGigByID(viewedGig.id, user_id, user.token)
+                if (result) {
+                    console.log("bura")
+                    console.log(viewedGig.awardedUser)
+                    let updatedGig = { ...viewedGig, active: 2, awardedUser: user_id }
+                    setViewGig(updatedGig)
+                }
+            }
+        }
+    }
+
+    const handleRefreshBid = async () => {
+        let result = false;
+        let biddings = await getGigBiddings(props.match.params.id, user.token)
+        if (biddings) {
+            result = biddings
+        }
+        return result
+
+    }
+
+
+
+    const handleRemove = async (bid) => {
+        let refresh = await handleRefreshBid()
+        let bidExist = await getBidExist(bid.user_id, user.token)
+        if (refresh) {
+            if (bidExist) {
+                if (bid.user_id === user.user.id) {
+                    console.log(bid.id)
+                    let result = await removeBid(bid.id, user.token)
+                    if (result) {
+                        window.location.reload()
+                    }
+                }
+
+            } else {
+                console.log("already removed")
+                setBiddings(refresh)
+            }
+        }
+
+    }
+
     let checkCurrentUser = async () => {
-
-
-
+        setBidExist(false)
         console.log(user.token)
         let result = await requestCurrentUser(user.token)
+        console.log(result)
         if (result.status) {
             await dispatch({
                 type: "USER",
@@ -30,9 +152,25 @@ const EachGig = (props) => {
             })
             console.log(props)
             let viewedGig = await getGigByID(props.match.params.id, user.token)
+            let biddings = await getGigBiddings(props.match.params.id, user.token)
+            console.log(result.data)
+
             console.log(viewedGig)
             if (viewedGig) {
                 setViewGig(viewedGig)
+                setBiddings(biddings)
+                let userBid = false;
+                console.log(biddings)
+                if (biddings) {
+                    userBid = biddings.find(x => x.user_id === result.data.id)
+                }
+                console.log(userBid)
+                if (userBid) {
+                    setBidExist(true)
+                    setUserBid(userBid)
+                } else {
+                    setBidExist(false)
+                }
                 setLogin('success')
             } else {
                 setLogin('waiting')
@@ -43,7 +181,7 @@ const EachGig = (props) => {
         }
     }
 
-    if (login === 'waiting') {
+    if (login === 'waiting' ) {
         return (
             <PianoPlay width={400} />
         )
@@ -54,39 +192,107 @@ const EachGig = (props) => {
 
         )
     }
-    else {
+    else if(viewedGig.length<=0) {
         return (
-            <div className="bp3-card each-gig-container">
-                <div className="each-gig-element">
-                    <h1 className="bp3-heading">{viewedGig.name}</h1>
-                </div>
-                <div className="each-gig-element">
-                    <Waveform url={viewedGig.track_url} title={viewedGig.name} />
-                </div>
+            <Redirect push to="/jobs"/>
+        )
+    }
+    else {
 
-                <div className="each-gig-element">
-                    Created date:<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className="bp3-tag .modifier">{new Date(viewedGig.createDate).toLocaleDateString("sq-AL", { year: 'numeric', month: '2-digit', day: '2-digit' })}</span>
-                </div>
+        return (
+            <div>
+                <div className="bp3-card each-gig-container">
+                    <div className="each-gig-element">
+                        <h1 className="bp3-heading">{viewedGig.name}</h1>
+                        <span className={`bp3-tag bp3-intent-${viewedGig.active === 1 ? 'warning' : viewedGig.active === 2 ? 'success' : 'danger'}`}>
+                            {viewedGig.active === 1 ? 'active' : viewedGig.active === 2 ? 'Awarded' : 'Closed'}</span>
 
-                <div className="each-gig-element">
-                    Looking for:<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className="bp3-tag .modifier">{viewedGig.type === 'V' ? 'vocalist' : 'producer'}</span>
-                </div>
-                <div className="each-gig-element">
-                    Language:<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className="bp3-tag .modifier">{viewedGig.language}</span>
+                    </div>
+                    {viewedGig.active === 1 ? <button onClick={closeGig} style={{ width: "10%" }} className="bp3-button bp3-intent-danger bp3-outlined bp3-small">Close</button> : null}
+                    <div className="each-gig-element">
+                        <Waveform url={viewedGig.track_url} title={viewedGig.name} />
+                    </div>
+
+                    <div className="each-gig-element">
+                        Created date:<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className="bp3-tag .modifier">{new Date(viewedGig.createDate).toLocaleDateString("sq-AL", { year: 'numeric', month: '2-digit', day: '2-digit' })}</span>
+                    </div>
+
+                    <div className="each-gig-element">
+                        Looking for:<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className="bp3-tag .modifier">{viewedGig.type === 'V' ? 'vocalist' : 'producer'}</span>
+                    </div>
+                    <div className="each-gig-element">
+                        Language:<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className="bp3-tag .modifier">{viewedGig.language}</span>
                     Genre:<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className="bp3-tag .modifier">{viewedGig.genre}</span>
                     BPM:<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className="bp3-tag .modifier">{viewedGig.bpm}</span>
-                </div>
-                <div className="each-gig-element">
-                    Created by:<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className="bp3-tag .modifier">{viewedGig.createdBy}</span>
-                    Budget:<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className="bp3-tag .modifier">{viewedGig.budgetMin}</span>
-         -<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className="bp3-tag .modifier">{viewedGig.budgetMax}</span>USD
-</div>
+                    </div>
+                    <div className="each-gig-element">
+                        Created by:<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className="bp3-tag .modifier">{viewedGig.createdBy}</span>
+                    Budget:<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className={`bp3-tag .modifier bp3-intent-${bidError === 'min' ? 'danger' : 'success'}`}>{viewedGig.budgetMin}</span>
+                    -<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className={`bp3-tag .modifier bp3-intent-${bidError === 'max' ? 'danger' : 'success'}`}>{viewedGig.budgetMax}</span>{Utils.currency}
+               </div>
 
-                <div className="each-gig-element">
-                    Requirements:<p></p><span style={{ marginBottom: '1%', marginRight: '1%' }} className="bp3-tag .modifier">{viewedGig.requirements}</span>
+                    <div className="each-gig-element">
+                        Requirements:<p></p><span style={{ marginBottom: '1%', marginRight: '1%' }} className="bp3-tag .modifier">{viewedGig.requirements}</span>
+                    </div>
+
+                </div>
+                <div className="bp3-card bid-area">
+
+                    {bidExist ? <div>
+                        Your bid is: <span className="bp3-tag">{userBid.amount}</span>
+                    </div> : viewedGig.user_id === user.user.id || viewedGig.active !== 1 ? null : <div>
+                        <input ref={bidRef} className="bp3-input bp3-intent-primary bp3-large  .modifier" type="number" placeholder="Your bid" dir="auto" />
+                        <button onClick={handleBid} style={{ marginLeft: '1%' }} type="button" className="bp3-button bp3-intent-success bp3-large .modifier">Submit</button>
+                    </div>}
                 </div>
 
+                <div className="bp3-card bid-area">
+                    {biddings.length > 0 ? biddings.map((bid, index) => <div key={index}>
+                        <blockquote className="bp3-blockquote each-bid bp3-card bp3-interactive" >
+
+
+                            <div className="each-bid-element">
+                           <div style={{textAlign:'center'}}> <span className="bp3-tag " >{bid.amount} {Utils.currency}</span></div>
+                                <img alt="user" style={{ width: '100px',padding:"5%" }} src="https://www.mountainheavensella.com/wp-content/uploads/2018/12/default-user.png" />
+                                {viewedGig.awardedUser === user.user.id ? <div style={{ marginTop: '7%', textAlign: "center" }}><span className={`bp3-tag bp3-intent-success`}>Successfull bid</span></div> : null}
+                                {bidExist && bid.user_id === user.user.id && viewedGig.user_id !== user.user.id && viewedGig.active === 1 ? <div style={{textAlign: "center"}}><button onClick={() => handleRemove(bid)}  className="bp3-button bp3-intent-danger remove-bid">remove Bid</button></div> : null}
+                                {viewedGig.user_id === user.user.id && viewedGig.active === 1 ? <div style={{textAlign: "center"}}><button onClick={() => awardGig(bid.user_id)}  className="bp3-button bp3-intent-success remove-bid">Award Gig</button></div> : null}
+                            </div>
+                            <div className="each-bid-element" style={{ width: '250px' }}>
+                                <NavLink to={`/profiles/${bid.user_id}`}> <h1 className="bp3-heading">{bid.full_name} </h1></NavLink>
+
+                                <div className="bp3-tabs">
+                                    <ul className="bp3-tab-list .modifier" role="tablist">
+                                        <li onClick={() => panelSelect('genres')} className="bp3-tab" role="tab" aria-selected={selected === 'genres' ? true : false}>Genres</li>
+                                        <li onClick={() => panelSelect('microphones')} className="bp3-tab" role="tab" aria-selected={selected === 'microphones' ? true : false}>Microphone</li>
+                                        <li onClick={() => panelSelect('soundslike')} className="bp3-tab" role="tab" aria-selected={selected === 'soundslike' ? true : false}>Sounds like</li>
+                                    </ul>
+                                    <div className="bp3-tab-panel" role="tabpanel" aria-hidden={selected === 'genres' ? false : true}>
+                                        {bid.genres.split(',').map((g, i) => <span key={i} style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp3-tag .modifier">{g}</span>)}
+                                    </div>
+                                    <div className="bp3-tab-panel" role="tabpanel" aria-hidden={selected === 'microphones' ? false : true}>
+                                        {bid.microphone.split(',').map((m, i) => <span key={i} style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp3-tag .modifier">{m}</span>)}
+                                    </div>
+                                    <div className="bp3-tab-panel" role="tabpanel" aria-hidden={selected === 'soundslike' ? false : true}>
+                                        {bid.soundslike.split(',').map((s, i) => <span key={i} style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp3-tag .modifier">{s}</span>)}
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div className="each-bid-element" style={{ marginTop: '0%' }}>
+                                <Waveform url={bid.track_url} title={bid.track_title} className="bid-waveform" />
+
+                            </div>
+                            <div>
+
+
+                            </div>
+
+                        </blockquote>
+                    </div>) : null}
+                </div>
             </div>
+
         )
     }
 }

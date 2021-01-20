@@ -55,7 +55,15 @@ const EachProfile = (props) => {
 
         )
     }
+    
+    else if (!viewUser.hasOwnProperty('id')) {
+       props.history.goBack()
+        return (
+            <p></p>
+        )
+    }
     else {
+      
         return (
             <div className="profile-section">
                 <div onMouseEnter={()=>setSection(1)} onMouseLeave={()=>setSection(0)} className={`bp3-card bp3-elevation-${section === 1? '4':'2'} .modifier profile-section-one`}>

@@ -107,10 +107,10 @@ const Vocalists = () => {
 
                         {vocalists.length > 0 ? vocalists.slice((currentPage - 1) * 2, currentPage * 2).map((vocalist, index) => <div key={index}>
                             <blockquote className="bp3-blockquote bp3-card bp3-interactive each-vocalist">
-                                <div className="each-vocalist-element">
+                                <div className="each-vocalist-element" style={{width:'100px'}}>
                                     <img alt="user" style={{ width: '100px' }} src="https://www.mountainheavensella.com/wp-content/uploads/2018/12/default-user.png" />
                                 </div>
-                                <div className="each-vocalist-element" style={{ width: '250px' }}>
+                                <div className="each-vocalist-element" style={{width:'500px'}} >
                                     <Link to={`/profiles/${vocalist.id}`}> <h1 className="bp3-heading">{vocalist.first_name} {vocalist.last_name} </h1></Link>
                                     <span style={{ marginLeft: '1%' }} className="bp3-tag .modifier">{vocalist.age}</span>
                                     <span style={{ marginLeft: '1%' }} className="bp3-tag .modifier">{vocalist.gender}</span>
@@ -132,7 +132,7 @@ const Vocalists = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div style={{ marginTop: '3%' }} >
+                                <div style={{ marginTop: '3%'}} className="each-vocalist-element">
                                     {/* <button style={{marginTop:'7%',marginLeft:'10%',display:'block'}} type="button" className="bp3-button">Connect</button> */}
 
 

@@ -1,40 +1,35 @@
 .producer-page-container {
-    display: flex;
+  display: flex;
 }
-
-
 
 .each-producer {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 250px;
-    justify-content: baseline;
-    margin-bottom: 5%;
-    padding:20px;
-    
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: baseline;
+  margin-bottom: 5%;
+  padding: 20px;
 }
 .producers-container {
-    width: 100%;
-    margin-top: 5%;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    flex-direction: column;
+  width: 800px;
+  margin-top: 5%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .each-producer-element {
-    margin-right: 15px; 
-    margin-top:30px;
+  margin-right: 15px;
+  margin-top: 30px;
 }
 
-
 .page-change {
-    cursor: pointer;
-    margin-right: 0.5%;
+  cursor: pointer;
+  margin-right: 0.5%;
 }
 
 .pagination {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }

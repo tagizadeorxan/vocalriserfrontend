@@ -15,6 +15,7 @@ const userReducer = (state,action) => {
             localStorage.setItem('vocalrisertoken','')
             return {
                 ...state,
+                token:'',
                 isLogged:false,
                 user:{}
             }
