@@ -21,8 +21,8 @@ const EachGig = (props) => {
     const [selected, setSelected] = useState('genres')
 
     useEffect(() => {
-        checkCurrentUser()
-    }, [])
+        checkCurrentUser() 
+    },[])
 
     const panelSelect = (type) => {
         setSelected(type)
@@ -178,10 +178,11 @@ const EachGig = (props) => {
 
         } else {
             setLogin('failed')
+            
         }
     }
 
-    if (login === 'waiting' ) {
+    if (login === 'waiting') {
         return (
             <PianoPlay width={400} />
         )
@@ -192,15 +193,15 @@ const EachGig = (props) => {
 
         )
     }
-    else if(viewedGig.length<=0) {
+    else if (!viewedGig.hasOwnProperty('id')) {
         return (
-            <Redirect push to="/jobs"/>
+            <Redirect push to="/jobs" />
         )
     }
     else {
 
         return (
-            <div>
+            <div className="gig-container">
                 <div className="bp3-card each-gig-container">
                     <div className="each-gig-element">
                         <h1 className="bp3-heading">{viewedGig.name}</h1>
@@ -229,7 +230,7 @@ const EachGig = (props) => {
                         Created by:<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className="bp3-tag .modifier">{viewedGig.createdBy}</span>
                     Budget:<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className={`bp3-tag .modifier bp3-intent-${bidError === 'min' ? 'danger' : 'success'}`}>{viewedGig.budgetMin}</span>
                     -<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className={`bp3-tag .modifier bp3-intent-${bidError === 'max' ? 'danger' : 'success'}`}>{viewedGig.budgetMax}</span>{Utils.currency}
-               </div>
+                    </div>
 
                     <div className="each-gig-element">
                         Requirements:<p></p><span style={{ marginBottom: '1%', marginRight: '1%' }} className="bp3-tag .modifier">{viewedGig.requirements}</span>
@@ -252,11 +253,11 @@ const EachGig = (props) => {
 
 
                             <div className="each-bid-element">
-                           <div style={{textAlign:'center'}}> <span className="bp3-tag " >{bid.amount} {Utils.currency}</span></div>
-                                <img alt="user" style={{ width: '100px',padding:"5%" }} src="https://www.mountainheavensella.com/wp-content/uploads/2018/12/default-user.png" />
+                                <div style={{ textAlign: 'center' }}> <span className="bp3-tag " >{bid.amount} {Utils.currency}</span></div>
+                                <img alt="user" style={{ width: '100px', padding: "5%" }} src="https://www.mountainheavensella.com/wp-content/uploads/2018/12/default-user.png" />
                                 {viewedGig.awardedUser === user.user.id ? <div style={{ marginTop: '7%', textAlign: "center" }}><span className={`bp3-tag bp3-intent-success`}>Successfull bid</span></div> : null}
-                                {bidExist && bid.user_id === user.user.id && viewedGig.user_id !== user.user.id && viewedGig.active === 1 ? <div style={{textAlign: "center"}}><button onClick={() => handleRemove(bid)}  className="bp3-button bp3-intent-danger remove-bid">remove Bid</button></div> : null}
-                                {viewedGig.user_id === user.user.id && viewedGig.active === 1 ? <div style={{textAlign: "center"}}><button onClick={() => awardGig(bid.user_id)}  className="bp3-button bp3-intent-success remove-bid">Award Gig</button></div> : null}
+                                {bidExist && bid.user_id === user.user.id && viewedGig.user_id !== user.user.id && viewedGig.active === 1 ? <div style={{ textAlign: "center" }}><button onClick={() => handleRemove(bid)} className="bp3-button bp3-intent-danger remove-bid">remove Bid</button></div> : null}
+                                {viewedGig.user_id === user.user.id && viewedGig.active === 1 ? <div style={{ textAlign: "center" }}><button onClick={() => awardGig(bid.user_id)} className="bp3-button bp3-intent-success remove-bid">Award Gig</button></div> : null}
                             </div>
                             <div className="each-bid-element" style={{ width: '250px' }}>
                                 <NavLink to={`/profiles/${bid.user_id}`}> <h1 className="bp3-heading">{bid.full_name} </h1></NavLink>

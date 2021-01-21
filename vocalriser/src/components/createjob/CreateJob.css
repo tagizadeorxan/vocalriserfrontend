@@ -1,0 +1,18 @@
+.createjob-container {
+  margin-top: 5%;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -180px; /* Negative half of width. */
+}
+
+.createjob-general {
+  margin-top: 5%;
+}
+
+.createjob-error {
+  color: red;
+}

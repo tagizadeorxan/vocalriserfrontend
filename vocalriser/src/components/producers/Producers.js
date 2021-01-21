@@ -18,6 +18,7 @@ const Producers = () => {
     let [pageSize, setPageSize] = useState(1)
     let [currentPage, setCurrentPage] = useState(1)
     const [selected, setSelected] = useState('genres')
+    const [userdata,setUserData] = useState({})
  
 
     useEffect(() => {
@@ -83,6 +84,7 @@ const Producers = () => {
         console.log(user.token)
         let result = await requestCurrentUser(user.token)
         if (result.status) {
+            setUserData(result.data)
             setLogin('success')
             getProducersList()
         } else {
@@ -98,6 +100,11 @@ const Producers = () => {
     else if (login === 'failed') {
         return (
             <Redirect push to="/" />
+        )
+    }
+    else if (!userdata.hasOwnProperty('id')) {
+        return (
+           <Redirect push to="/home" />
         )
     }
     else {

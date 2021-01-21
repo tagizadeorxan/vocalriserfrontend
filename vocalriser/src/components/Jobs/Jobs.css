@@ -1,5 +1,6 @@
 .job-page-container {
   display: flex;
+  width: 80%;
 }
 
 .each-job {

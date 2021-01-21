@@ -17,6 +17,7 @@ const Jobs = () => {
     const [selected, setSelected] = useState('requirements')
     let [pageSize, setPageSize] = useState(1)
     let [currentPage, setCurrentPage] = useState(1)
+    const [userdata,setUserData] = useState({})
 
     useEffect(() => {
         checkCurrentUser()
@@ -77,6 +78,7 @@ const Jobs = () => {
                 type: "GIGS",
                 payload: gigs
             })
+            setUserData(result.data)
             setLogin('success')
         } else {
             setLogin('failed')
@@ -93,6 +95,13 @@ const Jobs = () => {
             <Redirect push to="/" />
         )
     }
+
+    else if (!userdata.hasOwnProperty('id')) {
+        return (
+           <Redirect push to="/home" />
+        )
+    }
+
     else {
         return (
             <div className="job-page-container">

@@ -8,6 +8,14 @@
   flex-direction: column;
 }
 
+.gig-container {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  max-height: 100%;
+  margin-bottom: 5%;
+}
+
 .each-gig-element {
   margin-bottom: 1%;
 }
@@ -50,12 +58,9 @@ input[type="number"] {
 }
 
 #waveform {
-    width: 350px;
+  width: 350px;
 }
 
 .remove-bid {
   margin-top: 25%;
 }
-
-
-

@@ -16,6 +16,7 @@
 
 .profile-section {
   display: flex;
+  width: 80%;
 }
 
 .profile-section-one-each {

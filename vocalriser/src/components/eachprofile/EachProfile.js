@@ -112,7 +112,7 @@ const EachProfile = (props) => {
                             <li onClick={() => setSelected('connection')} className="bp3-tab" role="tab" aria-selected={selected === 'connection' ? true : false}>Connections</li>
                         </ul>
                         <div className="bp3-tab-panel" role="tabpanel" aria-hidden={selected === 'video' ? false : true}>
-                            <iframe width="560" height="315" src={viewUser.youtube_link} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                            <iframe title="video" width="560" height="315" src={viewUser.youtube_link} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                         </div>
                         <div className="bp3-tab-panel" role="tabpanel" aria-hidden={selected === 'review' ? false : true}>Reviews</div>
                         <div className="bp3-tab-panel" role="tabpanel" aria-hidden={selected === 'connection' ? false : true}>Connections</div>

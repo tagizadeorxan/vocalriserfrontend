@@ -8,6 +8,7 @@ import PianoPlay from '../piano'
 let Home = () => {
     const [user, dispatch] = useContext(UserContext)
     const [login, setLogin] = useState('waiting')
+    const [userdata, setUserData] = useState({})
 
     useEffect(() => {
         checkCurrentUser()
@@ -17,6 +18,7 @@ let Home = () => {
         console.log(user.token)
         let result = await requestCurrentUser(user.token)
         if (result.status) {
+            setUserData(result.data)
             setLogin('success')
         } else {
             setLogin('failed')
@@ -25,7 +27,7 @@ let Home = () => {
 
     if (login === 'waiting') {
         return (
-            <PianoPlay width={300}/>
+            <PianoPlay width={300} />
         )
     }
     else if (login === 'failed') {
@@ -33,10 +35,17 @@ let Home = () => {
             <Redirect push to="/" />
         )
     }
+
+    else if (!userdata.hasOwnProperty('id')) {
+        return (
+            <Redirect push to="/" />
+        )
+    }
+
     else {
         return (
             <div>
-                <PianoPlay  width={1000}/>
+                <PianoPlay width={1000} />
             </div>
         )
     }

@@ -6,10 +6,10 @@ export default function Footer() {
 
 
   return (
-    <div>
+    <footer>
 <nav className="bp3-navbar bp3-dark footer-container">
 
 </nav>
-    </div>
+    </footer>
   );
 }

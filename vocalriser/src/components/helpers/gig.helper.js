@@ -1,5 +1,5 @@
 import Utils from '../utils/common.utils'
-import axios from 'axios'
+
 
 export let getGigs = async (type, gender, token) => {
     let result = [];
@@ -249,4 +249,93 @@ export let getCards = async () => {
 
     return result
 
+}
+
+
+
+export let createGig = async (data,token) => {
+    let result = false;
+
+    let options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body:JSON.stringify(data)
+    }
+    await fetch(`${Utils.url}/api/v1/gigs/createGig`, options)
+        .then(res => {
+            if (res.status === 201) {
+                result = true
+            } 
+        })
+        .catch(err =>
+            console.log(err)
+        )
+
+    return result
+
+}
+
+
+
+
+export let getGigsByUserID = async (user_id,token) => {
+    let result = [];
+
+    let options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    }
+    await fetch(`${Utils.url}/api/v1/gigs/getGigsByUserID/${user_id}`, options)
+        .then(res => {
+            if (res.status === 200) {
+                return res.json()
+            } 
+        })
+        .then(res=> {
+            if(res){
+                result = res;
+            }
+        })
+        .catch(err =>
+            console.log(err)
+        )
+
+    return result
+}
+
+
+
+
+export let getBidderSuccessfullGigsByUserID = async (awardedUser,token) => {
+    let result = [];
+
+    let options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    }
+    await fetch(`${Utils.url}/api/v1/gigs/getBidderSuccessfullGigsByUserID/${awardedUser}`, options)
+        .then(res => {
+            if (res.status === 200) {
+                return res.json()
+            } 
+        })
+        .then(res=> {
+            if(res){
+                result = res;
+            }
+        })
+        .catch(err =>
+            console.log(err)
+        )
+
+    return result
 }

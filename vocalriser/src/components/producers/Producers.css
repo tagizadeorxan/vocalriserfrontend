@@ -1,5 +1,6 @@
 .producer-page-container {
   display: flex;
+  width: 80%;
 }
 
 .each-producer {

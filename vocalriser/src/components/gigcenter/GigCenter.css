@@ -1,0 +1,10 @@
+.gig-center-container {
+    margin-top: 5%;
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -370px; /* Negative half of width. */
+}

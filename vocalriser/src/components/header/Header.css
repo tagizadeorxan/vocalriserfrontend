@@ -2,3 +2,10 @@
     display: flex;
     justify-content: space-around;
 }
+
+.header-notification {
+    float: right;
+    margin-right: 0%;
+    position : 'fixed'; 
+    overflow-x : 'auto'
+}

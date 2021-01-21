@@ -3,9 +3,11 @@ import { Piano, KeyboardShortcuts, MidiNumbers } from 'react-piano';
 import 'react-piano/dist/styles.css';
 import './Piano.css'
 let Soundfont = require('soundfont-player')
-let ac = new AudioContext()
+
 
 const PianoPlay = ({width,classAdd}) => {
+
+    
     const firstNote = MidiNumbers.fromNote('c3');
     const lastNote = MidiNumbers.fromNote('d4');
     const keyboardShortcuts = KeyboardShortcuts.create({
@@ -18,7 +20,7 @@ const PianoPlay = ({width,classAdd}) => {
         <Piano
             noteRange={{ first: firstNote, last: lastNote }}
             playNote={(midiNumber) => {
-                Soundfont.instrument(ac, 'acoustic_grand_piano', { soundfont: 'MusyngKite' }).then(function (marimba) {
+                Soundfont.instrument(new AudioContext(), 'acoustic_grand_piano', { soundfont: 'MusyngKite' }).then(function (marimba) {
                     marimba.play(midiNumber)
                 })
             }}

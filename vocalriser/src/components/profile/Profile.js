@@ -12,6 +12,7 @@ const Profile = () => {
     const [login, setLogin] = useState('waiting')
     let [selected, setSelected] = useState('video')
     let [section, setSection] = useState()
+    const [userdata,setUserData] = useState()
 
     useEffect(() => {
         checkCurrentUser()
@@ -25,6 +26,7 @@ const Profile = () => {
                 type: "USER",
                 payload: result.data
             })
+            setUserData(result.data)
             setLogin('success')
         } else {
             setLogin('failed')
@@ -40,6 +42,12 @@ const Profile = () => {
         return (
             <Redirect push to="/" />
 
+        )
+    }
+
+    else if (!userdata.hasOwnProperty('id')) {
+        return (
+           <Redirect push to="/home" />
         )
     }
     else {
