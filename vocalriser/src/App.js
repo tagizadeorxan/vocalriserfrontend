@@ -14,6 +14,7 @@ import EachGig from './components/eachgig'
 import NoMatch from './components/nomatch'
 import CreateJob from './components/createjob'
 import GigCenter from './components/gigcenter'
+import AwardedGig from './components/awardedgig'
 
 import "@blueprintjs/core/lib/css/blueprint.css"
 import "@blueprintjs/icons/lib/css/blueprint-icons.css";
@@ -40,6 +41,7 @@ function App() {
 
 
             <Switch>
+            <Route exact path="/awardedgigs/:id" component={AwardedGig} />
               <Route exact path="/profiles/:id" component={EachProfile} />
               <Route exact path="/gigs/:id" component={EachGig} />
               <Route exact path="/createjob">

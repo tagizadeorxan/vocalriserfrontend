@@ -12,8 +12,7 @@ export default function Header() {
   const [logoutUser, setLogout] = useState(false)
   const [path, setPath] = useState()
   const [notificationTab, setNotificationTab] = useState(false)
-
-
+  
   const locationChange = (nav) => {
 
     let location = /[^/]*$/.exec(window.location.href)[0]
@@ -37,7 +36,7 @@ export default function Header() {
 
   return (
     <div >
-
+    
       <nav className="bp3-navbar bp3-dark">
         <div >
           <div className="bp3-navbar-group bp3-align-left">
@@ -70,18 +69,9 @@ export default function Header() {
           <div className="header-notification">
             <ul className="bp3-menu .modifier bp3-elevation-1">
               <li>
-                <a className="bp3-menu-item bp3-icon-people" tabIndex="0">Share...</a>
+               
               </li>
-              <li>
-                <a className="bp3-menu-item bp3-icon-circle-arrow-right" tabIndex="0">Move...</a>
-              </li>
-              <li>
-                <a className="bp3-menu-item bp3-icon-edit" tabIndex="0">Rename</a>
-              </li>
-              <li className="bp3-menu-divider"></li>
-              <li>
-                <a className="bp3-menu-item bp3-icon-trash bp3-intent-danger" tabIndex="0">Delete</a>
-              </li>
+
             </ul>
           </div> : <div className="header-notification">
 

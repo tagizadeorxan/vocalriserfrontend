@@ -58,15 +58,12 @@ let GigCenter = () => {
         return (
             <div className="gig-center-container">
 
-                <nav className="bp3-navbar .modifier">
+                <nav className="bp3-navbar .modifier" style={{ marginBottom: "5%" }}>
 
                     <div className="bp3-navbar-group bp3-align-left">
-                        <button onClick={() => setSelected('created')} className="bp3-button bp3-minimal">Created Gigs</button>
-                        <button onClick={() => setSelected('bidded')} className="bp3-button bp3-minimal">Bidded Gigs</button>
-                        <span className="bp3-navbar-divider"></span>
-                        <button className="bp3-button bp3-minimal bp3-icon-user"></button>
-                        <button className="bp3-button bp3-minimal bp3-icon-notifications"></button>
-                        <button className="bp3-button bp3-minimal bp3-icon-cog"></button>
+                        <button onClick={() => setSelected('created')} className="bp3-button bp3-minimal" style={selected === 'created' ? { backgroundColor: 'green', color: 'white' } : null}>Created Gigs</button>
+                        <button onClick={() => setSelected('bidded')} className="bp3-button bp3-minimal" style={selected === 'bidded' ? { backgroundColor: 'green', color: 'white' } : null}>Bidded Gigs</button>
+
                     </div>
                 </nav>
 
@@ -98,7 +95,7 @@ let GigCenter = () => {
                         } else if (gig.active === 2 && gig.progress === 0) {
                             return <div key={index} className="bp3-tab-panel" role="tabpanel" aria-hidden={eachSelected === 'pending' ? false : true}>
                                 <div className="bp3-card bp3-elevation-2 .modifier">
-                                    <h1 className="bp3-heading">{gig.name}</h1>
+                                    <Link to={`/awardedgigs/${gig.id}`}><h1 className="bp3-heading">{gig.name}</h1></Link>
                                     <span>create date: </span><span className="bp3-tag">{gig.createDate.substring(0, 10)}</span>
                                     <span style={{ marginLeft: '1%' }} >genre:</span><span style={{ marginLeft: '1%' }} className="bp3-tag">{gig.genre}</span>
                                     <span style={{ marginLeft: '1%' }} >bpm:</span><span style={{ marginLeft: '1%' }} className="bp3-tag">{gig.bpm}</span>
@@ -107,7 +104,7 @@ let GigCenter = () => {
                         } else if (gig.active === 2 && gig.progress === 1) {
                             return <div key={index} className="bp3-tab-panel" role="tabpanel" aria-hidden={eachSelected === 'progress' ? false : true}>
                                 <div className="bp3-card bp3-elevation-2 .modifier">
-                                    <h1 className="bp3-heading">{gig.name}</h1>
+                                    <Link to={`/awardedgigs/${gig.id}`}><h1 className="bp3-heading">{gig.name}</h1></Link>
                                     <span>create date: </span><span className="bp3-tag">{gig.createDate.substring(0, 10)}</span>
                                     <span style={{ marginLeft: '1%' }} >genre:</span><span style={{ marginLeft: '1%' }} className="bp3-tag">{gig.genre}</span>
                                     <span style={{ marginLeft: '1%' }} >bpm:</span><span style={{ marginLeft: '1%' }} className="bp3-tag">{gig.bpm}</span>
@@ -117,7 +114,7 @@ let GigCenter = () => {
 
                             return <div key={index} className="bp3-tab-panel" role="tabpanel" aria-hidden={eachSelected === 'completed' ? false : true}>
                                 <div className="bp3-card bp3-elevation-2 .modifier">
-                                    <h1 className="bp3-heading">{gig.name}</h1>
+                                    <Link to={`/awardedgigs/${gig.id}`}><h1 className="bp3-heading">{gig.name}</h1></Link>
                                     <span>create date: </span><span className="bp3-tag">{gig.createDate.substring(0, 10)}</span>
                                     <span style={{ marginLeft: '1%' }} >genre:</span><span style={{ marginLeft: '1%' }} className="bp3-tag">{gig.genre}</span>
                                     <span style={{ marginLeft: '1%' }} >bpm:</span><span style={{ marginLeft: '1%' }} className="bp3-tag">{gig.bpm}</span>
@@ -151,7 +148,7 @@ let GigCenter = () => {
                         if (gig.active === 2 && gig.progress === 0) {
                             return <div key={index} className="bp3-tab-panel" role="tabpanel" aria-hidden={eachSelected === 'pending' ? false : true}>
                                 <div className="bp3-card bp3-elevation-2 .modifier">
-                                    <h1 className="bp3-heading">{gig.name}</h1>
+                                    <Link to={`/awardedgigs/${gig.id}`}><h1 className="bp3-heading">{gig.name}</h1></Link>
                                     <span>create date: </span><span className="bp3-tag">{gig.createDate.substring(0, 10)}</span>
                                     <span style={{ marginLeft: '1%' }} >genre:</span><span style={{ marginLeft: '1%' }} className="bp3-tag">{gig.genre}</span>
                                     <span style={{ marginLeft: '1%' }} >bpm:</span><span style={{ marginLeft: '1%' }} className="bp3-tag">{gig.bpm}</span>
@@ -160,7 +157,7 @@ let GigCenter = () => {
                         } else if (gig.active === 2 && gig.progress === 1) {
                             return <div key={index} className="bp3-tab-panel" role="tabpanel" aria-hidden={eachSelected === 'progress' ? false : true}>
                                 <div className="bp3-card bp3-elevation-2 .modifier">
-                                    <h1 className="bp3-heading">{gig.name}</h1>
+                                    <Link to={`/awardedgigs/${gig.id}`}><h1 className="bp3-heading">{gig.name}</h1></Link>
                                     <span>create date: </span><span className="bp3-tag">{gig.createDate.substring(0, 10)}</span>
                                     <span style={{ marginLeft: '1%' }} >genre:</span><span style={{ marginLeft: '1%' }} className="bp3-tag">{gig.genre}</span>
                                     <span style={{ marginLeft: '1%' }} >bpm:</span><span style={{ marginLeft: '1%' }} className="bp3-tag">{gig.bpm}</span>
@@ -170,7 +167,7 @@ let GigCenter = () => {
 
                             return <div key={index} className="bp3-tab-panel" role="tabpanel" aria-hidden={eachSelected === 'completed' ? false : true}>
                                 <div className="bp3-card bp3-elevation-2 .modifier">
-                                    <h1 className="bp3-heading">{gig.name}</h1>
+                                    <Link to={`/awardedgigs/${gig.id}`}><h1 className="bp3-heading">{gig.name}</h1></Link>
                                     <span>create date: </span><span className="bp3-tag">{gig.createDate.substring(0, 10)}</span>
                                     <span style={{ marginLeft: '1%' }} >genre:</span><span style={{ marginLeft: '1%' }} className="bp3-tag">{gig.genre}</span>
                                     <span style={{ marginLeft: '1%' }} >bpm:</span><span style={{ marginLeft: '1%' }} className="bp3-tag">{gig.bpm}</span>

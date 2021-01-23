@@ -14,10 +14,10 @@ const Search = ({ search }) => {
     const handleSearch = () => {
         let data = {}
 
-        let result1 = (soundslike.current.value.length > 0) ? data['soundslike'] = soundslike.current.value : null
-        let result2 = (microphone.current.value.length > 0) ? data['microphone'] = microphone.current.value : null
-        let result3 = (genres.current.value.length > 0) ? data['genres'] = genres.current.value : null
-        let result4 = (gender.current.value.length > 0 && gender.current.value !== 'Gender...') ? data['gender'] = gender.current.value : null
+        if (soundslike.current.value.length > 0) data['soundslike'] = soundslike.current.value
+        if (microphone.current.value.length > 0) data['microphone'] = microphone.current.value
+        if (genres.current.value.length > 0) data['genres'] = genres.current.value
+        if (gender.current.value.length > 0 && gender.current.value !== 'Gender...') data['gender'] = gender.current.value
         search(data)
     }
 

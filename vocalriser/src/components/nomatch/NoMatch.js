@@ -28,7 +28,7 @@ const NoMatch = () => {
 
             {cards.length > 0 ? <div className="page-not-found-cards">
                 <div className="bp3-card .modifier">
-                    <img src={day ? cards[day].img : "null"} />
+                    <img alt="quote" src={day ? cards[day].img : "null"} />
                 </div>
 
             </div> : null}

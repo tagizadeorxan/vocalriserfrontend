@@ -13,11 +13,11 @@ const Search = ({ search }) => {
 
     const handleSearch = () => {
         let data = {}
-
-        let result1 = (name.current.value.length > 0) ? data['name'] = name.current.value : null
-        let result2 = (language.current.value.length > 0) ? data['language'] = language.current.value : null
-        let result3 = (genre.current.value.length > 0) ? data['genre'] = genre.current.value : null
-
+                
+        if (name.current.value.length > 0)  data['name'] = name.current.value 
+        if (language.current.value.length > 0)  data['language'] = language.current.value 
+       if (genre.current.value.length > 0)  data['genre'] = genre.current.value 
+        
         search(data)
     }
 

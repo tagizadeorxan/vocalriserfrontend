@@ -1,5 +1,5 @@
 
-import React, { useState, useContext, useEffect, useRef } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Redirect } from 'react-router-dom';
 import Search from './Search'
 import UserContext from '../../contexts/user.context';

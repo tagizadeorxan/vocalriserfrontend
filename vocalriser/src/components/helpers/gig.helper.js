@@ -161,7 +161,7 @@ export let closeGigByID = async (gig_id, token) => {
         }
     }
     await fetch(`${Utils.url}/api/v1/gigs/closeGigByID/${gig_id}`, options)
-        .then(res =>  {
+        .then(res => {
             console.log(res)
             if (res.status === 200) {
                 result = true
@@ -238,8 +238,8 @@ export let getCards = async () => {
                 return res.json()
             }
         })
-        .then(res=> {
-            if(res) {
+        .then(res => {
+            if (res) {
                 result = res
             }
         })
@@ -253,7 +253,7 @@ export let getCards = async () => {
 
 
 
-export let createGig = async (data,token) => {
+export let createGig = async (data, token) => {
     let result = false;
 
     let options = {
@@ -262,13 +262,13 @@ export let createGig = async (data,token) => {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         },
-        body:JSON.stringify(data)
+        body: JSON.stringify(data)
     }
     await fetch(`${Utils.url}/api/v1/gigs/createGig`, options)
         .then(res => {
             if (res.status === 201) {
                 result = true
-            } 
+            }
         })
         .catch(err =>
             console.log(err)
@@ -281,7 +281,7 @@ export let createGig = async (data,token) => {
 
 
 
-export let getGigsByUserID = async (user_id,token) => {
+export let getGigsByUserID = async (user_id, token) => {
     let result = [];
 
     let options = {
@@ -295,10 +295,10 @@ export let getGigsByUserID = async (user_id,token) => {
         .then(res => {
             if (res.status === 200) {
                 return res.json()
-            } 
+            }
         })
-        .then(res=> {
-            if(res){
+        .then(res => {
+            if (res) {
                 result = res;
             }
         })
@@ -312,7 +312,7 @@ export let getGigsByUserID = async (user_id,token) => {
 
 
 
-export let getBidderSuccessfullGigsByUserID = async (awardedUser,token) => {
+export let getBidderSuccessfullGigsByUserID = async (awardedUser, token) => {
     let result = [];
 
     let options = {
@@ -326,11 +326,91 @@ export let getBidderSuccessfullGigsByUserID = async (awardedUser,token) => {
         .then(res => {
             if (res.status === 200) {
                 return res.json()
-            } 
+            }
         })
-        .then(res=> {
-            if(res){
+        .then(res => {
+            if (res) {
                 result = res;
+            }
+        })
+        .catch(err =>
+            console.log(err)
+        )
+
+    return result
+}
+
+
+
+export let getPreparedContract = async (gig_id, token) => {
+    let result = ''
+
+    let options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    }
+    await fetch(`${Utils.url}/api/v1/gigs/prepareContractForGig/${gig_id}`, options)
+        .then(res => {
+            if (res.status === 200) {
+                return res.json()
+            }
+        })
+        .then(res => {
+            if (res) {
+                result = res;
+            }
+        })
+        .catch(err =>
+            console.log(err)
+        )
+
+    return result
+}
+
+
+
+export let acceptGig = async (gig_id, token) => {
+    let result = false
+
+    let options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    }
+    await fetch(`${Utils.url}/api/v1/gigs/acceptContractGigByID/${gig_id}`, options)
+        .then(res => {
+            if (res.status === 200) {
+                result = true
+            }
+        })
+        .catch(err =>
+            console.log(err)
+        )
+
+    return result
+}
+
+
+export let sendContract = async (data, token) => {
+    let result = false
+
+    let options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body:JSON.stringify(data)
+    }
+    await fetch(`${Utils.url}/api/v1/gigs/sendContract`, options)
+        .then(res => {
+            if (res.status === 200) {
+                result = true
             }
         })
         .catch(err =>

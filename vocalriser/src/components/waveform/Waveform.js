@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import WaveSurfer from "wavesurfer.js";
-import CursorPlugin from 'wavesurfer.js/dist/plugin/wavesurfer.cursor.min'
+
 import './Waveform.css'
 import "@blueprintjs/core/lib/css/blueprint.css"
 import "@blueprintjs/icons/lib/css/blueprint-icons.css";
