@@ -1,10 +1,13 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState } from 'react'
 import UserContext from '../../contexts/user.context'
 import { requestCurrentUser } from '../helpers/auth.helper'
 import { getGigByID , getPreparedContract, acceptGig ,sendContract} from '../helpers/gig.helper'
 import { Redirect } from 'react-router-dom';
 import Waveform from '../waveform'
 import PianoPlay from '../piano'
+
+let start = true
+
 
 const AwardedGig = (props) => {
     const [user, dispatch] = useContext(UserContext)
@@ -13,9 +16,7 @@ const AwardedGig = (props) => {
     const [contract,setContract] = useState('')
 
 
-    useEffect(() => {
-        checkCurrentUser()
-    }, [])
+
 
     
     const handleAcceptGig = async () => {
@@ -64,6 +65,13 @@ const AwardedGig = (props) => {
 
         }
     }
+
+
+    if(start) {
+        checkCurrentUser()
+        start = false
+    }
+
 
     if (login === 'waiting') {
         return (

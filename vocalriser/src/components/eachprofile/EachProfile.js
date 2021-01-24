@@ -1,27 +1,50 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState, useRef } from 'react'
 import UserContext from '../../contexts/user.context';
 import { requestCurrentUser } from '../helpers/auth.helper'
-import {getUserByID} from '../helpers/profile.helper'
+import { getUserByID } from '../helpers/profile.helper'
+import { createMessage,sendMessage } from '../helpers/messages.helper'
 import { Redirect } from 'react-router-dom';
 import Waveform from '../waveform'
 import PianoPlay from '../piano'
 
+let start = true
+
 const EachProfile = (props) => {
+
+    const messageInput = useRef()
 
     const [user, dispatch] = useContext(UserContext)
     const [login, setLogin] = useState('waiting')
     let [selected, setSelected] = useState('video')
-    let [section,setSection] = useState()
-    let [viewUser,setViewUser] = useState()
+    let [section, setSection] = useState()
+    let [viewUser, setViewUser] = useState()
+    const [message, setMessage] = useState()
 
-    useEffect(() => {
-        checkCurrentUser()
-    }, [])
+
+    const handlSendMessage = async (e) => {
+        e.preventDefault()
+        console.log("okdir")
+
+        let data = {
+            sender: user.user.id,
+            sender_fullname: `${user.user.first_name} ${user.user.last_name}`,
+            reciever: viewUser.id,
+            reciever_fullname: `${viewUser.first_name} ${viewUser.last_name}`,
+            message: messageInput.current.value
+        }
+        let result = await createMessage(data,user.token)
+      
+        if (result) {
+            setMessage(false)
+        }
+    }
+
+
 
     let checkCurrentUser = async () => {
-       
 
-        
+
+
         console.log(user.token)
         let result = await requestCurrentUser(user.token)
         if (result.status) {
@@ -30,18 +53,24 @@ const EachProfile = (props) => {
                 payload: result.data
             })
             console.log(props)
-            let viewedUser = await getUserByID(props.match.params.id,user.token)
+            let viewedUser = await getUserByID(props.match.params.id, user.token)
             console.log(viewedUser)
-            if(viewedUser){
+            if (viewedUser) {
                 setViewUser(viewedUser)
                 setLogin('success')
-            } else{
+            } else {
                 setLogin('waiting')
             }
-            
+
         } else {
             setLogin('failed')
         }
+    }
+
+
+    if (start) {
+        checkCurrentUser()
+        start = false
     }
 
     if (login === 'waiting') {
@@ -55,23 +84,27 @@ const EachProfile = (props) => {
 
         )
     }
-    
+
     else if (!viewUser.hasOwnProperty('id')) {
-       props.history.goBack()
+        props.history.goBack()
         return (
             <p></p>
         )
     }
     else {
-      
+
         return (
             <div className="profile-section">
-                <div onMouseEnter={()=>setSection(1)} onMouseLeave={()=>setSection(0)} className={`bp3-card bp3-elevation-${section === 1? '4':'2'} .modifier profile-section-one`}>
+                <div onMouseEnter={() => setSection(1)} onMouseLeave={() => setSection(0)} className={`bp3-card bp3-elevation-${section === 1 ? '4' : '2'} .modifier profile-section-one`}>
                     <div className="profile-section-one-each">
                         <img alt="user" style={{ width: '100px' }} src="https://www.mountainheavensella.com/wp-content/uploads/2018/12/default-user.png" />
+
                     </div>
 
                     <h1 className="bp3-heading profile-section-one-each">{viewUser.first_name} {viewUser.last_name}</h1>
+                    <button onClick={() => setMessage(true)} className="bp3-button">message</button>
+
+
                     <div className="profile-section-one-each">
                         <span style={{ marginLeft: '1%' }} className="bp3-tag .modifier">{viewUser.age}</span>
                         <span style={{ marginLeft: '1%' }} className="bp3-tag .modifier">{viewUser.gender}</span>
@@ -96,7 +129,7 @@ const EachProfile = (props) => {
                                 parseFloat(viewUser.raiting) > 4 ? 'success' : 'warning'}`}>{viewUser.raiting}</span>}
                     </div>
                 </div>
-                <div onMouseEnter={()=>setSection(2)} onMouseLeave={()=>setSection(0)} className={`bp3-card bp3-elevation-${section === 2? '4':'2'} .modifier profile-section-two`}>
+                <div onMouseEnter={() => setSection(2)} onMouseLeave={() => setSection(0)} className={`bp3-card bp3-elevation-${section === 2 ? '4' : '2'} .modifier profile-section-two`}>
                     <div className="profile-section-two-each">
                         <Waveform url={viewUser.track_url} title={viewUser.track_title} />
                     </div>
@@ -118,6 +151,24 @@ const EachProfile = (props) => {
                         <div className="bp3-tab-panel" role="tabpanel" aria-hidden={selected === 'connection' ? false : true}>Connections</div>
                     </div>
                 </div>
+
+                {message ? <div className="bp3-dialog-container">
+                    <div className="bp3-dialog">
+                        <div className="bp3-dialog-header">
+                            <span className="bp3-icon-large bp3-icon-inbox"></span>
+                            <h4 className="bp3-heading">Message</h4>
+                            <button aria-label="Close" className="bp3-dialog-close-button bp3-button bp3-minimal bp3-icon-cross"></button>
+                        </div>
+                        <div className="bp3-dialog-body">
+                            <form onSubmit={handlSendMessage}>
+                                <input ref={messageInput} type="text" className="bp3-input" required minLength={1} />
+                                <button onClick={() => setMessage(false)} type="button" className="bp3-button">close</button>
+                                <button type="submit" className="bp3-button bp3-intent-primary">Send</button>
+                            </form>
+                        </div>
+                    </div>
+                </div> : null}
+
 
             </div>
         )

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import { Redirect } from 'react-router-dom';
 import UserContext from '../../contexts/user.context';
 import { requestCurrentUser } from '../helpers/auth.helper'
@@ -7,6 +7,7 @@ import PianoPlay from '../piano'
 import { Link } from 'react-router-dom'
 import './GigCenter.css'
 
+let start = true
 
 let GigCenter = () => {
     const [user, dispatch] = useContext(UserContext)
@@ -17,9 +18,6 @@ let GigCenter = () => {
     const [creatorGigs, setCreatorGigs] = useState([])
     const [biddedGigs, setBiddedGigs] = useState()
 
-    useEffect(() => {
-        checkCurrentUser()
-    }, [])
 
     let checkCurrentUser = async () => {
         let result = await requestCurrentUser(user.token)
@@ -37,9 +35,16 @@ let GigCenter = () => {
         }
     }
 
+
+    if(start) {
+        checkCurrentUser()
+        start = false
+    }
+
+
     if (login === 'waiting') {
         return (
-            <PianoPlay width={300} />
+            <PianoPlay width={300} classAdd="loading"/>
         )
     }
     else if (login === 'failed') {

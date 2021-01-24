@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import { NavLink, Redirect } from 'react-router-dom';
 import UserContext from '../../contexts/user.context';
 import { requestCurrentUser } from '../helpers/auth.helper'
@@ -8,7 +8,7 @@ import Waveform from "../waveform";
 import './Producers.css'
 import PianoPlay from '../piano'
 
-
+let start = true
 
 
 const Producers = () => {
@@ -21,9 +21,6 @@ const Producers = () => {
     const [userdata, setUserData] = useState({})
 
 
-    useEffect(() => {
-        checkCurrentUser()
-    }, [])
 
 
     let getProducersList = async () => {
@@ -89,6 +86,12 @@ const Producers = () => {
         } else {
             setLogin('failed')
         }
+    }
+
+
+    if(start) {
+        checkCurrentUser()
+        start = false
     }
 
     if (login === 'waiting') {

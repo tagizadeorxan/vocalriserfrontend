@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState } from 'react'
 import UserContext from '../../contexts/user.context'
 import { requestCurrentUser } from '../helpers/auth.helper'
 import { getGigByID, getGigBiddings, removeBid, submitBid, closeGigByID, awardGigByID, getBidExist } from '../helpers/gig.helper'
@@ -6,8 +6,10 @@ import { Redirect } from 'react-router-dom';
 import Waveform from '../waveform'
 import PianoPlay from '../piano'
 import './EachGig.css'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import Utils from '../utils/common.utils'
+
+let start = true
 
 const EachGig = (props) => {
     const [user, dispatch] = useContext(UserContext)
@@ -20,9 +22,7 @@ const EachGig = (props) => {
     const bidRef = React.createRef()
     const [selected, setSelected] = useState('genres')
 
-    useEffect(() => {
-        checkCurrentUser() 
-    },[])
+
 
     const panelSelect = (type) => {
         setSelected(type)
@@ -182,6 +182,12 @@ const EachGig = (props) => {
         }
     }
 
+    if(start) {
+        checkCurrentUser()
+        start = false
+    }
+
+
     if (login === 'waiting') {
         return (
             <PianoPlay width={400} />
@@ -227,7 +233,8 @@ const EachGig = (props) => {
                     BPM:<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className="bp3-tag .modifier">{viewedGig.bpm}</span>
                     </div>
                     <div className="each-gig-element">
-                        Created by:<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className="bp3-tag .modifier">{viewedGig.createdBy}</span>
+                        Created by:<Link to={`/profiles/${viewedGig.user_id}`}><span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} 
+                        className="bp3-tag .modifier">{viewedGig.createdBy}</span></Link>
                     Budget:<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className={`bp3-tag .modifier bp3-intent-${bidError === 'min' ? 'danger' : 'success'}`}>{viewedGig.budgetMin}</span>
                     -<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className={`bp3-tag .modifier bp3-intent-${bidError === 'max' ? 'danger' : 'success'}`}>{viewedGig.budgetMax}</span>{Utils.currency}
                     </div>

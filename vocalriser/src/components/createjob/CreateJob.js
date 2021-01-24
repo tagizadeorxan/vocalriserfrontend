@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useContext } from 'react'
+import React, { useState, useRef, useContext } from 'react'
 import { requestCurrentUser } from '../helpers/auth.helper'
 import { getLanguages, getGenres } from '../helpers/common.helper'
 import { createGig } from '../helpers/gig.helper'
@@ -7,6 +7,7 @@ import { Redirect } from 'react-router-dom';
 import PianoPlay from '../piano'
 import './CreateJob.css'
 
+let start = true
 
 let CreateJob = () => {
 
@@ -30,9 +31,7 @@ let CreateJob = () => {
     const [error, setError] = useState(false)
     const [errorMessage, setErrorMessage] = useState()
 
-    useEffect(() => {
-        checkCurrentUser()
-    }, [])
+
 
 
     function formatDate(date) {
@@ -101,6 +100,13 @@ let CreateJob = () => {
         } else {
             setLogin('failed')
         }
+    }
+
+
+
+    if(start) {
+        checkCurrentUser()
+        start = false
     }
 
     if (login === 'waiting') {

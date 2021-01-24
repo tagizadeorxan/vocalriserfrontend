@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import './NoMatch.css'
 import { getCards } from '../helpers/gig.helper'
+
+let start = true
 
 const NoMatch = () => {
 
     const [cards, setCards] = useState([])
     const [day, setDay] = useState()
 
-    useEffect(() => {
-        getQuotes()
-    }, [])
+
 
     const getQuotes = async () => {
         var d = new Date();
@@ -18,6 +18,11 @@ const NoMatch = () => {
         setDay(n)
         let result = await getCards()
         setCards(result)
+    }
+
+    if(start) {
+        getQuotes()
+        start = false
     }
 
 

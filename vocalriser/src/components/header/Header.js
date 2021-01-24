@@ -13,6 +13,7 @@ export default function Header() {
   const [path, setPath] = useState()
   const [notificationTab, setNotificationTab] = useState(false)
   
+  
   const locationChange = (nav) => {
 
     let location = /[^/]*$/.exec(window.location.href)[0]
@@ -21,9 +22,10 @@ export default function Header() {
       window.location.reload()
     } else if (path === nav) {
       window.location = `/${nav}`
+    
     }
     else {
-      setPath(nav)
+      window.location = `/${nav}`
     }
   }
 
@@ -54,9 +56,10 @@ export default function Header() {
             <span className="bp3-navbar-divider"></span>
             
             <button onClick={() => locationChange('profile')} title="profile" className="bp3-button bp3-minimal bp3-icon-user"></button>
-            <button className="bp3-button bp3-minimal bp3-icon-notifications" title="notifications"></button>
+            <button onClick={() => setNotificationTab(!notificationTab)} className="bp3-button bp3-minimal bp3-icon-notifications" title="notifications"></button>
             <button className="bp3-button bp3-minimal bp3-icon-cog"></button>
-            <button onClick={() => setNotificationTab(!notificationTab)} className="bp3-button bp3-minimal bp3-icon-inbox-update bp3-intent-success" title="inbox"> </button>
+            
+            <button  onClick={()=>locationChange(`messages`)} className="bp3-button bp3-minimal bp3-icon-inbox-update bp3-intent-success" title="inbox"> </button>
             
             <button onClick={logout} className="bp3-button bp3-minimal bp3-icon-log-out" title="logout"></button>
           </div>

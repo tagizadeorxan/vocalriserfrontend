@@ -1,10 +1,13 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState } from 'react'
 import UserContext from '../../contexts/user.context';
 import { requestCurrentUser } from '../helpers/auth.helper'
 import { Redirect } from 'react-router-dom';
 import './Profile.css'
 import Waveform from '../waveform'
 import PianoPlay from '../piano'
+
+
+let start = true
 
 const Profile = () => {
 
@@ -14,9 +17,6 @@ const Profile = () => {
     let [section, setSection] = useState()
     const [userdata,setUserData] = useState()
 
-    useEffect(() => {
-        checkCurrentUser()
-    }, [])
 
     let checkCurrentUser = async () => {
         console.log(user.token)
@@ -31,6 +31,11 @@ const Profile = () => {
         } else {
             setLogin('failed')
         }
+    }
+
+    if(start) {
+        checkCurrentUser()
+        start = false
     }
 
     if (login === 'waiting') {

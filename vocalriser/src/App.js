@@ -15,6 +15,7 @@ import NoMatch from './components/nomatch'
 import CreateJob from './components/createjob'
 import GigCenter from './components/gigcenter'
 import AwardedGig from './components/awardedgig'
+import Messages from './components/messages'
 
 import "@blueprintjs/core/lib/css/blueprint.css"
 import "@blueprintjs/icons/lib/css/blueprint-icons.css";
@@ -44,6 +45,10 @@ function App() {
             <Route exact path="/awardedgigs/:id" component={AwardedGig} />
               <Route exact path="/profiles/:id" component={EachProfile} />
               <Route exact path="/gigs/:id" component={EachGig} />
+              <Route exact path="/messages">
+                <Messages/>
+              </Route>
+         
               <Route exact path="/createjob">
                 <CreateJob />
               </Route>

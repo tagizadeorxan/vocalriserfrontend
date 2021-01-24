@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import { Redirect } from 'react-router-dom';
 import UserContext from '../../contexts/user.context';
 import { requestCurrentUser } from '../helpers/auth.helper'
@@ -9,6 +9,7 @@ import Waveform from "../waveform";
 import { Link } from 'react-router-dom'
 import './Jobs.css'
 
+let start = true
 
 const Jobs = () => {
     const [user, dispatch] = useContext(UserContext)
@@ -19,9 +20,7 @@ const Jobs = () => {
     let [currentPage, setCurrentPage] = useState(1)
     const [userdata,setUserData] = useState({})
 
-    useEffect(() => {
-        checkCurrentUser()
-    }, [])
+
 
 
     const setSearchData = (data) => {
@@ -84,6 +83,12 @@ const Jobs = () => {
             setLogin('failed')
         }
     }
+
+    if(start) {
+        checkCurrentUser()
+        start = false
+    }
+
 
     if (login === 'waiting') {
         return (

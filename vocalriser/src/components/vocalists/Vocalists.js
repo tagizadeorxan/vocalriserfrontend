@@ -1,5 +1,5 @@
 
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import { Redirect } from 'react-router-dom';
 import Search from './Search'
 import UserContext from '../../contexts/user.context';
@@ -10,6 +10,7 @@ import Waveform from "../waveform";
 import PianoPlay from '../piano'
 import { Link } from 'react-router-dom'
 
+let start = true
 
 const Vocalists = () => {
     const [user, dispatch] = useContext(UserContext)
@@ -33,10 +34,7 @@ const Vocalists = () => {
         })
     }
 
-    useEffect(() => {
-        
-        checkCurrentUser()
-    }, [])
+  
 
     const panelSelect = (type) => {
         setSelected(type)
@@ -88,6 +86,13 @@ const Vocalists = () => {
         } else {
             setLogin('failed')
         }
+    }
+    console.log("interesting")
+
+    if(start) {
+        console.log("hmm")
+        checkCurrentUser()
+        start = false
     }
 
     if (login === 'waiting') {
