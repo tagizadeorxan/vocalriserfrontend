@@ -10,7 +10,7 @@ let Login = () => {
 
     const email = useRef()
     const password = useRef()
-    const confirmPassword = useRef()
+   
 
     const [error, setError] = useState(false)
     const [errorMessage, setErrorMessage] = useState()
@@ -25,12 +25,10 @@ let Login = () => {
         setErrorMessage('')
         let userEmail = email.current.value
         let userPassword = password.current.value
-        let userConfirmPassword = confirmPassword.current.value
         
 
         if (userEmail !== '') {
-            if (userPassword !== '' || userConfirmPassword !== '') {
-                if (userPassword === userConfirmPassword) {
+            if (userPassword !== '') {
                     setError(false)
                     let data = {
                         email: userEmail,
@@ -48,10 +46,7 @@ let Login = () => {
                         })
                         setSuccess(true)
                     }
-                } else {
-                    setError(true)
-                    setErrorMessage('Password not match')
-                }
+                
             } else {
                 setError(true)
                 setErrorMessage('Password can not be empty')
@@ -85,11 +80,6 @@ let Login = () => {
                 <button onClick={showPassword} className={`bp3-button bp3-minimal bp3-intent-warning ${passwordShow ? 'bp3-icon-unlock' : 'bp3-icon-lock'} .modifier`}></button>
             </div>
 
-
-            <div className="bp3-input-group .modifier login-general ">
-                <input ref={confirmPassword} type={passwordShow ? "text" : "password"} className="bp3-input" placeholder="Enter your password..." autoComplete="on" />
-                <button onClick={showPassword} className={`bp3-button bp3-minimal bp3-intent-warning ${passwordShow ? 'bp3-icon-unlock' : 'bp3-icon-lock'} .modifier`}></button>
-            </div>
            
             <button type="button" onClick={loginUser} className={`bp3-button bp3-icon-log-in .modifier login-general ${error? 'bp3-intent-danger':'bp3-intent-success'}`}>Sign in</button>
             
