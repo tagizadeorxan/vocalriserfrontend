@@ -85,7 +85,7 @@ export let sendMessage = async (data,token) => {
 }
 
 export let createMessage = async (data,token) => {
-    let result = false;
+    let result = {};
 
     let options = {
         headers: {
@@ -99,8 +99,13 @@ export let createMessage = async (data,token) => {
     await fetch(`${Utils.url}/api/v1/users/createMessage`, options)
         .then(res => {
             if (res.status === 200) {
-                result = true
+                return res.json()
             } 
+        })
+        .then(res=> {
+            if(res) {
+                result = res
+            }
         })
          .catch(err =>
              console.log(err)

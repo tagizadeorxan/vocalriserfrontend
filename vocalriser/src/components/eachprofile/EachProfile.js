@@ -2,7 +2,8 @@ import React, { useContext, useState, useRef } from 'react'
 import UserContext from '../../contexts/user.context';
 import { requestCurrentUser } from '../helpers/auth.helper'
 import { getUserByID } from '../helpers/profile.helper'
-import { createMessage,sendMessage } from '../helpers/messages.helper'
+import { createMessage, sendMessage } from '../helpers/messages.helper'
+import { createNotification } from '../helpers/notifications.helper'
 import { Redirect } from 'react-router-dom';
 import Waveform from '../waveform'
 import PianoPlay from '../piano'
@@ -32,10 +33,17 @@ const EachProfile = (props) => {
             reciever_fullname: `${viewUser.first_name} ${viewUser.last_name}`,
             message: messageInput.current.value
         }
-        let result = await createMessage(data,user.token)
-      
-        if (result) {
+        let result = await createMessage(data, user.token)
+
+        if (result.hasOwnProperty("id")) {
             setMessage(false)
+            let notification = {
+                type: "message",
+                fromUser: user.user.id,
+                toUser: viewUser.id,
+                messageID: result.id
+            }
+            let notify = await createNotification(notification, user.token)
         }
     }
 
@@ -102,7 +110,7 @@ const EachProfile = (props) => {
                     </div>
 
                     <h1 className="bp3-heading profile-section-one-each">{viewUser.first_name} {viewUser.last_name}</h1>
-                    <button onClick={() => setMessage(true)} className="bp3-button">message</button>
+                    {viewUser.id !== user.user.id? <button onClick={() => setMessage(true)} className="bp3-button">message</button>:null}
 
 
                     <div className="profile-section-one-each">

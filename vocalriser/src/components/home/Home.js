@@ -9,15 +9,16 @@ let start = true
 let Home = () => {
     const [user, dispatch] = useContext(UserContext)
     const [login, setLogin] = useState('waiting')
-    const [userdata, setUserData] = useState({})
-
-
+ 
 
     let checkCurrentUser = async () => {
         console.log(user.token)
         let result = await requestCurrentUser(user.token)
         if (result.status) {
-            setUserData(result.data)
+            await dispatch({
+                type: "USER",
+                payload: result.data
+            })
             setLogin('success')
         } else {
             setLogin('failed')
@@ -40,7 +41,7 @@ let Home = () => {
         )
     }
 
-    else if (!userdata.hasOwnProperty('id')) {
+    else if (!user.user.hasOwnProperty('id')) {
         return (
             <Redirect push to="/" />
         )

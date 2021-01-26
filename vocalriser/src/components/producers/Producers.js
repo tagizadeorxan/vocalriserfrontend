@@ -18,7 +18,7 @@ const Producers = () => {
     let [pageSize, setPageSize] = useState(1)
     let [currentPage, setCurrentPage] = useState(1)
     const [selected, setSelected] = useState('genres')
-    const [userdata, setUserData] = useState({})
+
 
 
 
@@ -80,7 +80,10 @@ const Producers = () => {
     let checkCurrentUser = async () => {
         let result = await requestCurrentUser(user.token)
         if (result.status) {
-            setUserData(result.data)
+            await dispatch({
+                type: "USER",
+                payload: result.data
+            })
             setLogin('success')
             getProducersList()
         } else {
@@ -89,7 +92,7 @@ const Producers = () => {
     }
 
 
-    if(start) {
+    if (start) {
         checkCurrentUser()
         start = false
     }
@@ -104,7 +107,7 @@ const Producers = () => {
             <Redirect push to="/" />
         )
     }
-    else if (!userdata.hasOwnProperty('id')) {
+    else if (!user.user.hasOwnProperty('id')) {
         return (
             <Redirect push to="/home" />
         )

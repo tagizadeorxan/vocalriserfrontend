@@ -405,7 +405,7 @@ export let sendContract = async (data, token) => {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         },
-        body:JSON.stringify(data)
+        body: JSON.stringify(data)
     }
     await fetch(`${Utils.url}/api/v1/gigs/sendContract`, options)
         .then(res => {
@@ -419,3 +419,35 @@ export let sendContract = async (data, token) => {
 
     return result
 }
+
+
+export let whereUserBiddedGigs = async (user_id, token) => {
+    let result = []
+
+    let options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+    }
+    await fetch(`${Utils.url}/api/v1/users/biddedGigs/${user_id}`, options)
+        .then(res => {
+            if (res.status === 200) {
+                return res.json()
+            }
+        })
+        .then(res => {
+            if (res) {
+                result = res
+            }
+        })
+        .catch(err =>
+            console.log(err)
+        )
+
+    return result
+}
+
+
+

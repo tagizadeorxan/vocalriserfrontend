@@ -8,7 +8,8 @@ let userState = {
     token:localStorage.getItem('vocalrisertoken') || '',
     vocalists:[],
     producers:[],
-    gigs:[]
+    gigs:[],
+    notifications:[]
  }
 
 

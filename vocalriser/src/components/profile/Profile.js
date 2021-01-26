@@ -15,7 +15,7 @@ const Profile = () => {
     const [login, setLogin] = useState('waiting')
     let [selected, setSelected] = useState('video')
     let [section, setSection] = useState()
-    const [userdata,setUserData] = useState()
+    
 
 
     let checkCurrentUser = async () => {
@@ -26,7 +26,7 @@ const Profile = () => {
                 type: "USER",
                 payload: result.data
             })
-            setUserData(result.data)
+    
             setLogin('success')
         } else {
             setLogin('failed')
@@ -50,7 +50,7 @@ const Profile = () => {
         )
     }
 
-    else if (!userdata.hasOwnProperty('id')) {
+    else if (!user.user.hasOwnProperty('id')) {
         return (
            <Redirect push to="/home" />
         )

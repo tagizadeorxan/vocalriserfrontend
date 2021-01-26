@@ -23,7 +23,7 @@ let CreateJob = () => {
     const genre = useRef()
 
     const [user, dispatch] = useContext(UserContext)
-    const [userdata, setUserData] = useState({})
+
     const [login, setLogin] = useState('waiting')
     const [languages, setLanguages] = useState([])
     const [genres, setGenres] = useState([])
@@ -61,7 +61,7 @@ let CreateJob = () => {
         let date = new Date()
 
         let data = {
-            user_id: userdata.id,
+            user_id: user.user.id,
             name: gigname.current.value,
             expireDate: formatDate(addDays(date, 15)),
             createDate: formatDate(date),
@@ -74,7 +74,7 @@ let CreateJob = () => {
             requirements: requirements.current.value,
             genre: genre.current.value,
             language: language.current.value,
-            createdBy: userdata.first_name + '' + userdata.last_name
+            createdBy: user.user.first_name + '' + user.user.last_name
         }
 
 
@@ -95,7 +95,10 @@ let CreateJob = () => {
         if (result.status) {
             setLanguages(languages)
             setGenres(genres)
-            setUserData(result.data)
+            await dispatch({
+                type: "USER",
+                payload: result.data
+            })
             setLogin('success')
         } else {
             setLogin('failed')
@@ -104,7 +107,7 @@ let CreateJob = () => {
 
 
 
-    if(start) {
+    if (start) {
         checkCurrentUser()
         start = false
     }
@@ -119,7 +122,7 @@ let CreateJob = () => {
             <Redirect push to="/" />
         )
     }
-    else if (!userdata.hasOwnProperty('id')) {
+    else if (!user.user.hasOwnProperty('id')) {
         return (
             <Redirect push to="/home" />
         )
@@ -163,8 +166,8 @@ let CreateJob = () => {
                         <select defaultValue="" ref={type} required>
                             <option value="">Type...</option>
 
-                            {userdata.type === "P" || userdata.type === "VP" ? <option value="V">Vocalist</option> : null}
-                            {userdata.type === "V" || userdata.type === "VP" ? <option value="P">Producer</option> : null}
+                            {user.user.type === "P" || user.user.type === "VP" ? <option value="V">Vocalist</option> : null}
+                            {user.user.type === "V" || user.user.type === "VP" ? <option value="P">Producer</option> : null}
                         </select>
                     </div>
 

@@ -19,7 +19,7 @@ const Vocalists = () => {
     let [vocalists, setVocalists] = useState([])
     let [pageSize, setPageSize] = useState(1)
     let [currentPage, setCurrentPage] = useState(1)
-    const [userdata,setUserData] = useState({})
+
 
 
 
@@ -80,7 +80,10 @@ const Vocalists = () => {
     let checkCurrentUser = async () => {
         let result = await requestCurrentUser(user.token)
         if (result.status) {
-            setUserData(result.data)
+            await dispatch({
+                type: "USER",
+                payload: result.data
+            })
             setLogin('success')
             getVocalistsList()
         } else {
@@ -106,7 +109,7 @@ const Vocalists = () => {
         )
     }
 
-    else if (!userdata.hasOwnProperty('id')) {
+    else if (!user.user.hasOwnProperty('id')) {
         return (
            <Redirect push to="/home" />
         )

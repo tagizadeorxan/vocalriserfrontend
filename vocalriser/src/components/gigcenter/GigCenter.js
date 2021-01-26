@@ -12,7 +12,7 @@ let start = true
 let GigCenter = () => {
     const [user, dispatch] = useContext(UserContext)
     const [login, setLogin] = useState('waiting')
-    const [userdata, setUserData] = useState({})
+
     const [selected, setSelected] = useState('created')
     const [eachSelected, setEachSelected] = useState('')
     const [creatorGigs, setCreatorGigs] = useState([])
@@ -25,10 +25,14 @@ let GigCenter = () => {
         let biddedGigs = await getBidderSuccessfullGigsByUserID(result.data.id, user.token)
         console.log(biddedGigs)
         if (result.status) {
+            await dispatch({
+                type: "USER",
+                payload: result.data
+            })
             console.log(creatorGigs)
             setBiddedGigs(biddedGigs)
             setCreatorGigs(creatorGigs)
-            setUserData(result.data)
+
             setLogin('success')
         } else {
             setLogin('failed')
@@ -36,7 +40,7 @@ let GigCenter = () => {
     }
 
 
-    if(start) {
+    if (start) {
         checkCurrentUser()
         start = false
     }
@@ -44,7 +48,7 @@ let GigCenter = () => {
 
     if (login === 'waiting') {
         return (
-            <PianoPlay width={300} classAdd="loading"/>
+            <PianoPlay width={300} classAdd="loading" />
         )
     }
     else if (login === 'failed') {
@@ -53,7 +57,7 @@ let GigCenter = () => {
         )
     }
 
-    else if (!userdata.hasOwnProperty('id')) {
+    else if (!user.user.hasOwnProperty('id')) {
         return (
             <Redirect push to="/" />
         )

@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import { Redirect } from 'react-router-dom';
 import UserContext from '../../contexts/user.context';
 import { requestCurrentUser } from '../helpers/auth.helper'
-import { getGigs } from '../helpers/gig.helper'
+import { getGigs, whereUserBiddedGigs } from '../helpers/gig.helper'
 import PianoPlay from '../piano'
 import Search from './Search'
 import Waveform from "../waveform";
@@ -18,7 +18,8 @@ const Jobs = () => {
     const [selected, setSelected] = useState('requirements')
     let [pageSize, setPageSize] = useState(1)
     let [currentPage, setCurrentPage] = useState(1)
-    const [userdata,setUserData] = useState({})
+
+    const [whereUserBidded, setWhereUserBidded] = useState([])
 
 
 
@@ -65,10 +66,11 @@ const Jobs = () => {
 
     let checkCurrentUser = async () => {
         let result = await requestCurrentUser(user.token)
+        let userBiddings = await whereUserBiddedGigs(result.data.id, user.token)
         console.log(result)
         if (result.status) {
             console.log(result)
-
+            setWhereUserBidded(userBiddings)
             let gigs = await getGigs(result.data.type, result.data.gender, user.token)
             setPageSize(Math.ceil(gigs.length === 0 ? (gigs.length + 1) / 2 : gigs.length / 2))
             console.log(gigs)
@@ -77,14 +79,17 @@ const Jobs = () => {
                 type: "GIGS",
                 payload: gigs
             })
-            setUserData(result.data)
+            await dispatch({
+                type: "USER",
+                payload: result.data
+            })
             setLogin('success')
         } else {
             setLogin('failed')
         }
     }
 
-    if(start) {
+    if (start) {
         checkCurrentUser()
         start = false
     }
@@ -101,9 +106,9 @@ const Jobs = () => {
         )
     }
 
-    else if (!userdata.hasOwnProperty('id')) {
+    else if (!user.user.hasOwnProperty('id')) {
         return (
-           <Redirect push to="/home" />
+            <Redirect push to="/home" />
         )
     }
 
@@ -116,6 +121,7 @@ const Jobs = () => {
 
                         {gigs.length > 0 ? gigs.slice((currentPage - 1) * 2, currentPage * 2).map((gig, index) => <div key={index}>
                             <blockquote className="bp3-blockquote bp3-card bp3-interactive each-job">
+                               
                                 <div className="each-job-element">
                                     {/* <img alt="user" style={{ width: '100px' }} src="https://www.mountainheavensella.com/wp-content/uploads/2018/12/default-user.png" /> */}
                                 </div>
@@ -140,6 +146,11 @@ const Jobs = () => {
                                             <span style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp3-tag .modifier">{gig.budgetMin}-{gig.budgetMax} USD</span>
                                         </div>
                                     </div>
+                                    {
+                                    whereUserBidded.find(b=> b.gig_id === gig.id) ? 
+                                    <div style={{ marginTop: '7%', textAlign: "center", float:"left" }}><span className={`bp3-tag bp3-intent-success`}>Submitted</span></div> 
+                                     : null
+                                }
                                 </div>
                                 <div style={{ marginTop: '3%' }} >
                                     {/* <button style={{marginTop:'7%',marginLeft:'10%',display:'block'}} type="button" className="bp3-button">Connect</button> */}
