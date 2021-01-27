@@ -145,12 +145,12 @@ let CreateJob = () => {
                     </div>
 
                     <div className="bp3-input-group .modifier createjob-general">
-                        <input ref={budgetMin} type={"number"} className="bp3-input" placeholder="Budget min..." min="20" max="100" autoComplete="on" required />
+                        <input ref={budgetMin} type={"number"} className="bp3-input" placeholder="Budget min..." min="20"  autoComplete="on" required />
                         <button className={`bp3-button bp3-minimal bp3-intent-warning bp3-icon-dollar .modifier`}></button>
                     </div>
 
                     <div className="bp3-input-group .modifier createjob-general">
-                        <input ref={budgetMax} type={"number"} className="bp3-input" placeholder="Budget max..." min="100" max="1000" autoComplete="on" required />
+                        <input ref={budgetMax} type={"number"} className="bp3-input" placeholder="Budget max..." min="20"  autoComplete="on" required />
                         <button className={`bp3-button bp3-minimal bp3-intent-warning bp3-icon-dollar .modifier`}></button>
                     </div>
 

@@ -1,8 +1,4 @@
-import React, {useContext} from 'react'
 import Utils from '../utils/common.utils'
-
-
-
 
 
 export let requestLogin = async (data) => {
@@ -29,7 +25,7 @@ export let requestLogin = async (data) => {
             } else if (res.status === 401) {
                 result.error = res.message
             } else {
-                if(res) {
+                if (res) {
                     result.user = res
                 }
             }
@@ -41,11 +37,11 @@ export let requestLogin = async (data) => {
 }
 
 export let requestCurrentUser = async (token) => {
-  
+
     let result = {
         status: false,
-        data:{},
-        errorMessage:''
+        data: {},
+        errorMessage: ''
     }
 
     let options = {
@@ -58,14 +54,13 @@ export let requestCurrentUser = async (token) => {
     }
     await fetch(`${Utils.url}/api/v1/users/whoami`, options)
         .then(res => {
-            console.log(res)
             if (res.status === 200) {
                 result.status = true
                 return res.json()
-            } 
+            }
         })
-        .then(res=> {
-            if(res) {
+        .then(res => {
+            if (res) {
                 result.data = res
             }
         })
@@ -78,7 +73,7 @@ export let requestCurrentUser = async (token) => {
 
 export let createUser = async (data) => {
     let options = {
-        method:'POST',
+        method: 'POST',
         headers: {
             'Accept': 'application/json, text/plain, */*',
             'Content-Type': 'application/json'
@@ -88,27 +83,27 @@ export let createUser = async (data) => {
 
     let result = {}
 
-    await fetch(`${Utils.url}/api/v1/users`,options)
+    await fetch(`${Utils.url}/api/v1/users`, options)
         .then(res => {
-            console.log(res)
+
             if (res.status === 201 || res.status === 409 || res.status === 400) {
                 return res.json()
-            } 
+            }
         })
         .then(res => {
-         if(res.status === 409 ){
-             result.errorMessage = res.message
-             result.status = false
-         }  else if (res.status === 400) {
-             result.errors = res
-            result.errorMessage = res.message
-            result.code = 400
-            result.status = false
-         }
-         else {
-             result.status = true
-         } 
-         
+            if (res.status === 409) {
+                result.errorMessage = res.message
+                result.status = false
+            } else if (res.status === 400) {
+                result.errors = res
+                result.errorMessage = res.message
+                result.code = 400
+                result.status = false
+            }
+            else {
+                result.status = true
+            }
+
         })
         .catch(error => {
             result.errorMessage = "Please try again later"

@@ -36,13 +36,19 @@ const EachGig = (props) => {
         } else if (bidRef.current.value < viewedGig.budgetMin) {
             setBidError('min')
         } else {
+            console.log("ok basladi")
             setBidError('')
             let refresh = await handleRefreshBid()
-            let bidExist = await getBidExist(user.user.id, user.token)
+            let bidExist = await getBidExist({
+                user_id: user.user.id,
+                gig_id: viewedGig.id
+            }, user.token)
 
             if (bidExist) {
+                console.log("bura")
                 setBiddings(refresh)
             } else {
+                console.log("bu yana")
                 let bid = {
                     gig_id: viewedGig.id,
                     user_id: user.user.id,
@@ -161,10 +167,9 @@ const EachGig = (props) => {
                 setBiddings(biddings)
                 let userBid = false;
                 console.log(biddings)
-                if (biddings) {
+                if (biddings.length > 0) {
                     userBid = biddings.find(x => x.user_id === result.data.id)
                 }
-                console.log(userBid)
                 if (userBid) {
                     setBidExist(true)
                     setUserBid(userBid)
@@ -178,11 +183,11 @@ const EachGig = (props) => {
 
         } else {
             setLogin('failed')
-            
+
         }
     }
 
-    if(start) {
+    if (start) {
         checkCurrentUser()
         start = false
     }
@@ -233,8 +238,8 @@ const EachGig = (props) => {
                     BPM:<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className="bp3-tag .modifier">{viewedGig.bpm}</span>
                     </div>
                     <div className="each-gig-element">
-                        Created by:<Link to={`/profiles/${viewedGig.user_id}`}><span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} 
-                        className="bp3-tag .modifier">{viewedGig.createdBy}</span></Link>
+                        Created by:<Link to={`/profiles/${viewedGig.user_id}`}><span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }}
+                            className="bp3-tag .modifier">{viewedGig.createdBy}</span></Link>
                     Budget:<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className={`bp3-tag .modifier bp3-intent-${bidError === 'min' ? 'danger' : 'success'}`}>{viewedGig.budgetMin}</span>
                     -<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className={`bp3-tag .modifier bp3-intent-${bidError === 'max' ? 'danger' : 'success'}`}>{viewedGig.budgetMax}</span>{Utils.currency}
                     </div>

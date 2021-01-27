@@ -17,19 +17,22 @@ let Messages = () => {
     const [login, setLogin] = useState('waiting')
     const [messages, setMessages] = useState([])
     const [eachMessages, setEachMessages] = useState([])
-    const [selectedMessage, setSelectedMessage] = useState()
+    const [selectedMessage, setSelectedMessage] = useState(0)
 
-    const handleNotification = async (messageID) => {
-        let findNotify = await user.notifications.find(e => e.messageID = messageID)
-        if (findNotify) {
-            let readNotify = await readNotification(findNotify.id, user.token)
-            if (readNotify) {
-                await dispatch({
+
+    const handleNotification = async () => {
+        user.notifications.map(n=> {
+            if(n.type === "message") {
+                 readNotification(n.id, user.token)
+                 dispatch({
                     type: "NOTIFICATIONS",
-                    payload: user.notifications.filter(item => item.id !== findNotify.id)
+                    payload: user.notifications.filter(item => item.id !== n.id)
                 })
             }
-        }
+        })
+
+        
+
     }
 
     const handleDeleteMessage = async (message_id, type) => {
@@ -68,7 +71,7 @@ let Messages = () => {
     }
 
     const handleEachMessages = async (message_id) => {
-        handleNotification(message_id)
+
         console.log(message_id)
         setSelectedMessage(message_id)
         console.log(message_id)
@@ -81,6 +84,7 @@ let Messages = () => {
     }
 
     let checkCurrentUser = async () => {
+        handleNotification()
         console.log(user.token)
         let result = await requestCurrentUser(user.token)
         console.log(result.data.id)
@@ -130,25 +134,28 @@ let Messages = () => {
 
                     <div className="bp3-card .modifier main-message-container">
                         {messages.map((message, index) => {
+
                             if (message.sender === user.user.id && message.sender_active === 1) {
                                 return <div key={index}  >
 
-                                    <button style={{ width: '89%', position: 'relative' }} className={`bp3-button bp3-outlined bp3-intent-${selectedMessage === message.id ? 'success' : null}`} onClick={() => handleEachMessages(message.id)} key={index}>{message.reciever_fullname}
 
-                                        {user.notifications.find(e => e.messageID === message.id) ?
-                                            <button className="bp3-button bp3-disabled bp3-icon-inbox bp3-minimal  bp3-intent-success" style={{ position: 'absolute', right: '3%', width: '15px' }}></button> : null}</button>
+
+                                    <button style={{ width: '89%', position: 'relative' }} className={`bp3-button bp3-outlined bp3-intent-${selectedMessage === message.id ? 'success' : null}`} onClick={() => handleEachMessages(message.id)} key={index}>{message.reciever_fullname}</button>
+
                                     <button style={{ float: 'right' }} onClick={() => handleDeleteMessage(message.id, 'sender_active')} className="bp3-button bp3-minimal bp3-icon-delete bp3-intent-danger"></button>
                                 </div>
                             } else if (message.reciever === user.user.id && message.reciever_active === 1) {
-                                return <div key={index}>
-                                    <button style={{ width: '89%' }} className={`bp3-button bp3-minimal  bp3-outlined bp3-intent-${selectedMessage === message.id ? 'success' : null}`} onClick={() => handleEachMessages(message.id)} key={index}>{message.sender_fullname}</button>
-                                    <button style={{ float: 'right' }} onClick={() => handleDeleteMessage(message.id, 'reciever_active')} className="bp3-button bp3-minimal bp3-icon-delete bp3-intent-danger"></button>
+                                return <div key={index}  >
+
+                                    <button style={{ width: '89%', position: 'relative' }} className={`bp3-button bp3-outlined bp3-intent-${selectedMessage === message.id ? 'success' : null}`} onClick={() => handleEachMessages(message.id)} key={index}>{message.sender_fullname}</button>
+
+                                    <button style={{ float: 'right' }} onClick={() => handleDeleteMessage(message.id, 'sender_active')} className="bp3-button bp3-minimal bp3-icon-delete bp3-intent-danger"></button>
                                 </div>
                             }
                         })}
                     </div>
 
-                    <div className="bp3-card .modifier each-message-container">
+                    {selectedMessage > 0 ? <div className="bp3-card .modifier each-message-container">
                         {eachMessages.length > 0 ? eachMessages.map((m, i) => <div key={i}>
                             <Link to={`/profiles/${m.sender_id}`}>{m.sender_fullname}</Link>
                             <p>{m.sender_message}</p>
@@ -161,10 +168,19 @@ let Messages = () => {
 
                         </div>
 
-                    </div>
+                    </div> : null}
 
 
-                </div> : null}
+                </div> : <div>
+                        You have not received any messages yet!
+                        Employers can message bidders to discuss bids and ask questions.
+
+                        This is an important part of the bidding process as it allows for questions to be
+                        answered before a gig is awarded.
+
+                        Keep an eye out for new messages by watching the envelope next to your username above.
+
+                </div>}
             </div>
         )
     }

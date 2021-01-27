@@ -119,7 +119,7 @@ const Jobs = () => {
                 <div style={{ marginLeft: '5%' }}>
                     <div className="jobs-container">
 
-                        {gigs.length > 0 ? gigs.slice((currentPage - 1) * 2, currentPage * 2).map((gig, index) => <div key={index}>
+                        {gigs.length > 0 ? gigs.reverse().slice((currentPage - 1) * 2, currentPage * 2).map((gig, index) => <div key={index}>
                             <blockquote className="bp3-blockquote bp3-card bp3-interactive each-job">
                                
                                 <div className="each-job-element">

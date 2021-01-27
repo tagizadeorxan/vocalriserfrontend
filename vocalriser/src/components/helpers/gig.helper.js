@@ -205,17 +205,18 @@ export let awardGigByID = async (gig_id, user_id, token) => {
 
 
 
-export let getBidExist = async (user_id, token) => {
+export let getBidExist = async (data, token) => {
     let result = false;
 
     let options = {
-        method: 'GET',
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
-        }
+        },
+        body:JSON.stringify(data)
     }
-    await fetch(`${Utils.url}/api/v1/gigs/bidExist/${user_id}`, options)
+    await fetch(`${Utils.url}/api/v1/gigs/bidExist`, options)
         .then(res => {
             if (res.status === 200) {
                 result = true

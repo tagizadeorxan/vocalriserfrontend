@@ -18,7 +18,7 @@ const EachProfile = (props) => {
     const [login, setLogin] = useState('waiting')
     let [selected, setSelected] = useState('video')
     let [section, setSection] = useState()
-    let [viewUser, setViewUser] = useState()
+    let [viewUser, setViewUser] = useState({})
     const [message, setMessage] = useState()
 
 
@@ -51,23 +51,21 @@ const EachProfile = (props) => {
 
     let checkCurrentUser = async () => {
 
-
-
-        console.log(user.token)
         let result = await requestCurrentUser(user.token)
         if (result.status) {
             await dispatch({
                 type: "USER",
                 payload: result.data
             })
-            console.log(props)
+      
             let viewedUser = await getUserByID(props.match.params.id, user.token)
             console.log(viewedUser)
             if (viewedUser) {
                 setViewUser(viewedUser)
+                console.log("sucesss")
                 setLogin('success')
             } else {
-                setLogin('waiting')
+                setLogin('failed')
             }
 
         } else {
@@ -94,12 +92,13 @@ const EachProfile = (props) => {
     }
 
     else if (!viewUser.hasOwnProperty('id')) {
-        props.history.goBack()
+       props.history.goBack()
         return (
             <p></p>
         )
     }
     else {
+       
 
         return (
             <div className="profile-section">
@@ -132,7 +131,8 @@ const EachProfile = (props) => {
                     City: <span style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp3-tag .modifier">{viewUser.city}</span>
                     </div>
                     <div className="profile-section-one-each">
-                        Raiting: {viewUser.raiting === null ? <span className="bp3-tag">No reviews yet</span> : <span
+                   
+                        Raiting: {viewUser.raiting === null  ? <span className="bp3-tag">No reviews yet</span> : <span
                             className={`bp3-tag bp3-intent-${parseFloat(viewUser.raiting) <= 3 ? 'danger' :
                                 parseFloat(viewUser.raiting) > 4 ? 'success' : 'warning'}`}>{viewUser.raiting}</span>}
                     </div>
