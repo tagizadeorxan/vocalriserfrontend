@@ -9,7 +9,6 @@ import './EachGig.css'
 import { NavLink, Link } from 'react-router-dom'
 import Utils from '../utils/common.utils'
 
-let start = true
 
 const EachGig = (props) => {
     const [user, dispatch] = useContext(UserContext)
@@ -21,6 +20,7 @@ const EachGig = (props) => {
     const [userBid, setUserBid] = useState()
     const bidRef = React.createRef()
     const [selected, setSelected] = useState('genres')
+    const [start,setStart] = useState(true)
 
 
 
@@ -36,7 +36,7 @@ const EachGig = (props) => {
         } else if (bidRef.current.value < viewedGig.budgetMin) {
             setBidError('min')
         } else {
-            console.log("ok basladi")
+        
             setBidError('')
             let refresh = await handleRefreshBid()
             let bidExist = await getBidExist({
@@ -45,10 +45,10 @@ const EachGig = (props) => {
             }, user.token)
 
             if (bidExist) {
-                console.log("bura")
+             
                 setBiddings(refresh)
             } else {
-                console.log("bu yana")
+              
                 let bid = {
                     gig_id: viewedGig.id,
                     user_id: user.user.id,
@@ -98,14 +98,13 @@ const EachGig = (props) => {
         let refresh = await handleRefreshGig()
         if (refresh) {
             if (viewedGig.active === 2) {
-                console.log("ora")
+           
                 setViewGig(refresh)
             } else {
 
                 let result = await awardGigByID(viewedGig.id, user_id, user.token)
                 if (result) {
-                    console.log("bura")
-                    console.log(viewedGig.awardedUser)
+               
                     let updatedGig = { ...viewedGig, active: 2, awardedUser: user_id }
                     setViewGig(updatedGig)
                 }
@@ -131,7 +130,7 @@ const EachGig = (props) => {
         if (refresh) {
             if (bidExist) {
                 if (bid.user_id === user.user.id) {
-                    console.log(bid.id)
+                  
                     let result = await removeBid(bid.id, user.token)
                     if (result) {
                         window.location.reload()
@@ -139,34 +138,34 @@ const EachGig = (props) => {
                 }
 
             } else {
-                console.log("already removed")
+              
                 setBiddings(refresh)
             }
         }
 
     }
 
-    let checkCurrentUser = async () => {
+    const checkCurrentUser = async () => {
         setBidExist(false)
-        console.log(user.token)
-        let result = await requestCurrentUser(user.token)
-        console.log(result)
+       
+        const result = await requestCurrentUser(user.token)
+    
         if (result.status) {
             await dispatch({
                 type: "USER",
                 payload: result.data
             })
-            console.log(props)
+          
             let viewedGig = await getGigByID(props.match.params.id, user.token)
             let biddings = await getGigBiddings(props.match.params.id, user.token)
-            console.log(result.data)
+          
 
-            console.log(viewedGig)
+           
             if (viewedGig) {
                 setViewGig(viewedGig)
                 setBiddings(biddings)
                 let userBid = false;
-                console.log(biddings)
+                
                 if (biddings.length > 0) {
                     userBid = biddings.find(x => x.user_id === result.data.id)
                 }
@@ -189,7 +188,7 @@ const EachGig = (props) => {
 
     if (start) {
         checkCurrentUser()
-        start = false
+        setStart(false)
     }
 
 

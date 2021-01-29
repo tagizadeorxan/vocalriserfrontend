@@ -1,40 +1,37 @@
 import React, { useContext, useState } from 'react'
 import UserContext from '../../contexts/user.context'
 import { requestCurrentUser } from '../helpers/auth.helper'
-import { getGigByID , getPreparedContract, acceptGig ,sendContract} from '../helpers/gig.helper'
+import { getGigByID, getPreparedContract, acceptGig, sendContract } from '../helpers/gig.helper'
 import { Redirect } from 'react-router-dom';
 import Waveform from '../waveform'
 import PianoPlay from '../piano'
 
-let start = true
 
 
 const AwardedGig = (props) => {
     const [user, dispatch] = useContext(UserContext)
     const [login, setLogin] = useState('waiting')
     const [viewedGig, setViewGig] = useState()
-    const [contract,setContract] = useState('')
+    const [contract, setContract] = useState('')
+    const [start, setStart] = useState(true)
 
 
-
-
-    
     const handleAcceptGig = async () => {
-        let result = await acceptGig(viewedGig.id,user.token)
-        if(result) {
-            setViewGig({...viewedGig,progress:1})
+        const result = await acceptGig(viewedGig.id, user.token)
+        if (result) {
+            setViewGig({ ...viewedGig, progress: 1 })
             sendContract({
-              user_id:viewedGig.user_id,
-              awardedUser:viewedGig.awardedUser,
-              contract
-            },user.token)
+                user_id: viewedGig.user_id,
+                awardedUser: viewedGig.awardedUser,
+                contract
+            }, user.token)
         }
     }
 
 
-    let checkCurrentUser = async () => {
+    const checkCurrentUser = async () => {
 
-        let result = await requestCurrentUser(user.token)
+        const result = await requestCurrentUser(user.token)
 
         if (result.status) {
             await dispatch({
@@ -42,19 +39,14 @@ const AwardedGig = (props) => {
                 payload: result.data
             })
 
-            let viewedGig = await getGigByID(props.match.params.id, user.token)
-            if(viewedGig.progress === 0) {
-                console.log(props.match.params.id)
-                let result = await getPreparedContract(props.match.params.id,user.token)
-                console.log(contract)
+            const viewedGig = await getGigByID(props.match.params.id, user.token)
+            if (viewedGig.progress === 0) {
+                const result = await getPreparedContract(props.match.params.id, user.token)
                 setContract(result.contract)
             }
-            
+
             if (viewedGig) {
                 setViewGig(viewedGig)
-               
-                console.log(user.user.id)
-                console.log(viewedGig.awardedUser)
                 setLogin('')
             } else {
                 setLogin('failed')
@@ -67,9 +59,9 @@ const AwardedGig = (props) => {
     }
 
 
-    if(start) {
+    if (start) {
         checkCurrentUser()
-        start = false
+        setStart(false)
     }
 
 
@@ -100,8 +92,8 @@ const AwardedGig = (props) => {
                         <button aria-label="Close" className="bp3-dialog-close-button bp3-button bp3-minimal bp3-icon-cross"></button>
                     </div>
                     <div className="bp3-dialog-body">
-                        {contract.length>0 ? contract:null}
-    </div>
+                        {contract.length > 0 ? contract : null}
+                    </div>
                     <div className="bp3-dialog-footer">
                         <div className="bp3-dialog-footer-actions">
                             <button type="button" className="bp3-button">Decline</button>
@@ -113,7 +105,7 @@ const AwardedGig = (props) => {
         )
     }
 
-    else if(viewedGig.progress > 0) {
+    else if (viewedGig.progress > 0) {
 
         return (
             <div className="gig-container">
@@ -155,17 +147,17 @@ const AwardedGig = (props) => {
             </div>
 
         )
-    } 
-    
+    }
+
     else if (viewedGig.awardedUser !== user.user.id && viewedGig.progress === 0) {
         return (
             <p>Agreement waiting for acception</p>
-         )
+        )
     }
-    
+
     else {
-        return(
-             <Redirect push to="/jobs" />
+        return (
+            <Redirect push to="/jobs" />
         )
     }
 }

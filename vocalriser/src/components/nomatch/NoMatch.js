@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import './NoMatch.css'
 import { getCards } from '../helpers/gig.helper'
 
-let start = true
+
 
 const NoMatch = () => {
 
     const [cards, setCards] = useState([])
     const [day, setDay] = useState()
+    const [start,setStart] = useState(true)
 
 
 
@@ -22,7 +23,7 @@ const NoMatch = () => {
 
     if(start) {
         getQuotes()
-        start = false
+        setStart(false)
     }
 
 

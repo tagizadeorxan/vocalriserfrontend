@@ -21,7 +21,8 @@
 
 .profile-section-one-each {
   margin-top: 3%;
-  align-items: center;
+ 
+  
 }
 
 .profile-section-two-each {
@@ -31,5 +32,6 @@
 .profile-section-one-each span {
   display: inline-block;
   vertical-align: middle;
-  line-height: normal;
+
 }
+

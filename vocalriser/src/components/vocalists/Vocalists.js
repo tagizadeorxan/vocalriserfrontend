@@ -10,7 +10,7 @@ import Waveform from "../waveform";
 import PianoPlay from '../piano'
 import { Link } from 'react-router-dom'
 
-let start = true
+
 
 const Vocalists = () => {
     const [user, dispatch] = useContext(UserContext)
@@ -19,13 +19,14 @@ const Vocalists = () => {
     let [vocalists, setVocalists] = useState([])
     let [pageSize, setPageSize] = useState(1)
     let [currentPage, setCurrentPage] = useState(1)
+    const [start,setStart] = useState(true)
 
 
 
 
     let getVocalistsList = async () => {
         let vocalistList = await getVocalists(user.token)
-        console.log(vocalistList)
+       
         setPageSize(Math.ceil(vocalistList.length === 0 ? (vocalistList.length + 1) / 2 : vocalistList.length / 2))
         setVocalists(vocalistList)
         dispatch({
@@ -77,8 +78,8 @@ const Vocalists = () => {
 
     }
 
-    let checkCurrentUser = async () => {
-        let result = await requestCurrentUser(user.token)
+    const checkCurrentUser = async () => {
+        const result = await requestCurrentUser(user.token)
         if (result.status) {
             await dispatch({
                 type: "USER",
@@ -90,12 +91,11 @@ const Vocalists = () => {
             setLogin('failed')
         }
     }
-    console.log("interesting")
+    
 
     if(start) {
-        console.log("hmm")
         checkCurrentUser()
-        start = false
+        setStart(false)
     }
 
     if (login === 'waiting') {

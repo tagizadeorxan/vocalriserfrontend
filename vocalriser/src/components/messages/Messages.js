@@ -9,7 +9,7 @@ import './Messages.css'
 import { Link } from 'react-router-dom'
 
 
-let start = true
+
 
 let Messages = () => {
     const sendMessageInput = useRef()
@@ -18,6 +18,7 @@ let Messages = () => {
     const [messages, setMessages] = useState([])
     const [eachMessages, setEachMessages] = useState([])
     const [selectedMessage, setSelectedMessage] = useState(0)
+    const [start,setStart] = useState(true)
 
 
     const handleNotification = async () => {
@@ -40,7 +41,7 @@ let Messages = () => {
             id: message_id,
             type
         }
-        console.log(data)
+       
         let result = await deleteMessage(data, user.token)
 
         if (result) {
@@ -60,8 +61,7 @@ let Messages = () => {
             sender_fullname,
             sender_message: sendMessageInput.current.value
         }
-        console.log(data)
-
+       
         let result = await sendMessage(data, user.token)
         let eachMessage = await getEachMessages(message_id, user.token)
         if (result && eachMessage) {
@@ -72,25 +72,24 @@ let Messages = () => {
 
     const handleEachMessages = async (message_id) => {
 
-        console.log(message_id)
+      
         setSelectedMessage(message_id)
-        console.log(message_id)
-        console.log("working")
+      
         let eachMessages = await getEachMessages(message_id, user.token)
-        console.log(eachMessages)
+       
         if (eachMessages) {
             setEachMessages(eachMessages)
         }
     }
 
-    let checkCurrentUser = async () => {
+    const checkCurrentUser = async () => {
         handleNotification()
-        console.log(user.token)
-        let result = await requestCurrentUser(user.token)
-        console.log(result.data.id)
+       
+        const result = await requestCurrentUser(user.token)
+        
 
-        let messages = await getMessages(result.data.id, user.token)
-        console.log(messages)
+        const messages = await getMessages(result.data.id, user.token)
+       
         if (result.status && messages) {
             await dispatch({
                 type: "USER",
@@ -105,7 +104,7 @@ let Messages = () => {
 
     if (start) {
         checkCurrentUser()
-        start = false
+       setStart(false)
     }
 
 

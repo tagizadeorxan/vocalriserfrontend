@@ -42,9 +42,9 @@ let Register = () => {
         if (result.status) {
             setSuccess(true)
         } else {
-            console.log(result.code)
+         
             if (result.code === 400) {
-                console.log(result.errors[0])
+            
                 setError(true)
                 setErrorMessage(result.errors[0].msg)
             } else {
@@ -84,7 +84,7 @@ let Register = () => {
             </div>
 
             <div className="bp3-input-group .modifier register-general">
-                <input ref={age} type={"number"} className="bp3-input" placeholder="Enter your last age..." autoComplete="on" />
+                <input ref={age} type={"number"} className="bp3-input" placeholder="Enter your feeling age..." autoComplete="on" />
                 <button className={`bp3-button bp3-minimal bp3-intent-warning bp3-icon-user .modifier`}></button>
             </div>
             <div className="bp3-select .modifier register-general">

@@ -9,15 +9,16 @@ import Waveform from "../waveform";
 import { Link } from 'react-router-dom'
 import './Jobs.css'
 
-let start = true
 
 const Jobs = () => {
+  
     const [user, dispatch] = useContext(UserContext)
     const [login, setLogin] = useState('waiting')
     const [gigs, setGigs] = useState([])
     const [selected, setSelected] = useState('requirements')
     let [pageSize, setPageSize] = useState(1)
     let [currentPage, setCurrentPage] = useState(1)
+    const [start,setStart] = useState(true)
 
     const [whereUserBidded, setWhereUserBidded] = useState([])
 
@@ -64,16 +65,16 @@ const Jobs = () => {
         }
     }
 
-    let checkCurrentUser = async () => {
-        let result = await requestCurrentUser(user.token)
-        let userBiddings = await whereUserBiddedGigs(result.data.id, user.token)
-        console.log(result)
+    const checkCurrentUser = async () => {
+        const result = await requestCurrentUser(user.token)
+        const userBiddings = await whereUserBiddedGigs(result.data.id, user.token)
+       
         if (result.status) {
-            console.log(result)
+          
             setWhereUserBidded(userBiddings)
             let gigs = await getGigs(result.data.type, result.data.gender, user.token)
             setPageSize(Math.ceil(gigs.length === 0 ? (gigs.length + 1) / 2 : gigs.length / 2))
-            console.log(gigs)
+         
             setGigs(gigs)
             dispatch({
                 type: "GIGS",
@@ -91,7 +92,7 @@ const Jobs = () => {
 
     if (start) {
         checkCurrentUser()
-        start = false
+        setStart(false)
     }
 
 

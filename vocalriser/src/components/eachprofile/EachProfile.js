@@ -8,7 +8,7 @@ import { Redirect } from 'react-router-dom';
 import Waveform from '../waveform'
 import PianoPlay from '../piano'
 
-let start = true
+
 
 const EachProfile = (props) => {
 
@@ -20,11 +20,12 @@ const EachProfile = (props) => {
     let [section, setSection] = useState()
     let [viewUser, setViewUser] = useState({})
     const [message, setMessage] = useState()
+    const [start,setStart] = useState(true)
 
 
     const handlSendMessage = async (e) => {
         e.preventDefault()
-        console.log("okdir")
+        
 
         let data = {
             sender: user.user.id,
@@ -49,9 +50,9 @@ const EachProfile = (props) => {
 
 
 
-    let checkCurrentUser = async () => {
+    const checkCurrentUser = async () => {
 
-        let result = await requestCurrentUser(user.token)
+        const result = await requestCurrentUser(user.token)
         if (result.status) {
             await dispatch({
                 type: "USER",
@@ -59,10 +60,10 @@ const EachProfile = (props) => {
             })
       
             let viewedUser = await getUserByID(props.match.params.id, user.token)
-            console.log(viewedUser)
+       
             if (viewedUser) {
                 setViewUser(viewedUser)
-                console.log("sucesss")
+            
                 setLogin('success')
             } else {
                 setLogin('failed')
@@ -76,7 +77,7 @@ const EachProfile = (props) => {
 
     if (start) {
         checkCurrentUser()
-        start = false
+       setStart(false)
     }
 
     if (login === 'waiting') {
@@ -104,7 +105,7 @@ const EachProfile = (props) => {
             <div className="profile-section">
                 <div onMouseEnter={() => setSection(1)} onMouseLeave={() => setSection(0)} className={`bp3-card bp3-elevation-${section === 1 ? '4' : '2'} .modifier profile-section-one`}>
                     <div className="profile-section-one-each">
-                        <img alt="user" style={{ width: '100px' }} src="https://www.mountainheavensella.com/wp-content/uploads/2018/12/default-user.png" />
+                        <img alt="user" style={{ width: '100px' }} src={viewUser.image} />
 
                     </div>
 

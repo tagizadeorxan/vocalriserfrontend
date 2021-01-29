@@ -21,7 +21,7 @@ export default function Header() {
   const handleNotifications = async () => {
     let currentUser = await requestCurrentUser(user.token)
     let result = await getNotifications(currentUser.data.id, user.token)
-    console.log(result)
+ 
     if (result) {
       await dispatch({
         type:"NOTIFICATIONS",
@@ -31,7 +31,7 @@ export default function Header() {
   }
 
   if (notify) {
-    console.log(user.user.id)
+    
     handleNotifications()
     notify = false
   } else {
@@ -46,13 +46,11 @@ export default function Header() {
 
     if (location === nav) {
       window.location.reload()
-    } else if (path === nav) {
-      window.location = `/${nav}`
-
+    } else{
+     // window.location = `/${nav}`
+     setPath(nav)
     }
-    else {
-      window.location = `/${nav}`
-    }
+   
   }
 
   const logout = async () => {

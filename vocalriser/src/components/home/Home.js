@@ -4,16 +4,17 @@ import UserContext from '../../contexts/user.context';
 import { requestCurrentUser } from '../helpers/auth.helper'
 import PianoPlay from '../piano'
 
-let start = true
 
-let Home = () => {
+
+const Home = () => {
     const [user, dispatch] = useContext(UserContext)
     const [login, setLogin] = useState('waiting')
+    const [start,setStart] = useState(true)
  
 
-    let checkCurrentUser = async () => {
-        console.log(user.token)
-        let result = await requestCurrentUser(user.token)
+    const checkCurrentUser = async () => {
+
+        const result = await requestCurrentUser(user.token)
         if (result.status) {
             await dispatch({
                 type: "USER",
@@ -27,7 +28,7 @@ let Home = () => {
 
     if(start) {
         checkCurrentUser()
-        start = false
+        setStart(false)
     }
 
     if (login === 'waiting') {

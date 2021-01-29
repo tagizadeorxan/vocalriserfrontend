@@ -7,7 +7,7 @@ import PianoPlay from '../piano'
 import { Link } from 'react-router-dom'
 import './GigCenter.css'
 
-let start = true
+
 
 let GigCenter = () => {
     const [user, dispatch] = useContext(UserContext)
@@ -17,19 +17,20 @@ let GigCenter = () => {
     const [eachSelected, setEachSelected] = useState('')
     const [creatorGigs, setCreatorGigs] = useState([])
     const [biddedGigs, setBiddedGigs] = useState()
+    const [start,setStart] = useState(true)
 
 
-    let checkCurrentUser = async () => {
-        let result = await requestCurrentUser(user.token)
-        let creatorGigs = await getGigsByUserID(result.data.id, user.token)
-        let biddedGigs = await getBidderSuccessfullGigsByUserID(result.data.id, user.token)
-        console.log(biddedGigs)
+    const checkCurrentUser = async () => {
+        const result = await requestCurrentUser(user.token)
+        const creatorGigs = await getGigsByUserID(result.data.id, user.token)
+        const biddedGigs = await getBidderSuccessfullGigsByUserID(result.data.id, user.token)
+     
         if (result.status) {
             await dispatch({
                 type: "USER",
                 payload: result.data
             })
-            console.log(creatorGigs)
+            
             setBiddedGigs(biddedGigs)
             setCreatorGigs(creatorGigs)
 
@@ -42,7 +43,7 @@ let GigCenter = () => {
 
     if (start) {
         checkCurrentUser()
-        start = false
+        setStart(false)
     }
 
 

@@ -44,7 +44,7 @@ let Login = () => {
                     setError(true)
                     setErrorMessage(result.error)
                 } else {
-                    console.log(result.user)
+                    
                     await dispatch({
                         type: "LOGIN",
                         payload: result.user

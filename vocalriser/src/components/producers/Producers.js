@@ -8,7 +8,7 @@ import Waveform from "../waveform";
 import './Producers.css'
 import PianoPlay from '../piano'
 
-let start = true
+
 
 
 const Producers = () => {
@@ -18,6 +18,7 @@ const Producers = () => {
     let [pageSize, setPageSize] = useState(1)
     let [currentPage, setCurrentPage] = useState(1)
     const [selected, setSelected] = useState('genres')
+    const [start,setStart] = useState(true)
 
 
 
@@ -77,8 +78,8 @@ const Producers = () => {
 
     }
 
-    let checkCurrentUser = async () => {
-        let result = await requestCurrentUser(user.token)
+    const checkCurrentUser = async () => {
+        const result = await requestCurrentUser(user.token)
         if (result.status) {
             await dispatch({
                 type: "USER",
@@ -94,7 +95,7 @@ const Producers = () => {
 
     if (start) {
         checkCurrentUser()
-        start = false
+        setStart(false)
     }
 
     if (login === 'waiting') {

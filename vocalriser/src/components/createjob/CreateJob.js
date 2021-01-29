@@ -7,7 +7,7 @@ import { Redirect } from 'react-router-dom';
 import PianoPlay from '../piano'
 import './CreateJob.css'
 
-let start = true
+
 
 let CreateJob = () => {
 
@@ -23,13 +23,13 @@ let CreateJob = () => {
     const genre = useRef()
 
     const [user, dispatch] = useContext(UserContext)
-
     const [login, setLogin] = useState('waiting')
     const [languages, setLanguages] = useState([])
     const [genres, setGenres] = useState([])
     const [created, setCreated] = useState(false)
     const [error, setError] = useState(false)
     const [errorMessage, setErrorMessage] = useState()
+    const [start, setStart] = useState(true)
 
 
 
@@ -58,9 +58,9 @@ let CreateJob = () => {
     const handleGigCreate = async (e) => {
         e.preventDefault()
         setError(false)
-        let date = new Date()
+        const date = new Date()
 
-        let data = {
+        const data = {
             user_id: user.user.id,
             name: gigname.current.value,
             expireDate: formatDate(addDays(date, 15)),
@@ -78,7 +78,7 @@ let CreateJob = () => {
         }
 
 
-        let result = await createGig(data, user.token)
+        const result = await createGig(data, user.token)
 
         if (result) {
             setCreated(true)
@@ -88,10 +88,10 @@ let CreateJob = () => {
         }
     }
 
-    let checkCurrentUser = async () => {
-        let result = await requestCurrentUser(user.token)
-        let languages = await getLanguages()
-        let genres = await getGenres()
+    const checkCurrentUser = async () => {
+        const result = await requestCurrentUser(user.token)
+        const languages = await getLanguages()
+        const genres = await getGenres()
         if (result.status) {
             setLanguages(languages)
             setGenres(genres)
@@ -109,7 +109,7 @@ let CreateJob = () => {
 
     if (start) {
         checkCurrentUser()
-        start = false
+        setStart(false)
     }
 
     if (login === 'waiting') {
@@ -145,12 +145,12 @@ let CreateJob = () => {
                     </div>
 
                     <div className="bp3-input-group .modifier createjob-general">
-                        <input ref={budgetMin} type={"number"} className="bp3-input" placeholder="Budget min..." min="20"  autoComplete="on" required />
+                        <input ref={budgetMin} type={"number"} className="bp3-input" placeholder="Budget min..." min="20" autoComplete="on" required />
                         <button className={`bp3-button bp3-minimal bp3-intent-warning bp3-icon-dollar .modifier`}></button>
                     </div>
 
                     <div className="bp3-input-group .modifier createjob-general">
-                        <input ref={budgetMax} type={"number"} className="bp3-input" placeholder="Budget max..." min="20"  autoComplete="on" required />
+                        <input ref={budgetMax} type={"number"} className="bp3-input" placeholder="Budget max..." min="20" autoComplete="on" required />
                         <button className={`bp3-button bp3-minimal bp3-intent-warning bp3-icon-dollar .modifier`}></button>
                     </div>
 
