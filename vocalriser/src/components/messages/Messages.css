@@ -24,3 +24,12 @@
     margin-top: 3%;
 
 }
+
+.information-block {
+  width: 800px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15%;
+  font-size: medium;
+}

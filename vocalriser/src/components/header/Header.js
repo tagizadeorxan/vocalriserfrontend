@@ -5,6 +5,9 @@ import { requestCurrentUser } from '../helpers/auth.helper'
 import './Header.css'
 import { getNotifications } from '../helpers/notifications.helper'
 
+//const icon = require('../../images/vocalriser.png')
+import icon from '../../images/vocalriser.png'
+
 let notify = true
 
 export default function Header() {
@@ -66,7 +69,7 @@ export default function Header() {
       <nav className="bp3-navbar bp3-dark">
         <div >
           <div className="bp3-navbar-group bp3-align-left">
-            <div className="bp3-navbar-heading">VocalRiser</div>
+          <img style={{width:"15%"}} src={icon}/>
           </div>
           <div className="bp3-navbar-group bp3-align-right header-menu">
             <button onClick={() => locationChange('home')} className="bp3-button bp3-minimal">Home</button>

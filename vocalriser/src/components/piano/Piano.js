@@ -20,7 +20,7 @@ const PianoPlay = ({width,classAdd}) => {
         <Piano
             noteRange={{ first: firstNote, last: lastNote }}
             playNote={(midiNumber) => {
-                Soundfont.instrument(new AudioContext(), 'acoustic_grand_piano', { soundfont: 'MusyngKite' }).then(function (marimba) {
+                Soundfont.instrument(new AudioContext(), 'electric_piano_1', { soundfont: 'MusyngKite' }).then(function (marimba) {
                     marimba.play(midiNumber)
                 })
             }}

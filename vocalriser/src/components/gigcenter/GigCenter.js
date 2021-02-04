@@ -144,8 +144,8 @@ let GigCenter = () => {
                     })}
 
 
-                </div> : null}
-
+                </div> : selected === "created" && creatorGigs.length === 0 ? <p>no created gigs</p>:null}
+             
                 { selected === 'bidded' && biddedGigs.length > 0 ? <div className="bp3-tabs">
                     <ul className="bp3-tab-list bp3-large .modifier" role="tablist">
                         <li onClick={() => setEachSelected('pending')} className="bp3-tab" role="tab" aria-selected={eachSelected === 'pending' ? true : false}>Pending</li>
@@ -189,7 +189,7 @@ let GigCenter = () => {
 
 
 
-                </div> : null}
+                </div> : selected === "bidded" && biddedGigs.length === 0 ? <p>no bidded gigs</p>:null}
 
             </div>
         )

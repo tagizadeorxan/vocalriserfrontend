@@ -163,7 +163,7 @@ const Jobs = () => {
                                 </div>
 
                             </blockquote>
-                        </div>) : null}
+                        </div>) : <div className="information-block">No jobs for now</div>}
 
 
                     </div>

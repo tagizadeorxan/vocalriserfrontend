@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import UserContext from '../../contexts/user.context'
 import { requestCurrentUser } from '../helpers/auth.helper'
 import { getGigByID, getGigBiddings, removeBid, submitBid, closeGigByID, awardGigByID, getBidExist } from '../helpers/gig.helper'
+import {createNotification} from '../helpers/notifications.helper'
 import { Redirect } from 'react-router-dom';
 import Waveform from '../waveform'
 import PianoPlay from '../piano'
@@ -48,7 +49,7 @@ const EachGig = (props) => {
              
                 setBiddings(refresh)
             } else {
-              
+           
                 let bid = {
                     gig_id: viewedGig.id,
                     user_id: user.user.id,
@@ -60,6 +61,15 @@ const EachGig = (props) => {
                 }
 
                 let result = await submitBid(bid, user.token)
+
+                let notification = {
+                    type: "bidGig",
+                    fromUser: user.user.id,
+                    toUser:viewedGig.user_id,
+                    gigID:viewedGig.id
+                }
+                let notify = await createNotification(notification, user.token) 
+
 
                 if (result) {
                     window.location.reload(true)
@@ -98,14 +108,26 @@ const EachGig = (props) => {
         let refresh = await handleRefreshGig()
         if (refresh) {
             if (viewedGig.active === 2) {
-           
+     
+ 
                 setViewGig(refresh)
+           
+        
             } else {
 
                 let result = await awardGigByID(viewedGig.id, user_id, user.token)
                 if (result) {
                
                     let updatedGig = { ...viewedGig, active: 2, awardedUser: user_id }
+
+                    let notification = {
+                        type: "awardgig",
+                        fromUser: viewedGig.user_id,
+                        toUser:user_id,
+                        gigID:viewedGig.id
+                    }
+                    let notify = await createNotification(notification, user.token)     
+
                     setViewGig(updatedGig)
                 }
             }
@@ -126,7 +148,14 @@ const EachGig = (props) => {
 
     const handleRemove = async (bid) => {
         let refresh = await handleRefreshBid()
-        let bidExist = await getBidExist(bid.user_id, user.token)
+        let data = {
+            user_id:bid.user_id,
+            gig_id:viewedGig.id
+        }
+
+        
+        let bidExist = await getBidExist(data, user.token)
+        
         if (refresh) {
             if (bidExist) {
                 if (bid.user_id === user.user.id) {

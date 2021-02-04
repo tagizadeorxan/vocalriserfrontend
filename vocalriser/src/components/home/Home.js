@@ -11,9 +11,9 @@ const Home = () => {
     const [login, setLogin] = useState('waiting')
     const [start,setStart] = useState(true)
  
-
+     
     const checkCurrentUser = async () => {
-
+      
         const result = await requestCurrentUser(user.token)
         if (result.status) {
             await dispatch({

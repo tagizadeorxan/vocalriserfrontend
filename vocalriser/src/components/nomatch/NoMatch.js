@@ -19,6 +19,8 @@ const NoMatch = () => {
         setDay(n)
         let result = await getCards()
         setCards(result)
+    
+        
     }
 
     if(start) {
@@ -34,7 +36,7 @@ const NoMatch = () => {
 
             {cards.length > 0 ? <div className="page-not-found-cards">
                 <div className="bp3-card .modifier">
-                    <img alt="quote" src={day ? cards[day].img : "null"} />
+                   <img alt="quote" src={day ? cards[day].img : "null"} />
                 </div>
 
             </div> : null}

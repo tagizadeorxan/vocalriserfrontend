@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import UserContext from '../../contexts/user.context'
 import { requestCurrentUser } from '../helpers/auth.helper'
 import { getGigByID, getPreparedContract, acceptGig, sendContract } from '../helpers/gig.helper'
+import { createNotification } from '../helpers/notifications.helper'
 import { Redirect } from 'react-router-dom';
 import Waveform from '../waveform'
 import PianoPlay from '../piano'
@@ -19,6 +20,17 @@ const AwardedGig = (props) => {
     const handleAcceptGig = async () => {
         const result = await acceptGig(viewedGig.id, user.token)
         if (result) {
+
+            let notification = {
+                type: "acceptGig",
+                fromUser: user.user.id,
+                toUser: viewedGig.user_id,
+                gigID: viewedGig.id
+            }
+            let notify = await createNotification(notification, user.token)
+
+
+
             setViewGig({ ...viewedGig, progress: 1 })
             sendContract({
                 user_id: viewedGig.user_id,

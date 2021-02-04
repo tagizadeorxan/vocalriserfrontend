@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import UserContext from '../../contexts/user.context';
 import { requestCurrentUser } from '../helpers/auth.helper'
 import { getEachMessages, getMessages, sendMessage, deleteMessage, createMessage } from '../helpers/messages.helper'
-import { readNotification } from '../helpers/notifications.helper'
+import { readNotification, createNotification } from '../helpers/notifications.helper'
 import PianoPlay from '../piano'
 import './Messages.css'
 import { Link } from 'react-router-dom'
@@ -18,21 +18,21 @@ let Messages = () => {
     const [messages, setMessages] = useState([])
     const [eachMessages, setEachMessages] = useState([])
     const [selectedMessage, setSelectedMessage] = useState(0)
-    const [start,setStart] = useState(true)
+    const [start, setStart] = useState(true)
 
 
     const handleNotification = async () => {
-        user.notifications.map(n=> {
-            if(n.type === "message") {
-                 readNotification(n.id, user.token)
-                 dispatch({
+        user.notifications.map(n => {
+            if (n.type === "message") {
+                readNotification(n.id, user.token)
+                dispatch({
                     type: "NOTIFICATIONS",
                     payload: user.notifications.filter(item => item.id !== n.id)
                 })
             }
         })
 
-        
+
 
     }
 
@@ -41,7 +41,7 @@ let Messages = () => {
             id: message_id,
             type
         }
-       
+
         let result = await deleteMessage(data, user.token)
 
         if (result) {
@@ -55,13 +55,32 @@ let Messages = () => {
 
     const handleSendMessage = async (e, message_id, sender_id, sender_fullname, sender_message) => {
         e.preventDefault()
+
+
+        let getMessagebyID = messages.find(e => e.id === message_id)
+        let toUser;
+        if (sender_id === getMessagebyID.sender) {
+            toUser = getMessagebyID.reciever
+        } else {
+            toUser = getMessagebyID.sender
+        }
+
+        let notification = {
+            type: "message",
+            fromUser: sender_id,
+            toUser,
+            messageID: message_id
+        }
+        let notify = await createNotification(notification, user.token)
+
+
         let data = {
             message_id,
             sender_id,
             sender_fullname,
             sender_message: sendMessageInput.current.value
         }
-       
+
         let result = await sendMessage(data, user.token)
         let eachMessage = await getEachMessages(message_id, user.token)
         if (result && eachMessage) {
@@ -72,11 +91,11 @@ let Messages = () => {
 
     const handleEachMessages = async (message_id) => {
 
-      
+
         setSelectedMessage(message_id)
-      
+
         let eachMessages = await getEachMessages(message_id, user.token)
-       
+
         if (eachMessages) {
             setEachMessages(eachMessages)
         }
@@ -84,12 +103,12 @@ let Messages = () => {
 
     const checkCurrentUser = async () => {
         handleNotification()
-       
+
         const result = await requestCurrentUser(user.token)
-        
+
 
         const messages = await getMessages(result.data.id, user.token)
-       
+
         if (result.status && messages) {
             await dispatch({
                 type: "USER",
@@ -104,7 +123,7 @@ let Messages = () => {
 
     if (start) {
         checkCurrentUser()
-       setStart(false)
+        setStart(false)
     }
 
 
@@ -170,7 +189,7 @@ let Messages = () => {
                     </div> : null}
 
 
-                </div> : <div>
+                </div> : <div className="information-block">
                         You have not received any messages yet!
                         Employers can message bidders to discuss bids and ask questions.
 
