@@ -9,3 +9,20 @@
     position : 'fixed'; 
     overflow-x : 'auto'
 }
+
+.notification {
+    position: relative;
+    display: inline-block;
+  }
+  
+  
+  .notification .badge {
+    position: absolute;
+    top: -6px;
+    right: -5px;
+    padding: 1px 6px;
+    border-radius: 50%;
+    background: orangered;
+    color: white;
+    
+  }

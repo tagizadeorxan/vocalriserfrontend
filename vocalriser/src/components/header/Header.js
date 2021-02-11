@@ -17,31 +17,37 @@ export default function Header() {
   const [user, dispatch] = useContext(UserContext)
   const [logoutUser, setLogout] = useState(false)
   const [path, setPath] = useState()
-  const [notificationTab, setNotificationTab] = useState(false)
-  
+
+
+
 
 
   const handleNotifications = async () => {
     let currentUser = await requestCurrentUser(user.token)
     let result = await getNotifications(currentUser.data.id, user.token)
- 
+
     if (result) {
       await dispatch({
-        type:"NOTIFICATIONS",
-        payload:result
+        type: "NOTIFICATIONS",
+        payload: result
       })
     }
   }
 
   if (notify) {
-    
+
     handleNotifications()
     notify = false
   } else {
     notify = false
   }
 
-
+const handleNotificationTab = () => {
+  console.log(`NOTIFICATIONSTAB${!user.notificationtab}`)
+  dispatch({
+    type: `NOTIFICATIONSTAB${!user.notificationtab}`
+  })
+}
 
   const locationChange = (nav) => {
 
@@ -49,11 +55,11 @@ export default function Header() {
 
     if (location === nav) {
       window.location.reload()
-    } else{
-     // window.location = `/${nav}`
-     setPath(nav)
+    } else {
+      // window.location = `/${nav}`
+      setPath(nav)
     }
-   
+
   }
 
   const logout = async () => {
@@ -69,7 +75,7 @@ export default function Header() {
       <nav className="bp3-navbar bp3-dark">
         <div >
           <div className="bp3-navbar-group bp3-align-left">
-          <img style={{width:"15%"}} src={icon}/>
+            <img style={{ width: "15%" }} src={icon} />
           </div>
           <div className="bp3-navbar-group bp3-align-right header-menu">
             <button onClick={() => locationChange('home')} className="bp3-button bp3-minimal">Home</button>
@@ -83,8 +89,13 @@ export default function Header() {
             <span className="bp3-navbar-divider"></span>
 
             <button onClick={() => locationChange('profile')} title="profile" className="bp3-button bp3-minimal bp3-icon-user"></button>
-            <button onClick={() => setNotificationTab(!notificationTab)} className="bp3-button bp3-minimal bp3-icon-notifications" title="notifications"></button>
-            <button className="bp3-button bp3-minimal bp3-icon-cog"></button>
+            <div className="notification">
+              {user.notifications.length > 0 ? <span className="badge">{user.notifications.length}</span> : null}
+              <button onClick={handleNotificationTab} className="bp3-button bp3-minimal bp3-icon-notifications" title="notifications"></button>
+
+            </div>
+
+            <button onClick={() => locationChange('settings')} className="bp3-button bp3-minimal bp3-icon-cog"></button>
 
             <button onClick={() => locationChange(`messages`)} className={`bp3-button bp3-minimal bp3-icon-inbox-update bp3-intent-${user.notifications.find(e => e.type === "message") ? 'success' : 'no'}`} title="inbox"> </button>
 
@@ -95,15 +106,18 @@ export default function Header() {
       </nav>
 
       {
-        notificationTab ?
+        user.notificationtab ?
           <div className="header-notification">
+
             <ul className="bp3-menu .modifier bp3-elevation-1">
 
-              {user.notifications.length > 0 ? user.notifications.map((n, index) =>
-                <li>
-                  <a class="bp3-menu-item bp3-icon-people" tabindex="0">Share...</a>
-                </li>
-              ) : 'no notification'}
+              {user.notifications.length > 0 ? user.notifications.map((n, index) => {
+                if (n.type === 'message') {
+                  return <li key={index}>
+                    <a className="bp3-menu-item bp3-icon-inbox" tabIndex="0">received a message...</a>
+                  </li>
+                }
+              }) : 'no notification'}
 
 
 

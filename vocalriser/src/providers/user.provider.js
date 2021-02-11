@@ -9,7 +9,8 @@ let userState = {
     vocalists:[],
     producers:[],
     gigs:[],
-    notifications:[]
+    notifications:[],
+    notificationtab:false
  }
 
 

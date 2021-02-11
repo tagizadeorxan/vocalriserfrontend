@@ -196,7 +196,7 @@ let Messages = () => {
                         This is an important part of the bidding process as it allows for questions to be
                         answered before a gig is awarded.
 
-                        Keep an eye out for new messages by watching the envelope next to your username above.
+                        Keep an eye out for new messages. 
 
                 </div>}
             </div>

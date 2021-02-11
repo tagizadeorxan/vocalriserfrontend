@@ -1,5 +1,4 @@
-import React from 'react'
-import UserProvider from './providers/user.provider'
+import React, { useContext } from 'react'
 import Login from './components/login'
 import Home from './components/home'
 import Register from './components/register'
@@ -16,6 +15,8 @@ import CreateJob from './components/createjob'
 import GigCenter from './components/gigcenter'
 import AwardedGig from './components/awardedgig'
 import Messages from './components/messages'
+import UserContext from './contexts/user.context'
+import Settings from './components/settings'
 
 import "@blueprintjs/core/lib/css/blueprint.css"
 import "@blueprintjs/icons/lib/css/blueprint-icons.css";
@@ -28,61 +29,69 @@ import './App.css';
 
 
 
-function App() {
+const App = () => {
+
+  const [user, dispatch] = useContext(UserContext)
+
+  const handleNotificaitonTab = () => {
+    dispatch({
+      type: "NOTIFICATIONSTABfalse"
+    })
+  }
+
 
   return (
     <div>
 
 
       <Router>
+        <Header />
 
-        <UserProvider>
-          <Header />
-          <div className="body-container">
-
-
-            <Switch>
+        <div onClick={handleNotificaitonTab} className="body-container">
+          <Switch>
             <Route exact path="/awardedgigs/:id" component={AwardedGig} />
-              <Route exact path="/profiles/:id" component={EachProfile} />
-              <Route exact path="/gigs/:id" component={EachGig} />
-              <Route exact path="/messages">
-                <Messages/>
-              </Route>
-         
-              <Route exact path="/createjob">
-                <CreateJob />
-              </Route>
-              <Route exact path="/">
-                <Login />
-              </Route>
-              <Route exact path="/home">
-                <Home />
-              </Route>
-              <Route exact path="/gigcenter"> 
-              <GigCenter/>
-              </Route>
-              <Route exact path="/registration">
-                <Register />
-              </Route>
-              <Route exact path='/vocalists'>
-                <Vocalists />
-              </Route>
-              <Route exact path='/producers'>
-                <Producers />
-              </Route>
-              <Route exact path='/jobs'>
-                <Jobs />
-              </Route>
-              <Route exact path="/profile">
-                <Profile />
-              </Route>
-              <Route component={NoMatch} />
-            </Switch>
-          </div>
-          <Footer />
+            <Route exact path="/profiles/:id" component={EachProfile} />
+            <Route exact path="/gigs/:id" component={EachGig} />
+            <Route exact path="/messages">
+              <Messages />
+            </Route>
 
-        </UserProvider>
+            <Route exact path="/createjob">
+              <CreateJob />
+            </Route>
+            <Route exact path="/">
+              <Login />
+            </Route>
+            <Route exact path="/home">
+              <Home />
+            </Route>
+            <Route exact path="/gigcenter">
+              <GigCenter />
+            </Route>
+            <Route exact path="/registration">
+              <Register />
+            </Route>
+            <Route exact path='/vocalists'>
+              <Vocalists />
+            </Route>
+            <Route exact path='/producers'>
+              <Producers />
+            </Route>
+            <Route exact path='/jobs'>
+              <Jobs />
+            </Route>
+            <Route exact path="/profile">
+              <Profile />
+            </Route>
+            <Route exact path="/settings">
+              <Settings/>
+            </Route>
+            <Route component={NoMatch} />
+          </Switch>
+        </div>
 
+
+        <Footer />
       </Router>
 
     </div>

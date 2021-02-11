@@ -1,11 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import UserProvider from './providers/user.provider'
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-    <App />,
+
+  <UserProvider>
+    <App />
+
+  </UserProvider>
+  ,
   document.getElementById('root')
 );
 

@@ -44,6 +44,16 @@ const userReducer = (state, action) => {
                 ...state,
                 notifications: action.payload
             }
+        case "NOTIFICATIONSTABfalse":
+            return {
+                ...state,
+                notificationtab: false
+            }
+        case "NOTIFICATIONSTABtrue":
+            return {
+                ...state,
+                notificationtab: true
+            }
         default:
             return state
     }
