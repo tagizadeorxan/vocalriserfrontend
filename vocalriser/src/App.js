@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import Login from './components/login'
 import Home from './components/home'
 import Register from './components/register'
@@ -17,6 +17,11 @@ import AwardedGig from './components/awardedgig'
 import Messages from './components/messages'
 import UserContext from './contexts/user.context'
 import Settings from './components/settings'
+import About from './components//about'
+import Help from './components/help'
+import Privacy from './components/privacy'
+import Terms from './components/terms'
+import Fees from './components/fees'
 
 import "@blueprintjs/core/lib/css/blueprint.css"
 import "@blueprintjs/icons/lib/css/blueprint-icons.css";
@@ -32,6 +37,22 @@ import './App.css';
 const App = () => {
 
   const [user, dispatch] = useContext(UserContext)
+  const [path, setPath] = useState()
+
+  const locationChange = (nav) => {
+
+    let location = /[^/]*$/.exec(window.location.href)[0]
+
+    if (location === nav) {
+      window.location.reload()
+    } else {
+      // window.location = `/${nav}`
+      setPath(nav)
+    }
+
+  }
+
+
 
   const handleNotificaitonTab = () => {
     dispatch({
@@ -45,7 +66,7 @@ const App = () => {
 
 
       <Router>
-        <Header />
+        <Header locationChange={locationChange} path={path} />
 
         <div onClick={handleNotificaitonTab} className="body-container">
           <Switch>
@@ -84,14 +105,29 @@ const App = () => {
               <Profile />
             </Route>
             <Route exact path="/settings">
-              <Settings/>
+              <Settings />
+            </Route>
+            <Route exact path="/about">
+              <About />
+            </Route>
+            <Route exact path="/fees">
+              <Fees />
+            </Route>
+            <Route exact path="/privacy">
+              <Privacy />
+            </Route>
+            <Route exact path="/terms">
+              <Terms />
+            </Route>
+            <Route exact path="/help">
+              <Help />
             </Route>
             <Route component={NoMatch} />
           </Switch>
         </div>
 
 
-        <Footer />
+        <Footer locationChange={locationChange} path={path} />
       </Router>
 
     </div>

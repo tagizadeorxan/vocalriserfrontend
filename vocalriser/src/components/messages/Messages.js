@@ -22,16 +22,19 @@ let Messages = () => {
 
 
     const handleNotification = async () => {
-        user.notifications.map(n => {
+       await user.notifications.map(n => {
             if (n.type === "message") {
+
                 readNotification(n.id, user.token)
-                dispatch({
-                    type: "NOTIFICATIONS",
-                    payload: user.notifications.filter(item => item.id !== n.id)
-                })
+          
+
             }
         })
 
+        dispatch({
+            type: "NOTIFICATIONS",
+            payload: user.notifications.filter(item => item.type !== 'message')
+        })
 
 
     }
@@ -196,7 +199,7 @@ let Messages = () => {
                         This is an important part of the bidding process as it allows for questions to be
                         answered before a gig is awarded.
 
-                        Keep an eye out for new messages. 
+                        Keep an eye out for new messages.
 
                 </div>}
             </div>

@@ -10,7 +10,9 @@ let userState = {
     producers:[],
     gigs:[],
     notifications:[],
-    notificationtab:false
+    notificationtab:false,
+    theme:'#394b59',
+    textColor:'white'
  }
 
 

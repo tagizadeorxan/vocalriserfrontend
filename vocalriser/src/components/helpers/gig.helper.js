@@ -30,6 +30,35 @@ export let getGigs = async (type, gender, token) => {
 }
 
 
+export let getAllActiveGigs = async (token) => {
+    let result = [];
+
+    let options = {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        method: 'GET'
+    }
+    await fetch(`${Utils.url}/api/v1/gigs/getAllActiveGigs`, options)
+        .then(res => {
+            if (res.status === 200) {
+                return res.json()
+            }
+        }).then(res => {
+            if (res) {
+                result = res
+            }
+        })
+        .catch(err =>
+            console.log(err)
+        )
+
+    return result
+}
+
+
 
 
 export let getGigByID = async (id, token) => {

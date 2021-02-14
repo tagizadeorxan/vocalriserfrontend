@@ -13,7 +13,7 @@ const Settings = () => {
     return (
         <div>
             <div className="each-setting">
-                <text style={{ marginRight: '1%' }}>Home music</text>
+                <div style={{ marginRight: '1%' }}>Home music</div>
                 <label className="switch">
                     <input onClick={() => handlePress('homeSound')} type="checkbox" defaultChecked={localStorage.getItem('homeSound') === 'true' ? true : false} />
                     <span className="slider round"></span>

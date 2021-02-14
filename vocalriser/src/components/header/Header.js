@@ -10,15 +10,12 @@ import icon from '../../images/vocalriser.png'
 
 let notify = true
 
-export default function Header() {
+export default function Header(props) {
 
 
 
   const [user, dispatch] = useContext(UserContext)
   const [logoutUser, setLogout] = useState(false)
-  const [path, setPath] = useState()
-
-
 
 
 
@@ -49,18 +46,7 @@ const handleNotificationTab = () => {
   })
 }
 
-  const locationChange = (nav) => {
 
-    let location = /[^/]*$/.exec(window.location.href)[0]
-
-    if (location === nav) {
-      window.location.reload()
-    } else {
-      // window.location = `/${nav}`
-      setPath(nav)
-    }
-
-  }
 
   const logout = async () => {
     await dispatch({
@@ -72,32 +58,32 @@ const handleNotificationTab = () => {
   return (
     <div >
 
-      <nav className="bp3-navbar bp3-dark">
+      <nav className="bp3-navbar bp3-dark" style={{backgroundColor:user.theme}}>
         <div >
           <div className="bp3-navbar-group bp3-align-left">
             <img style={{ width: "15%" }} src={icon} />
           </div>
           <div className="bp3-navbar-group bp3-align-right header-menu">
-            <button onClick={() => locationChange('home')} className="bp3-button bp3-minimal">Home</button>
-            <button onClick={() => locationChange('gigcenter')} className="bp3-button bp3-minimal">Gig Center</button>
-            <button onClick={() => locationChange('vocalists')} className="bp3-button bp3-minimal">Vocalists</button>
-            <button onClick={() => locationChange('producers')} className="bp3-button bp3-minimal">Producers</button>
-            <button onClick={() => locationChange('jobs')} className="bp3-button bp3-minimal">Jobs</button>
+            <button onClick={() => props.locationChange('home')} className="bp3-button bp3-minimal" style={{color:user.textColor}}>Home</button>
+            <button onClick={() => props.locationChange('gigcenter')} className="bp3-button bp3-minimal" style={{color:user.textColor}}>Gig Center</button>
+            <button onClick={() => props.locationChange('vocalists')} className="bp3-button bp3-minimal" style={{color:user.textColor}}>Vocalists</button>
+            <button onClick={() => props.locationChange('producers')} className="bp3-button bp3-minimal" style={{color:user.textColor}}>Producers</button>
+            <button onClick={() => props.locationChange('jobs')} className="bp3-button bp3-minimal" style={{color:user.textColor}} >Jobs</button>
             <span className="bp3-navbar-divider"></span>
-            <button onClick={() => locationChange('createjob')} className="bp3-button bp3-minimal bp3-icon-new-object">Create Job</button>
+            <button onClick={() => props.locationChange('createjob')} className="bp3-button bp3-minimal bp3-icon-new-object" style={{color:user.textColor}}>Create Job</button>
 
             <span className="bp3-navbar-divider"></span>
 
-            <button onClick={() => locationChange('profile')} title="profile" className="bp3-button bp3-minimal bp3-icon-user"></button>
+            <button onClick={() => props.locationChange('profile')} title="profile" className="bp3-button bp3-minimal bp3-icon-user" style={{color:user.textColor}}></button>
             <div className="notification">
               {user.notifications.length > 0 ? <span className="badge">{user.notifications.length}</span> : null}
               <button onClick={handleNotificationTab} className="bp3-button bp3-minimal bp3-icon-notifications" title="notifications"></button>
 
             </div>
 
-            <button onClick={() => locationChange('settings')} className="bp3-button bp3-minimal bp3-icon-cog"></button>
+            <button onClick={() => props.locationChange('settings')} className="bp3-button bp3-minimal bp3-icon-cog"></button>
 
-            <button onClick={() => locationChange(`messages`)} className={`bp3-button bp3-minimal bp3-icon-inbox-update bp3-intent-${user.notifications.find(e => e.type === "message") ? 'success' : 'no'}`} title="inbox"> </button>
+            <button onClick={() => props.locationChange(`messages`)} className={`bp3-button bp3-minimal bp3-icon-inbox-update bp3-intent-${user.notifications.find(e => e.type === "message") ? 'success' : 'no'}`} title="inbox"> </button>
 
             <button onClick={logout} className="bp3-button bp3-minimal bp3-icon-log-out" title="logout"></button>
           </div>
@@ -126,7 +112,7 @@ const handleNotificationTab = () => {
 
           </div>
       }
-      { path ? <Redirect push to={`/${path}`} /> : null}
+      { props.path ? <Redirect push to={`/${props.path}`} /> : null}
       {logoutUser ? <Redirect push to="/" /> : null}
     </div>
   );
