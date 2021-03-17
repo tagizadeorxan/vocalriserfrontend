@@ -121,7 +121,7 @@ const EachGig = (props) => {
                     let updatedGig = { ...viewedGig, active: 2, awardedUser: user_id }
 
                     let notification = {
-                        type: "awardgig",
+                        type: "awardGig",
                         fromUser: viewedGig.user_id,
                         toUser:user_id,
                         gigID:viewedGig.id

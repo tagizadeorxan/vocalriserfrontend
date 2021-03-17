@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { requestCurrentUser } from '../helpers/auth.helper'
 import './Header.css'
 import { getNotifications } from '../helpers/notifications.helper'
+import {Link} from 'react-router-dom'
 
 //const icon = require('../../images/vocalriser.png')
 import icon from '../../images/vocalriser.png'
@@ -98,11 +99,25 @@ const handleNotificationTab = () => {
             <ul className="bp3-menu .modifier bp3-elevation-1">
 
               {user.notifications.length > 0 ? user.notifications.map((n, index) => {
-                if (n.type === 'message') {
+
+               switch(n.type) {
+                 case 'message':
                   return <li key={index}>
                     <a className="bp3-menu-item bp3-icon-inbox" tabIndex="0">received a message...</a>
                   </li>
-                }
+                  case 'acceptGig':
+                  return <li key={index}>
+                  <a className="bp3-menu-item bp3-icon-inbox" tabIndex="0">User accepted <Link to={`/awardedgigs/${n.gigID}`}>gig</Link></a>
+                  </li>
+                  case 'awardGig':
+                  return <li key={index}>
+                  <a className="bp3-menu-item bp3-icon-inbox" tabIndex="0">You awarded for gig <Link to={`/awardedgigs/${n.gigID}`}></Link></a>
+                  </li>
+                 default:
+                 // 
+               }
+                
+      
               }) : 'no notification'}
 
 
