@@ -3,7 +3,7 @@ import UserContext from '../../contexts/user.context'
 import { requestCurrentUser } from '../helpers/auth.helper'
 import { getGigByID, getGigBiddings, removeBid, submitBid, closeGigByID, awardGigByID, getBidExist } from '../helpers/gig.helper'
 import {createNotification} from '../helpers/notifications.helper'
-import { Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import Waveform from '../waveform'
 import PianoPlay from '../piano'
 import './EachGig.css'
@@ -228,13 +228,13 @@ const EachGig = (props) => {
     }
     else if (login === 'failed') {
         return (
-            <Redirect push to="/" />
+            <Navigate push to="/" />
 
         )
     }
     else if (!viewedGig.hasOwnProperty('id')) {
         return (
-            <Redirect push to="/jobs" />
+            <Navigate push to="/jobs" />
         )
     }
     else {

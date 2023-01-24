@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import UserContext from '../../contexts/user.context';
 import { requestCurrentUser } from '../helpers/auth.helper'
 import { getGigsByUserID, getBidderSuccessfullGigsByUserID } from '../helpers/gig.helper'
@@ -54,13 +54,13 @@ let GigCenter = () => {
     }
     else if (login === 'failed') {
         return (
-            <Redirect push to="/" />
+            <Navigate push to="/" />
         )
     }
 
     else if (!user.user.hasOwnProperty('id')) {
         return (
-            <Redirect push to="/" />
+            <Navigate push to="/" />
         )
     }
 

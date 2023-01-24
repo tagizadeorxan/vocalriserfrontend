@@ -1,6 +1,6 @@
 
 import React, { useState, useContext } from 'react'
-import { Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import Search from './Search'
 import UserContext from '../../contexts/user.context';
 import { requestCurrentUser } from '../helpers/auth.helper'
@@ -105,13 +105,13 @@ const Vocalists = () => {
     }
     else if (login === 'failed') {
         return (
-            <Redirect push to="/" />
+            <Navigate push to="/" />
         )
     }
 
     else if (!user.user.hasOwnProperty('id')) {
         return (
-           <Redirect push to="/home" />
+           <Navigate push to="/home" />
         )
     }
 

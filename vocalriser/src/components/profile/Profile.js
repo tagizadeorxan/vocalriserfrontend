@@ -2,7 +2,7 @@ import React, { useContext, useState, useRef } from 'react'
 import UserContext from '../../contexts/user.context';
 import { requestCurrentUser } from '../helpers/auth.helper'
 import { updateUser } from '../helpers/profile.helper'
-import { Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import './Profile.css'
 import Waveform from '../waveform'
 import PianoPlay from '../piano'
@@ -125,14 +125,14 @@ const Profile = () => {
     }
     else if (login === 'failed') {
         return (
-            <Redirect push to="/" />
+            <Navigate push to="/" />
 
         )
     }
 
     else if (!user.user.hasOwnProperty('id')) {
         return (
-            <Redirect push to="/home" />
+            <Navigate push to="/home" />
         )
     }
     else {

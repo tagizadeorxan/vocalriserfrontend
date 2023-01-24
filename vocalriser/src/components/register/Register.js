@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import { createUser } from '../helpers/auth.helper'
-import { Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import './Register.css'
 
 
@@ -118,7 +118,7 @@ let Register = () => {
             <button type="button" onClick={signup} className={`bp3-button .modifier login-general ${error? 'bp3-intent-danger':'bp3-intent-success'}`}>Sign up</button>
 
             {error? <p className="register-general register-error"><i className="bp3-icon-error"></i> {errorMessage}</p>:null}
-            {success ? <Redirect push to="/" /> : null}
+            {success ? <Navigate push to="/" /> : null}
         </div>
 
     )

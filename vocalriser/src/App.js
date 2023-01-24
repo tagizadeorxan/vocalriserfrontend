@@ -28,7 +28,7 @@ import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 
 import {
   BrowserRouter as Router,
-  Route, Switch
+  Route, Routes
 } from "react-router-dom";
 import './App.css';
 
@@ -69,7 +69,7 @@ const App = () => {
         <Header locationChange={locationChange} path={path} />
 
         <div onClick={handleNotificaitonTab} className="body-container">
-          <Switch>
+          <Routes>
             <Route exact path="/awardedgigs/:id" component={AwardedGig} />
             <Route exact path="/profiles/:id" component={EachProfile} />
             <Route exact path="/gigs/:id" component={EachGig} />
@@ -123,7 +123,7 @@ const App = () => {
               <Help />
             </Route>
             <Route component={NoMatch} />
-          </Switch>
+          </Routes>
         </div>
 
 

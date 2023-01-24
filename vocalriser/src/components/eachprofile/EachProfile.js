@@ -4,7 +4,7 @@ import { requestCurrentUser } from '../helpers/auth.helper'
 import { getUserByID } from '../helpers/profile.helper'
 import { createMessage, sendMessage } from '../helpers/messages.helper'
 import { createNotification } from '../helpers/notifications.helper'
-import { Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import Waveform from '../waveform'
 import PianoPlay from '../piano'
 
@@ -87,7 +87,7 @@ const EachProfile = (props) => {
     }
     else if (login === 'failed') {
         return (
-            <Redirect push to="/" />
+            <Navigate push to="/" />
 
         )
     }

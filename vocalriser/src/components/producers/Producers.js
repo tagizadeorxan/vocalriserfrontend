@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { NavLink, Redirect } from 'react-router-dom';
+import { NavLink, Navigate } from 'react-router-dom';
 import UserContext from '../../contexts/user.context';
 import { requestCurrentUser } from '../helpers/auth.helper'
 import { getProducers } from '../helpers/producers.helper'
@@ -105,12 +105,12 @@ const Producers = () => {
     }
     else if (login === 'failed') {
         return (
-            <Redirect push to="/" />
+            <Navigate push to="/" />
         )
     }
     else if (!user.user.hasOwnProperty('id')) {
         return (
-            <Redirect push to="/home" />
+            <Navigate push to="/home" />
         )
     }
     else {

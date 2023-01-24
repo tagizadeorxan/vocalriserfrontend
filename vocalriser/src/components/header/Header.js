@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import UserContext from '../../contexts/user.context';
-import { Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { requestCurrentUser } from '../helpers/auth.helper'
 import './Header.css'
 import { getNotifications } from '../helpers/notifications.helper'
@@ -127,8 +127,8 @@ const handleNotificationTab = () => {
 
           </div>
       }
-      { props.path ? <Redirect push to={`/${props.path}`} /> : null}
-      {logoutUser ? <Redirect push to="/" /> : null}
+      { props.path ? <Navigate push to={`/${props.path}`} /> : null}
+      {logoutUser ? <Navigate push to="/" /> : null}
     </div>
   );
 }

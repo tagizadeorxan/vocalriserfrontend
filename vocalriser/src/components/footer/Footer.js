@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import { Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import UserContext from '../../contexts/user.context';
 
 import './Footer.css'
@@ -25,7 +25,7 @@ export default function Footer(props) {
         <span className="bp3-navbar-divider"></span>
         <button onClick={() => props.locationChange('about')} className="bp3-button bp3-minimal"style={{color:user.textColor}} >About</button>
       </div>
-      { props.path ? <Redirect push to={`/${props.path}`} /> : null}
+      { props.path ? <Navigate push to={`/${props.path}`} /> : null}
     </nav>
 
   );

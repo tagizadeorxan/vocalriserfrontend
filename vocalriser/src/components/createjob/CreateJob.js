@@ -3,7 +3,7 @@ import { requestCurrentUser } from '../helpers/auth.helper'
 import { getLanguages, getGenres } from '../helpers/common.helper'
 import { createGig } from '../helpers/gig.helper'
 import UserContext from '../../contexts/user.context';
-import { Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import PianoPlay from '../piano'
 import './CreateJob.css'
 
@@ -119,12 +119,12 @@ let CreateJob = () => {
     }
     else if (login === 'failed') {
         return (
-            <Redirect push to="/" />
+            <Navigate push to="/" />
         )
     }
     else if (!user.user.hasOwnProperty('id')) {
         return (
-            <Redirect push to="/home" />
+            <Navigate push to="/home" />
         )
     }
 
@@ -132,7 +132,7 @@ let CreateJob = () => {
         return (
 
             <div className="createjob-container">
-                {created ? <Redirect push to="/jobs" /> : null}
+                {created ? <Navigate push to="/jobs" /> : null}
                 <form onSubmit={handleGigCreate}>
                     <div className="bp3-input-group .modifier createjob-general">
                         <input ref={gigname} type={"text"} maxLength={20} minLength={6} className="bp3-input" placeholder="Enter gig name..." autoComplete="on" required />
@@ -256,7 +256,7 @@ let CreateJob = () => {
             <button type="button" onClick={signup} className={`bp3-button .modifier login-general ${error? 'bp3-intent-danger':'bp3-intent-success'}`}>Sign up</button>
 
             {error? <p className="createjob-general createjob-error"><i className="bp3-icon-error"></i> {errorMessage}</p>:null} */}
-                {/* {success ? <Redirect push to="/" /> : null} */}
+                {/* {success ? <Navigate push to="/" /> : null} */}
             </div>
 
         )

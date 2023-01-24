@@ -1,7 +1,7 @@
 import React, { useState, useContext, useRef } from 'react'
 import UserContext from '../../contexts/user.context';
 import { requestLogin } from '../helpers/auth.helper'
-import { Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import './Login.css'
 
 
@@ -91,8 +91,8 @@ let Login = () => {
             <button type="button" onClick={() => setSignUp(true)} className="bp3-button .modifier login-general">Sign up</button>
 
             {error ? <p className="login-general login-error"><i className="bp3-icon-error"></i> {errorMessage}</p> : null}
-            {signup ? <Redirect push to="/registration" /> : null}
-            {success ? <Redirect push to="/profile" /> : null}
+            {signup ? <Navigate push to="/registration" /> : null}
+            {success ? <Navigate push to="/profile" /> : null}
 
 
 
