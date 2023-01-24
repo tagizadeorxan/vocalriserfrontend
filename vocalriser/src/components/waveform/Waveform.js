@@ -70,10 +70,10 @@ export default function Waveform({ url,title }) {
 
   return (
     <div>
-    <h5 className="bp3-heading">{title}</h5>
+    <h5 className="bp4-heading">{title}</h5>
       <div id="waveform" ref={waveformRef} />
       <div className="controls">
-      <button onClick={handlePlayPause} type="button" className={`bp3-button ${!playing ? "bp3-icon-play" : "bp3-icon-pause"}`}></button>
+      <button onClick={handlePlayPause} type="button" className={`bp4-button ${!playing ? "bp4-icon-play" : "bp4-icon-pause"}`}></button>
       
     <input 
       className="controls-volume"

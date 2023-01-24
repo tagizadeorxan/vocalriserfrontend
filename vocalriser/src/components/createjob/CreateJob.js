@@ -134,27 +134,27 @@ let CreateJob = () => {
             <div className="createjob-container">
                 {created ? <Navigate push to="/jobs" /> : null}
                 <form onSubmit={handleGigCreate}>
-                    <div className="bp3-input-group .modifier createjob-general">
-                        <input ref={gigname} type={"text"} maxLength={20} minLength={6} className="bp3-input" placeholder="Enter gig name..." autoComplete="on" required />
-                        <button className={`bp3-button bp3-minimal bp3-intent-warning bp3-icon-user .modifier`}></button>
+                    <div className="bp4-input-group .modifier createjob-general">
+                        <input ref={gigname} type={"text"} maxLength={20} minLength={6} className="bp4-input" placeholder="Enter gig name..." autoComplete="on" required />
+                        <button className={`bp4-button bp4-minimal bp4-intent-warning bp4-icon-user .modifier`}></button>
                     </div>
 
-                    <div className="bp3-input-group .modifier createjob-general">
-                        <input ref={bpm} type={"number"} max="1015" min="60" className="bp3-input" placeholder="BPM..." autoComplete="on" required />
-                        <button className={`bp3-button bp3-minimal bp3-intent-warning bp3-icon-numerical .modifier`}></button>
+                    <div className="bp4-input-group .modifier createjob-general">
+                        <input ref={bpm} type={"number"} max="1015" min="60" className="bp4-input" placeholder="BPM..." autoComplete="on" required />
+                        <button className={`bp4-button bp4-minimal bp4-intent-warning bp4-icon-numerical .modifier`}></button>
                     </div>
 
-                    <div className="bp3-input-group .modifier createjob-general">
-                        <input ref={budgetMin} type={"number"} className="bp3-input" placeholder="Budget min..." min="20" autoComplete="on" required />
-                        <button className={`bp3-button bp3-minimal bp3-intent-warning bp3-icon-dollar .modifier`}></button>
+                    <div className="bp4-input-group .modifier createjob-general">
+                        <input ref={budgetMin} type={"number"} className="bp4-input" placeholder="Budget min..." min="20" autoComplete="on" required />
+                        <button className={`bp4-button bp4-minimal bp4-intent-warning bp4-icon-dollar .modifier`}></button>
                     </div>
 
-                    <div className="bp3-input-group .modifier createjob-general">
-                        <input ref={budgetMax} type={"number"} className="bp3-input" placeholder="Budget max..." min="20" autoComplete="on" required />
-                        <button className={`bp3-button bp3-minimal bp3-intent-warning bp3-icon-dollar .modifier`}></button>
+                    <div className="bp4-input-group .modifier createjob-general">
+                        <input ref={budgetMax} type={"number"} className="bp4-input" placeholder="Budget max..." min="20" autoComplete="on" required />
+                        <button className={`bp4-button bp4-minimal bp4-intent-warning bp4-icon-dollar .modifier`}></button>
                     </div>
 
-                    <div className="bp3-select .modifier createjob-general">
+                    <div className="bp4-select .modifier createjob-general">
                         <select ref={gender} required>
                             <option value="">Gender...</option>
                             <option value="M">Male</option>
@@ -162,7 +162,7 @@ let CreateJob = () => {
                         </select>
                     </div>
 
-                    <div className="bp3-select .modifier createjob-general">
+                    <div className="bp4-select .modifier createjob-general">
                         <select defaultValue="" ref={type} required>
                             <option value="">Type...</option>
 
@@ -171,34 +171,34 @@ let CreateJob = () => {
                         </select>
                     </div>
 
-                    <div className="bp3-input-group .modifier createjob-general">
-                        <input ref={track_url} type={"text"} maxLength={500} className="bp3-input" placeholder="Track url...{example:http//:music.mp3}" autoComplete="on" required />
-                        <button className={`bp3-button bp3-minimal bp3-intent-warning bp3-icon-music .modifier`}></button>
+                    <div className="bp4-input-group .modifier createjob-general">
+                        <input ref={track_url} type={"text"} maxLength={500} className="bp4-input" placeholder="Track url...{example:http//:music.mp3}" autoComplete="on" required />
+                        <button className={`bp4-button bp4-minimal bp4-intent-warning bp4-icon-music .modifier`}></button>
                     </div>
 
-                    <div className="bp3-input-group .modifier createjob-general">
-                        <textarea ref={requirements} className="bp3-input .modifier" dir="auto" placeholder="Requirements..." required></textarea>
+                    <div className="bp4-input-group .modifier createjob-general">
+                        <textarea ref={requirements} className="bp4-input .modifier" dir="auto" placeholder="Requirements..." required></textarea>
                     </div>
 
 
-                    {languages.length > 0 ? <div className="bp3-select .modifier createjob-general">
+                    {languages.length > 0 ? <div className="bp4-select .modifier createjob-general">
                         <select ref={language} required>
                             {languages.map((l, i) => <option key={i} value={l}>{l}</option>)}
                         </select>
                     </div> : null}
 
-                    {genres.length > 0 ? <div className="bp3-select .modifier createjob-general">
+                    {genres.length > 0 ? <div className="bp4-select .modifier createjob-general">
                         <select ref={genre} required>
                             {genres.map((l, i) => <option key={i} value={l}>{l}</option>)}
                         </select>
                     </div> : null}
 
-                    <div className="bp3-input-group .modifier createjob-general">
-                        {error ? <p className="register-general register-error"><i className="bp3-icon-error"></i> {errorMessage}</p> : null}
+                    <div className="bp4-input-group .modifier createjob-general">
+                        {error ? <p className="register-general register-error"><i className="bp4-icon-error"></i> {errorMessage}</p> : null}
                     </div>
 
-                    <div className="bp3-input-group .modifier createjob-general">
-                        <button className="bp3-button bp3-intent-success">Create</button>
+                    <div className="bp4-input-group .modifier createjob-general">
+                        <button className="bp4-button bp4-intent-success">Create</button>
                     </div>
 
 
@@ -207,33 +207,33 @@ let CreateJob = () => {
                 </form>
 
 
-                {/* <div className="bp3-input-group .modifier createjob-general">
-                <input ref={username} type={"text"} className="bp3-input" placeholder="Enter your username..." autoComplete="on" />
-                <button className={`bp3-button bp3-minimal bp3-intent-warning bp3-icon-user .modifier`}></button>
+                {/* <div className="bp4-input-group .modifier createjob-general">
+                <input ref={username} type={"text"} className="bp4-input" placeholder="Enter your username..." autoComplete="on" />
+                <button className={`bp4-button bp4-minimal bp4-intent-warning bp4-icon-user .modifier`}></button>
             </div>
 
-            <div className="bp3-input-group .modifier createjob-general">
-                <input ref={email} type={"email"} className="bp3-input" placeholder="Enter your email..." autoComplete="on" />
-                <button className={`bp3-button bp3-minimal bp3-intent-warning bp3-icon-envelope .modifier`}></button>
+            <div className="bp4-input-group .modifier createjob-general">
+                <input ref={email} type={"email"} className="bp4-input" placeholder="Enter your email..." autoComplete="on" />
+                <button className={`bp4-button bp4-minimal bp4-intent-warning bp4-icon-envelope .modifier`}></button>
             </div>
 
-            <div className="bp3-input-group .modifier createjob-general">
-                <input ref={first_name} type={"text"} className="bp3-input" placeholder="Enter your first name..." autoComplete="on" />
-                <button className={`bp3-button bp3-minimal bp3-intent-warning bp3-icon-user .modifier`}></button>
+            <div className="bp4-input-group .modifier createjob-general">
+                <input ref={first_name} type={"text"} className="bp4-input" placeholder="Enter your first name..." autoComplete="on" />
+                <button className={`bp4-button bp4-minimal bp4-intent-warning bp4-icon-user .modifier`}></button>
             </div>
 
-            <div className="bp3-input-group .modifier createjob-general">
-                <input ref={last_name} type={"text"} className="bp3-input" placeholder="Enter your last name..." autoComplete="on" />
-                <button className={`bp3-button bp3-minimal bp3-intent-warning bp3-icon-user .modifier`}></button>
+            <div className="bp4-input-group .modifier createjob-general">
+                <input ref={last_name} type={"text"} className="bp4-input" placeholder="Enter your last name..." autoComplete="on" />
+                <button className={`bp4-button bp4-minimal bp4-intent-warning bp4-icon-user .modifier`}></button>
             </div>
 
-            <div className="bp3-input-group .modifier createjob-general">
-                <input ref={age} type={"number"} className="bp3-input" placeholder="Enter your last age..." autoComplete="on" />
-                <button className={`bp3-button bp3-minimal bp3-intent-warning bp3-icon-user .modifier`}></button>
+            <div className="bp4-input-group .modifier createjob-general">
+                <input ref={age} type={"number"} className="bp4-input" placeholder="Enter your last age..." autoComplete="on" />
+                <button className={`bp4-button bp4-minimal bp4-intent-warning bp4-icon-user .modifier`}></button>
             </div>
      
 
-            <div className="bp3-select .modifier createjob-general">
+            <div className="bp4-select .modifier createjob-general">
                 <select ref={type}>
                     <option selected value="">Type...</option>
                     <option value="V">Vocalist</option>
@@ -242,20 +242,20 @@ let CreateJob = () => {
                 </select>
             </div>
 
-            <div className="bp3-input-group .modifier createjob-general">
-                <input ref={password}  type={passwordShow ? "text" : "password"} className="bp3-input" placeholder="Enter your password..." autoComplete="on" />
-                <button onClick={showPassword} className={`bp3-button bp3-minimal bp3-intent-warning ${passwordShow ? 'bp3-icon-unlock' : 'bp3-icon-lock'} .modifier`}></button>
+            <div className="bp4-input-group .modifier createjob-general">
+                <input ref={password}  type={passwordShow ? "text" : "password"} className="bp4-input" placeholder="Enter your password..." autoComplete="on" />
+                <button onClick={showPassword} className={`bp4-button bp4-minimal bp4-intent-warning ${passwordShow ? 'bp4-icon-unlock' : 'bp4-icon-lock'} .modifier`}></button>
             </div>
            
-            <div className="bp3-input-group .modifier createjob-general">
-                <input ref={confirm_password} type={passwordShow ? "text" : "password"} className="bp3-input" placeholder="Confirm your password..." autoComplete="on" />
-                <button onClick={showPassword} className={`bp3-button bp3-minimal bp3-intent-warning ${passwordShow ? 'bp3-icon-unlock' : 'bp3-icon-lock'} .modifier`}></button>
+            <div className="bp4-input-group .modifier createjob-general">
+                <input ref={confirm_password} type={passwordShow ? "text" : "password"} className="bp4-input" placeholder="Confirm your password..." autoComplete="on" />
+                <button onClick={showPassword} className={`bp4-button bp4-minimal bp4-intent-warning ${passwordShow ? 'bp4-icon-unlock' : 'bp4-icon-lock'} .modifier`}></button>
             </div>
 
 
-            <button type="button" onClick={signup} className={`bp3-button .modifier login-general ${error? 'bp3-intent-danger':'bp3-intent-success'}`}>Sign up</button>
+            <button type="button" onClick={signup} className={`bp4-button .modifier login-general ${error? 'bp4-intent-danger':'bp4-intent-success'}`}>Sign up</button>
 
-            {error? <p className="createjob-general createjob-error"><i className="bp3-icon-error"></i> {errorMessage}</p>:null} */}
+            {error? <p className="createjob-general createjob-error"><i className="bp4-icon-error"></i> {errorMessage}</p>:null} */}
                 {/* {success ? <Navigate push to="/" /> : null} */}
             </div>
 

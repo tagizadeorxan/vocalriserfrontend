@@ -31,11 +31,11 @@ const NoMatch = () => {
 
     return (
         <div className="page-not-found-container">
-            <h1 className="bp3-heading bp3-large">Page Not Found</h1>
-            <span className="bp3-icon bp3-icon-ban-circle"></span>
+            <h1 className="bp4-heading bp4-large">Page Not Found</h1>
+            <span className="bp4-icon bp4-icon-ban-circle"></span>
 
             {cards.length > 0 ? <div className="page-not-found-cards">
-                <div className="bp3-card .modifier">
+                <div className="bp4-card .modifier">
                    <img alt="quote" src={day ? cards[day].img : "null"} />
                 </div>
 

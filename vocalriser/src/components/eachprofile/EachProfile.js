@@ -103,76 +103,76 @@ const EachProfile = (props) => {
 
         return (
             <div className="profile-section">
-                <div onMouseEnter={() => setSection(1)} onMouseLeave={() => setSection(0)} className={`bp3-card bp3-elevation-${section === 1 ? '4' : '2'} .modifier profile-section-one`}>
+                <div onMouseEnter={() => setSection(1)} onMouseLeave={() => setSection(0)} className={`bp4-card bp4-elevation-${section === 1 ? '4' : '2'} .modifier profile-section-one`}>
                     <div className="profile-section-one-each">
                         <img alt="user" style={{ width: '100px' }} src={viewUser.image} />
 
                     </div>
 
-                    <h1 className="bp3-heading profile-section-one-each">{viewUser.first_name} {viewUser.last_name}</h1>
-                    {viewUser.id !== user.user.id? <button onClick={() => setMessage(true)} className="bp3-button">message</button>:null}
+                    <h1 className="bp4-heading profile-section-one-each">{viewUser.first_name} {viewUser.last_name}</h1>
+                    {viewUser.id !== user.user.id? <button onClick={() => setMessage(true)} className="bp4-button">message</button>:null}
 
 
                     <div className="profile-section-one-each">
-                        <span style={{ marginLeft: '1%' }} className="bp3-tag .modifier">{viewUser.age}</span>
-                        <span style={{ marginLeft: '1%' }} className="bp3-tag .modifier">{viewUser.gender}</span>
+                        <span style={{ marginLeft: '1%' }} className="bp4-tag .modifier">{viewUser.age}</span>
+                        <span style={{ marginLeft: '1%' }} className="bp4-tag .modifier">{viewUser.gender}</span>
                     </div>
 
                     <div className="profile-section-one-each">
-                        Sounds like: {viewUser.soundslike.split(',').map((g, i) => <span key={i} style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp3-tag .modifier">{g}</span>)}
+                        Sounds like: {viewUser.soundslike.split(',').map((g, i) => <span key={i} style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp4-tag .modifier">{g}</span>)}
                     </div>
                     <div className="profile-section-one-each">
-                        Microphones: {viewUser.microphone.split(',').map((g, i) => <span key={i} style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp3-tag .modifier">{g}</span>)}
+                        Microphones: {viewUser.microphone.split(',').map((g, i) => <span key={i} style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp4-tag .modifier">{g}</span>)}
                     </div>
                     <div className="profile-section-one-each">
-                        Genres: {viewUser.genres.split(',').map((g, i) => <span key={i} style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp3-tag .modifier">{g}</span>)}
+                        Genres: {viewUser.genres.split(',').map((g, i) => <span key={i} style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp4-tag .modifier">{g}</span>)}
                     </div>
                     <div className="profile-section-one-each">
-                        Country: <span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className="bp3-tag .modifier">{viewUser.country}</span>
-                    City: <span style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp3-tag .modifier">{viewUser.city}</span>
+                        Country: <span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className="bp4-tag .modifier">{viewUser.country}</span>
+                    City: <span style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp4-tag .modifier">{viewUser.city}</span>
                     </div>
                     <div className="profile-section-one-each">
                    
-                        Raiting: {viewUser.raiting === null  ? <span className="bp3-tag">No reviews yet</span> : <span
-                            className={`bp3-tag bp3-intent-${parseFloat(viewUser.raiting) <= 3 ? 'danger' :
+                        Raiting: {viewUser.raiting === null  ? <span className="bp4-tag">No reviews yet</span> : <span
+                            className={`bp4-tag bp4-intent-${parseFloat(viewUser.raiting) <= 3 ? 'danger' :
                                 parseFloat(viewUser.raiting) > 4 ? 'success' : 'warning'}`}>{viewUser.raiting}</span>}
                     </div>
                 </div>
-                <div onMouseEnter={() => setSection(2)} onMouseLeave={() => setSection(0)} className={`bp3-card bp3-elevation-${section === 2 ? '4' : '2'} .modifier profile-section-two`}>
+                <div onMouseEnter={() => setSection(2)} onMouseLeave={() => setSection(0)} className={`bp4-card bp4-elevation-${section === 2 ? '4' : '2'} .modifier profile-section-two`}>
                     <div className="profile-section-two-each">
                         <Waveform url={viewUser.track_url} title={viewUser.track_title} />
                     </div>
 
                     <div className="profile-section-two-each">
-                        <span className="bp3-tag">About</span> {viewUser.about}
+                        <span className="bp4-tag">About</span> {viewUser.about}
                     </div>
 
-                    <div className="bp3-tabs profile-section-two-each">
-                        <ul className="bp3-tab-list .modifier" role="tablist">
-                            <li onClick={() => setSelected('video')} className="bp3-tab" role="tab" aria-selected={selected === 'video' ? true : false}>Video</li>
-                            <li onClick={() => setSelected('review')} className="bp3-tab" role="tab" aria-selected={selected === 'review' ? true : false}>Reviews</li>
-                            <li onClick={() => setSelected('connection')} className="bp3-tab" role="tab" aria-selected={selected === 'connection' ? true : false}>Connections</li>
+                    <div className="bp4-tabs profile-section-two-each">
+                        <ul className="bp4-tab-list .modifier" role="tablist">
+                            <li onClick={() => setSelected('video')} className="bp4-tab" role="tab" aria-selected={selected === 'video' ? true : false}>Video</li>
+                            <li onClick={() => setSelected('review')} className="bp4-tab" role="tab" aria-selected={selected === 'review' ? true : false}>Reviews</li>
+                            <li onClick={() => setSelected('connection')} className="bp4-tab" role="tab" aria-selected={selected === 'connection' ? true : false}>Connections</li>
                         </ul>
-                        <div className="bp3-tab-panel" role="tabpanel" aria-hidden={selected === 'video' ? false : true}>
+                        <div className="bp4-tab-panel" role="tabpanel" aria-hidden={selected === 'video' ? false : true}>
                             <iframe title="video" width="560" height="315" src={viewUser.youtube_link} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                         </div>
-                        <div className="bp3-tab-panel" role="tabpanel" aria-hidden={selected === 'review' ? false : true}>Reviews</div>
-                        <div className="bp3-tab-panel" role="tabpanel" aria-hidden={selected === 'connection' ? false : true}>Connections</div>
+                        <div className="bp4-tab-panel" role="tabpanel" aria-hidden={selected === 'review' ? false : true}>Reviews</div>
+                        <div className="bp4-tab-panel" role="tabpanel" aria-hidden={selected === 'connection' ? false : true}>Connections</div>
                     </div>
                 </div>
 
-                {message ? <div className="bp3-dialog-container">
-                    <div className="bp3-dialog">
-                        <div className="bp3-dialog-header">
-                            <span className="bp3-icon-large bp3-icon-inbox"></span>
-                            <h4 className="bp3-heading">Message</h4>
-                            <button aria-label="Close" className="bp3-dialog-close-button bp3-button bp3-minimal bp3-icon-cross"></button>
+                {message ? <div className="bp4-dialog-container">
+                    <div className="bp4-dialog">
+                        <div className="bp4-dialog-header">
+                            <span className="bp4-icon-large bp4-icon-inbox"></span>
+                            <h4 className="bp4-heading">Message</h4>
+                            <button aria-label="Close" className="bp4-dialog-close-button bp4-button bp4-minimal bp4-icon-cross"></button>
                         </div>
-                        <div className="bp3-dialog-body">
+                        <div className="bp4-dialog-body">
                             <form onSubmit={handlSendMessage}>
-                                <input ref={messageInput} type="text" className="bp3-input" required minLength={1} />
-                                <button onClick={() => setMessage(false)} type="button" className="bp3-button">close</button>
-                                <button type="submit" className="bp3-button bp3-intent-primary">Send</button>
+                                <input ref={messageInput} type="text" className="bp4-input" required minLength={1} />
+                                <button onClick={() => setMessage(false)} type="button" className="bp4-button">close</button>
+                                <button type="submit" className="bp4-button bp4-intent-primary">Send</button>
                             </form>
                         </div>
                     </div>

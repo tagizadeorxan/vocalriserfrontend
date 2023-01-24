@@ -102,13 +102,13 @@ const Home = () => {
 
                 <div className="home-icon">
                     <img src={icon} alt="icon" />
-                    <div className="bp3-navbar-group bp3-align-center">
-                        <button className="bp3-button bp3-minimal">Vocalists: {statistics.vocalists ? statistics.vocalists : '...'}</button>
-                        <span className="bp3-navbar-divider"></span>
-                        <button className="bp3-button bp3-minimal">Producers: {statistics.producers ? statistics.producers : '...'}</button>
+                    <div className="bp4-navbar-group bp4-align-center">
+                        <button className="bp4-button bp4-minimal">Vocalists: {statistics.vocalists ? statistics.vocalists : '...'}</button>
+                        <span className="bp4-navbar-divider"></span>
+                        <button className="bp4-button bp4-minimal">Producers: {statistics.producers ? statistics.producers : '...'}</button>
                     </div>
-                    <div className="bp3-navbar-group bp3-align-center">
-                        <button className="bp3-button bp3-minimal">Jobs: {statistics.activeJobs ? statistics.activeJobs : '...'}</button>
+                    <div className="bp4-navbar-group bp4-align-center">
+                        <button className="bp4-button bp4-minimal">Jobs: {statistics.activeJobs ? statistics.activeJobs : '...'}</button>
                     </div>
                 </div>
 

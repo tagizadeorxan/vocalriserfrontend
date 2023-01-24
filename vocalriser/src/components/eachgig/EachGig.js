@@ -241,81 +241,81 @@ const EachGig = (props) => {
 
         return (
             <div className="gig-container">
-                <div className="bp3-card each-gig-container">
+                <div className="bp4-card each-gig-container">
                     <div className="each-gig-element">
-                        <h1 className="bp3-heading">{viewedGig.name}</h1>
-                        <span className={`bp3-tag bp3-intent-${viewedGig.active === 1 ? 'warning' : viewedGig.active === 2 ? 'success' : 'danger'}`}>
+                        <h1 className="bp4-heading">{viewedGig.name}</h1>
+                        <span className={`bp4-tag bp4-intent-${viewedGig.active === 1 ? 'warning' : viewedGig.active === 2 ? 'success' : 'danger'}`}>
                             {viewedGig.active === 1 ? 'active' : viewedGig.active === 2 ? 'Awarded' : 'Closed'}</span>
 
                     </div>
-                    {viewedGig.active === 1 ? <button onClick={closeGig} style={{ width: "10%" }} className="bp3-button bp3-intent-danger bp3-outlined bp3-small">Close</button> : null}
+                    {viewedGig.active === 1 ? <button onClick={closeGig} style={{ width: "10%" }} className="bp4-button bp4-intent-danger bp4-outlined bp4-small">Close</button> : null}
                     <div className="each-gig-element">
                         <Waveform url={viewedGig.track_url} title={viewedGig.name} />
                     </div>
 
                     <div className="each-gig-element">
-                        Created date:<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className="bp3-tag .modifier">{new Date(viewedGig.createDate).toLocaleDateString("sq-AL", { year: 'numeric', month: '2-digit', day: '2-digit' })}</span>
+                        Created date:<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className="bp4-tag .modifier">{new Date(viewedGig.createDate).toLocaleDateString("sq-AL", { year: 'numeric', month: '2-digit', day: '2-digit' })}</span>
                     </div>
 
                     <div className="each-gig-element">
-                        Looking for:<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className="bp3-tag .modifier">{viewedGig.type === 'V' ? 'vocalist' : 'producer'}</span>
+                        Looking for:<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className="bp4-tag .modifier">{viewedGig.type === 'V' ? 'vocalist' : 'producer'}</span>
                     </div>
                     <div className="each-gig-element">
-                        Language:<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className="bp3-tag .modifier">{viewedGig.language}</span>
-                    Genre:<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className="bp3-tag .modifier">{viewedGig.genre}</span>
-                    BPM:<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className="bp3-tag .modifier">{viewedGig.bpm}</span>
+                        Language:<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className="bp4-tag .modifier">{viewedGig.language}</span>
+                    Genre:<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className="bp4-tag .modifier">{viewedGig.genre}</span>
+                    BPM:<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className="bp4-tag .modifier">{viewedGig.bpm}</span>
                     </div>
                     <div className="each-gig-element">
                         Created by:<Link to={`/profiles/${viewedGig.user_id}`}><span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }}
-                            className="bp3-tag .modifier">{viewedGig.createdBy}</span></Link>
-                    Budget:<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className={`bp3-tag .modifier bp3-intent-${bidError === 'min' ? 'danger' : 'success'}`}>{viewedGig.budgetMin}</span>
-                    -<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className={`bp3-tag .modifier bp3-intent-${bidError === 'max' ? 'danger' : 'success'}`}>{viewedGig.budgetMax}</span>{Utils.currency}
+                            className="bp4-tag .modifier">{viewedGig.createdBy}</span></Link>
+                    Budget:<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className={`bp4-tag .modifier bp4-intent-${bidError === 'min' ? 'danger' : 'success'}`}>{viewedGig.budgetMin}</span>
+                    -<span style={{ marginLeft: '1%', marginBottom: '1%', marginRight: '1%' }} className={`bp4-tag .modifier bp4-intent-${bidError === 'max' ? 'danger' : 'success'}`}>{viewedGig.budgetMax}</span>{Utils.currency}
                     </div>
 
                     <div className="each-gig-element">
-                        Requirements:<p></p><span style={{ marginBottom: '1%', marginRight: '1%' }} className="bp3-tag .modifier">{viewedGig.requirements}</span>
+                        Requirements:<p></p><span style={{ marginBottom: '1%', marginRight: '1%' }} className="bp4-tag .modifier">{viewedGig.requirements}</span>
                     </div>
 
                 </div>
-                <div className="bp3-card bid-area">
+                <div className="bp4-card bid-area">
 
                     {bidExist ? <div>
-                        Your bid is: <span className="bp3-tag">{userBid.amount}</span>
+                        Your bid is: <span className="bp4-tag">{userBid.amount}</span>
                     </div> : viewedGig.user_id === user.user.id || viewedGig.active !== 1 ? null : <div>
-                        <input ref={bidRef} className="bp3-input bp3-intent-primary bp3-large  .modifier" type="number" placeholder="Your bid" dir="auto" />
-                        <button onClick={handleBid} style={{ marginLeft: '1%' }} type="button" className="bp3-button bp3-intent-success bp3-large .modifier">Submit</button>
+                        <input ref={bidRef} className="bp4-input bp4-intent-primary bp4-large  .modifier" type="number" placeholder="Your bid" dir="auto" />
+                        <button onClick={handleBid} style={{ marginLeft: '1%' }} type="button" className="bp4-button bp4-intent-success bp4-large .modifier">Submit</button>
                     </div>}
                 </div>
 
-                <div className="bp3-card bid-area">
+                <div className="bp4-card bid-area">
                     {biddings.length > 0 ? biddings.map((bid, index) => <div key={index}>
-                        <blockquote className="bp3-blockquote each-bid bp3-card bp3-interactive" >
+                        <blockquote className="bp4-blockquote each-bid bp4-card bp4-interactive" >
 
 
                             <div className="each-bid-element">
-                                <div style={{ textAlign: 'center' }}> <span className="bp3-tag " >{bid.amount} {Utils.currency}</span></div>
+                                <div style={{ textAlign: 'center' }}> <span className="bp4-tag " >{bid.amount} {Utils.currency}</span></div>
                                 <img alt="user" style={{ width: '100px', padding: "5%" }} src="https://www.mountainheavensella.com/wp-content/uploads/2018/12/default-user.png" />
-                                {viewedGig.awardedUser === user.user.id ? <div style={{ marginTop: '7%', textAlign: "center" }}><span className={`bp3-tag bp3-intent-success`}>Successfull bid</span></div> : null}
-                                {bidExist && bid.user_id === user.user.id && viewedGig.user_id !== user.user.id && viewedGig.active === 1 ? <div style={{ textAlign: "center" }}><button onClick={() => handleRemove(bid)} className="bp3-button bp3-intent-danger remove-bid">remove Bid</button></div> : null}
-                                {viewedGig.user_id === user.user.id && viewedGig.active === 1 ? <div style={{ textAlign: "center" }}><button onClick={() => awardGig(bid.user_id)} className="bp3-button bp3-intent-success remove-bid">Award Gig</button></div> : null}
+                                {viewedGig.awardedUser === user.user.id ? <div style={{ marginTop: '7%', textAlign: "center" }}><span className={`bp4-tag bp4-intent-success`}>Successfull bid</span></div> : null}
+                                {bidExist && bid.user_id === user.user.id && viewedGig.user_id !== user.user.id && viewedGig.active === 1 ? <div style={{ textAlign: "center" }}><button onClick={() => handleRemove(bid)} className="bp4-button bp4-intent-danger remove-bid">remove Bid</button></div> : null}
+                                {viewedGig.user_id === user.user.id && viewedGig.active === 1 ? <div style={{ textAlign: "center" }}><button onClick={() => awardGig(bid.user_id)} className="bp4-button bp4-intent-success remove-bid">Award Gig</button></div> : null}
                             </div>
                             <div className="each-bid-element" style={{ width: '250px' }}>
-                                <NavLink to={`/profiles/${bid.user_id}`}> <h1 className="bp3-heading">{bid.full_name} </h1></NavLink>
+                                <NavLink to={`/profiles/${bid.user_id}`}> <h1 className="bp4-heading">{bid.full_name} </h1></NavLink>
 
-                                <div className="bp3-tabs">
-                                    <ul className="bp3-tab-list .modifier" role="tablist">
-                                        <li onClick={() => panelSelect('genres')} className="bp3-tab" role="tab" aria-selected={selected === 'genres' ? true : false}>Genres</li>
-                                        <li onClick={() => panelSelect('microphones')} className="bp3-tab" role="tab" aria-selected={selected === 'microphones' ? true : false}>Microphone</li>
-                                        <li onClick={() => panelSelect('soundslike')} className="bp3-tab" role="tab" aria-selected={selected === 'soundslike' ? true : false}>Sounds like</li>
+                                <div className="bp4-tabs">
+                                    <ul className="bp4-tab-list .modifier" role="tablist">
+                                        <li onClick={() => panelSelect('genres')} className="bp4-tab" role="tab" aria-selected={selected === 'genres' ? true : false}>Genres</li>
+                                        <li onClick={() => panelSelect('microphones')} className="bp4-tab" role="tab" aria-selected={selected === 'microphones' ? true : false}>Microphone</li>
+                                        <li onClick={() => panelSelect('soundslike')} className="bp4-tab" role="tab" aria-selected={selected === 'soundslike' ? true : false}>Sounds like</li>
                                     </ul>
-                                    <div className="bp3-tab-panel" role="tabpanel" aria-hidden={selected === 'genres' ? false : true}>
-                                        {bid.genres.split(',').map((g, i) => <span key={i} style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp3-tag .modifier">{g}</span>)}
+                                    <div className="bp4-tab-panel" role="tabpanel" aria-hidden={selected === 'genres' ? false : true}>
+                                        {bid.genres.split(',').map((g, i) => <span key={i} style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp4-tag .modifier">{g}</span>)}
                                     </div>
-                                    <div className="bp3-tab-panel" role="tabpanel" aria-hidden={selected === 'microphones' ? false : true}>
-                                        {bid.microphone.split(',').map((m, i) => <span key={i} style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp3-tag .modifier">{m}</span>)}
+                                    <div className="bp4-tab-panel" role="tabpanel" aria-hidden={selected === 'microphones' ? false : true}>
+                                        {bid.microphone.split(',').map((m, i) => <span key={i} style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp4-tag .modifier">{m}</span>)}
                                     </div>
-                                    <div className="bp3-tab-panel" role="tabpanel" aria-hidden={selected === 'soundslike' ? false : true}>
-                                        {bid.soundslike.split(',').map((s, i) => <span key={i} style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp3-tag .modifier">{s}</span>)}
+                                    <div className="bp4-tab-panel" role="tabpanel" aria-hidden={selected === 'soundslike' ? false : true}>
+                                        {bid.soundslike.split(',').map((s, i) => <span key={i} style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp4-tag .modifier">{s}</span>)}
                                     </div>
                                 </div>
 

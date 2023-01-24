@@ -74,23 +74,23 @@ let Login = () => {
 
         <div className="login-container">
 
-            <div className="bp3-input-group .modifier login-general">
-                <input onKeyPress={handleKeyPress} ref={email} type={"email"} className="bp3-input" placeholder="Enter your email..." autoComplete="on" />
-                <button className={`bp3-button bp3-minimal bp3-intent-warning bp3-icon-envelope .modifier`}></button>
+            <div className="bp4-input-group .modifier login-general">
+                <input onKeyPress={handleKeyPress} ref={email} type={"email"} className="bp4-input" placeholder="Enter your email..." autoComplete="on" />
+                <button className={`bp4-button bp4-minimal bp4-intent-warning bp4-icon-envelope .modifier`}></button>
             </div>
 
 
-            <div className="bp3-input-group .modifier login-general ">
-                <input onKeyPress={handleKeyPress} ref={password} type={passwordShow ? "text" : "password"} className="bp3-input" placeholder="Enter your password..." autoComplete="on" />
-                <button onClick={showPassword} className={`bp3-button bp3-minimal bp3-intent-warning ${passwordShow ? 'bp3-icon-unlock' : 'bp3-icon-lock'} .modifier`}></button>
+            <div className="bp4-input-group .modifier login-general ">
+                <input onKeyPress={handleKeyPress} ref={password} type={passwordShow ? "text" : "password"} className="bp4-input" placeholder="Enter your password..." autoComplete="on" />
+                <button onClick={showPassword} className={`bp4-button bp4-minimal bp4-intent-warning ${passwordShow ? 'bp4-icon-unlock' : 'bp4-icon-lock'} .modifier`}></button>
             </div>
 
 
-            <button type="button" onClick={loginUser} className={`bp3-button bp3-icon-log-in .modifier login-general ${error ? 'bp3-intent-danger' : 'bp3-intent-success'}`}>Sign in</button>
+            <button type="button" onClick={loginUser} className={`bp4-button bp4-icon-log-in .modifier login-general ${error ? 'bp4-intent-danger' : 'bp4-intent-success'}`}>Sign in</button>
 
-            <button type="button" onClick={() => setSignUp(true)} className="bp3-button .modifier login-general">Sign up</button>
+            <button type="button" onClick={() => setSignUp(true)} className="bp4-button .modifier login-general">Sign up</button>
 
-            {error ? <p className="login-general login-error"><i className="bp3-icon-error"></i> {errorMessage}</p> : null}
+            {error ? <p className="login-general login-error"><i className="bp4-icon-error"></i> {errorMessage}</p> : null}
             {signup ? <Navigate push to="/registration" /> : null}
             {success ? <Navigate push to="/profile" /> : null}
 

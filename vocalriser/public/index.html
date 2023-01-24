@@ -1,21 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/vocal.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-   
-    />
- 
+    <meta name="description" />
+
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link
+      href="path/to/node_modules/normalize.css/normalize.css"
+      rel="stylesheet"
+    />
+    <!-- blueprint-icons.css file must be included alongside blueprint.css! -->
+    <link
+      href="path/to/node_modules/@blueprintjs/icons/lib/css/blueprint-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="path/to/node_modules/@blueprintjs/core/lib/css/blueprint.css"
+      rel="stylesheet"
+    />
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -26,37 +35,62 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>VocalRiser</title>
-     <!-- Start of Async Drift Code -->
-     <script>
+    <!-- Start of Async Drift Code -->
+    <script>
       "use strict";
-      
-      !function() {
-        var t = window.driftt = window.drift = window.driftt || [];
+
+      !(function () {
+        var t = (window.driftt = window.drift = window.driftt || []);
         if (!t.init) {
-          if (t.invoked) return void (window.console && console.error && console.error("Drift snippet included twice."));
-          t.invoked = !0, t.methods = [ "identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on" ], 
-          t.factory = function(e) {
-            return function() {
-              var n = Array.prototype.slice.call(arguments);
-              return n.unshift(e), t.push(n), t;
-            };
-          }, t.methods.forEach(function(e) {
-            t[e] = t.factory(e);
-          }), t.load = function(t) {
-            var e = 3e5, n = Math.ceil(new Date() / e) * e, o = document.createElement("script");
-            o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + n + "/" + t + ".js";
-            var i = document.getElementsByTagName("script")[0];
-            i.parentNode.insertBefore(o, i);
-          };
+          if (t.invoked)
+            return void (
+              window.console &&
+              console.error &&
+              console.error("Drift snippet included twice.")
+            );
+          (t.invoked = !0),
+            (t.methods = [
+              "identify",
+              "config",
+              "track",
+              "reset",
+              "debug",
+              "show",
+              "ping",
+              "page",
+              "hide",
+              "off",
+              "on"
+            ]),
+            (t.factory = function (e) {
+              return function () {
+                var n = Array.prototype.slice.call(arguments);
+                return n.unshift(e), t.push(n), t;
+              };
+            }),
+            t.methods.forEach(function (e) {
+              t[e] = t.factory(e);
+            }),
+            (t.load = function (t) {
+              var e = 3e5,
+                n = Math.ceil(new Date() / e) * e,
+                o = document.createElement("script");
+              (o.type = "text/javascript"),
+                (o.async = !0),
+                (o.crossorigin = "anonymous"),
+                (o.src =
+                  "https://js.driftt.com/include/" + n + "/" + t + ".js");
+              var i = document.getElementsByTagName("script")[0];
+              i.parentNode.insertBefore(o, i);
+            });
         }
-      }();
-      drift.SNIPPET_VERSION = '0.3.1';
-      drift.load('537xhb4zgbg4');
-      </script>
-  <!-- End of Async Drift Code -->
+      })();
+      drift.SNIPPET_VERSION = "0.3.1";
+      drift.load("537xhb4zgbg4");
+    </script>
+    <!-- End of Async Drift Code -->
   </head>
   <body>
-       
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--

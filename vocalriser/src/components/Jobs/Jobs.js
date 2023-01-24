@@ -121,40 +121,40 @@ const Jobs = () => {
                     <div className="jobs-container">
 
                         {gigs.length > 0 ? gigs.reverse().slice((currentPage - 1) * 2, currentPage * 2).map((gig, index) => <div key={index}>
-                            <blockquote className="bp3-blockquote bp3-card bp3-interactive each-job">
+                            <blockquote className="bp4-blockquote bp4-card bp4-interactive each-job">
                                
                                 <div className="each-job-element">
                                     {/* <img alt="user" style={{ width: '100px' }} src="https://www.mountainheavensella.com/wp-content/uploads/2018/12/default-user.png" /> */}
                                 </div>
                                 <div className="each-job-element" style={{ width: '500px' }}>
-                                    <Link to={`/gigs/${gig.id}`}> <h1 className="bp3-heading">{gig.name}</h1></Link>
-                                    <span style={{ marginLeft: '1%' }} className="bp3-tag .modifier">{gig.bpm}</span>
-                                    <span style={{ marginLeft: '1%' }} className="bp3-tag .modifier">{gig.genre}</span>
+                                    <Link to={`/gigs/${gig.id}`}> <h1 className="bp4-heading">{gig.name}</h1></Link>
+                                    <span style={{ marginLeft: '1%' }} className="bp4-tag .modifier">{gig.bpm}</span>
+                                    <span style={{ marginLeft: '1%' }} className="bp4-tag .modifier">{gig.genre}</span>
 
-                                    <div className="bp3-tabs">
-                                        <ul className="bp3-tab-list .modifier" role="tablist">
-                                            <li onClick={() => panelSelect('requirements')} className="bp3-tab" role="tab" aria-selected={selected === 'requirements' ? true : false}>Requirements</li>
-                                            <li onClick={() => panelSelect('language')} className="bp3-tab" role="tab" aria-selected={selected === 'language' ? true : false}>Language</li>
-                                            <li onClick={() => panelSelect('budget')} className="bp3-tab" role="tab" aria-selected={selected === 'budget' ? true : false}>Budget</li>
+                                    <div className="bp4-tabs">
+                                        <ul className="bp4-tab-list .modifier" role="tablist">
+                                            <li onClick={() => panelSelect('requirements')} className="bp4-tab" role="tab" aria-selected={selected === 'requirements' ? true : false}>Requirements</li>
+                                            <li onClick={() => panelSelect('language')} className="bp4-tab" role="tab" aria-selected={selected === 'language' ? true : false}>Language</li>
+                                            <li onClick={() => panelSelect('budget')} className="bp4-tab" role="tab" aria-selected={selected === 'budget' ? true : false}>Budget</li>
                                         </ul>
-                                        <div className="bp3-tab-panel" role="tabpanel" aria-hidden={selected === 'requirements' ? false : true}>
-                                            <span style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp3-tag .modifier">{gig.requirements.substring(0, 30)}...</span>
+                                        <div className="bp4-tab-panel" role="tabpanel" aria-hidden={selected === 'requirements' ? false : true}>
+                                            <span style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp4-tag .modifier">{gig.requirements.substring(0, 30)}...</span>
                                         </div>
-                                        <div className="bp3-tab-panel" role="tabpanel" aria-hidden={selected === 'language' ? false : true}>
-                                            <span style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp3-tag .modifier">{gig.language}</span>
+                                        <div className="bp4-tab-panel" role="tabpanel" aria-hidden={selected === 'language' ? false : true}>
+                                            <span style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp4-tag .modifier">{gig.language}</span>
                                         </div>
-                                        <div className="bp3-tab-panel" role="tabpanel" aria-hidden={selected === 'budget' ? false : true}>
-                                            <span style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp3-tag .modifier">{gig.budgetMin}-{gig.budgetMax} USD</span>
+                                        <div className="bp4-tab-panel" role="tabpanel" aria-hidden={selected === 'budget' ? false : true}>
+                                            <span style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp4-tag .modifier">{gig.budgetMin}-{gig.budgetMax} USD</span>
                                         </div>
                                     </div>
                                     {
                                     whereUserBidded.find(b=> b.gig_id === gig.id) ? 
-                                    <div style={{ marginTop: '7%', textAlign: "center", float:"left" }}><span className={`bp3-tag bp3-intent-success`}>Submitted</span></div> 
+                                    <div style={{ marginTop: '7%', textAlign: "center", float:"left" }}><span className={`bp4-tag bp4-intent-success`}>Submitted</span></div> 
                                      : null
                                 }
                                 </div>
                                 <div style={{ marginTop: '3%' }} >
-                                    {/* <button style={{marginTop:'7%',marginLeft:'10%',display:'block'}} type="button" className="bp3-button">Connect</button> */}
+                                    {/* <button style={{marginTop:'7%',marginLeft:'10%',display:'block'}} type="button" className="bp4-button">Connect</button> */}
 
 
                                     <Waveform url={gig.track_url} title={gig.name} />
@@ -169,8 +169,8 @@ const Jobs = () => {
                     </div>
 
                     <div className="pagination">
-                        {currentPage === 1 ? null : <span onClick={() => changePage('prev')} className="bp3-tag .modifier page-change">previous page</span>}
-                        {currentPage === pageSize ? null : <span onClick={() => changePage('next')} className="bp3-tag .modifier page-change">next page</span>}
+                        {currentPage === 1 ? null : <span onClick={() => changePage('prev')} className="bp4-tag .modifier page-change">previous page</span>}
+                        {currentPage === pageSize ? null : <span onClick={() => changePage('next')} className="bp4-tag .modifier page-change">next page</span>}
                     </div>
                 </div>
 

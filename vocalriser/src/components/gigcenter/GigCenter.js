@@ -68,75 +68,75 @@ let GigCenter = () => {
         return (
             <div className="gig-center-container">
 
-                <nav className="bp3-navbar .modifier" style={{ marginBottom: "5%" }}>
+                <nav className="bp4-navbar .modifier" style={{ marginBottom: "5%" }}>
 
-                    <div className="bp3-navbar-group bp3-align-left">
-                        <button onClick={() => setSelected('created')} className="bp3-button bp3-minimal" style={selected === 'created' ? { backgroundColor: 'green', color: 'white' } : null}>Created Gigs</button>
-                        <button onClick={() => setSelected('bidded')} className="bp3-button bp3-minimal" style={selected === 'bidded' ? { backgroundColor: 'green', color: 'white' } : null}>Bidded Gigs</button>
+                    <div className="bp4-navbar-group bp4-align-left">
+                        <button onClick={() => setSelected('created')} className="bp4-button bp4-minimal" style={selected === 'created' ? { backgroundColor: 'green', color: 'white' } : null}>Created Gigs</button>
+                        <button onClick={() => setSelected('bidded')} className="bp4-button bp4-minimal" style={selected === 'bidded' ? { backgroundColor: 'green', color: 'white' } : null}>Bidded Gigs</button>
 
                     </div>
                 </nav>
 
 
-                { selected === 'created' && creatorGigs.length > 0 ? <div className="bp3-tabs">
-                    <ul className="bp3-tab-list bp3-large .modifier" role="tablist">
+                { selected === 'created' && creatorGigs.length > 0 ? <div className="bp4-tabs">
+                    <ul className="bp4-tab-list bp4-large .modifier" role="tablist">
 
                         {/* active:1, closed:0 - in gigs active   //  */}
-                        <li onClick={() => setEachSelected('active')} className="bp3-tab" role="tab" aria-selected={eachSelected === 'active' ? true : false}>Active</li>
-                        <li onClick={() => setEachSelected('pending')} className="bp3-tab" role="tab" aria-selected={eachSelected === 'pending' ? true : false}>Pending</li>
-                        <li onClick={() => setEachSelected('progress')} className="bp3-tab" role="tab" aria-selected={eachSelected === 'progress' ? true : false}>Progress</li>
-                        <li onClick={() => setEachSelected('completed')} className="bp3-tab" role="tab" aria-selected={eachSelected === 'completed' ? true : false}>Completed</li>
-                        <li onClick={() => setEachSelected('closed')} className="bp3-tab" role="tab" aria-selected={eachSelected === 'closed' ? true : false}>Closed</li>
+                        <li onClick={() => setEachSelected('active')} className="bp4-tab" role="tab" aria-selected={eachSelected === 'active' ? true : false}>Active</li>
+                        <li onClick={() => setEachSelected('pending')} className="bp4-tab" role="tab" aria-selected={eachSelected === 'pending' ? true : false}>Pending</li>
+                        <li onClick={() => setEachSelected('progress')} className="bp4-tab" role="tab" aria-selected={eachSelected === 'progress' ? true : false}>Progress</li>
+                        <li onClick={() => setEachSelected('completed')} className="bp4-tab" role="tab" aria-selected={eachSelected === 'completed' ? true : false}>Completed</li>
+                        <li onClick={() => setEachSelected('closed')} className="bp4-tab" role="tab" aria-selected={eachSelected === 'closed' ? true : false}>Closed</li>
 
 
                     </ul>
 
                     {creatorGigs.map((gig, index) => {
                         if (gig.active === 1) {
-                            return <div key={index} className="bp3-tab-panel" role="tabpanel" aria-hidden={eachSelected === 'active' ? false : true}>
-                                <div className="bp3-card bp3-elevation-2 .modifier">
-                                    <Link to={`/gigs/${gig.id}`}><h1 className="bp3-heading">{gig.name}</h1></Link>
-                                    <span>create date: </span><span className="bp3-tag">{gig.createDate.substring(0, 10)}</span>
-                                    <span style={{ marginLeft: '1%' }} >genre:</span><span style={{ marginLeft: '1%' }} className="bp3-tag">{gig.genre}</span>
-                                    <span style={{ marginLeft: '1%' }} >bpm:</span><span style={{ marginLeft: '1%' }} className="bp3-tag">{gig.bpm}</span>
+                            return <div key={index} className="bp4-tab-panel" role="tabpanel" aria-hidden={eachSelected === 'active' ? false : true}>
+                                <div className="bp4-card bp4-elevation-2 .modifier">
+                                    <Link to={`/gigs/${gig.id}`}><h1 className="bp4-heading">{gig.name}</h1></Link>
+                                    <span>create date: </span><span className="bp4-tag">{gig.createDate.substring(0, 10)}</span>
+                                    <span style={{ marginLeft: '1%' }} >genre:</span><span style={{ marginLeft: '1%' }} className="bp4-tag">{gig.genre}</span>
+                                    <span style={{ marginLeft: '1%' }} >bpm:</span><span style={{ marginLeft: '1%' }} className="bp4-tag">{gig.bpm}</span>
                                 </div>
 
                             </div>
                         } else if (gig.active === 2 && gig.progress === 0) {
-                            return <div key={index} className="bp3-tab-panel" role="tabpanel" aria-hidden={eachSelected === 'pending' ? false : true}>
-                                <div className="bp3-card bp3-elevation-2 .modifier">
-                                    <Link to={`/awardedgigs/${gig.id}`}><h1 className="bp3-heading">{gig.name}</h1></Link>
-                                    <span>create date: </span><span className="bp3-tag">{gig.createDate.substring(0, 10)}</span>
-                                    <span style={{ marginLeft: '1%' }} >genre:</span><span style={{ marginLeft: '1%' }} className="bp3-tag">{gig.genre}</span>
-                                    <span style={{ marginLeft: '1%' }} >bpm:</span><span style={{ marginLeft: '1%' }} className="bp3-tag">{gig.bpm}</span>
+                            return <div key={index} className="bp4-tab-panel" role="tabpanel" aria-hidden={eachSelected === 'pending' ? false : true}>
+                                <div className="bp4-card bp4-elevation-2 .modifier">
+                                    <Link to={`/awardedgigs/${gig.id}`}><h1 className="bp4-heading">{gig.name}</h1></Link>
+                                    <span>create date: </span><span className="bp4-tag">{gig.createDate.substring(0, 10)}</span>
+                                    <span style={{ marginLeft: '1%' }} >genre:</span><span style={{ marginLeft: '1%' }} className="bp4-tag">{gig.genre}</span>
+                                    <span style={{ marginLeft: '1%' }} >bpm:</span><span style={{ marginLeft: '1%' }} className="bp4-tag">{gig.bpm}</span>
                                 </div>
                             </div>
                         } else if (gig.active === 2 && gig.progress === 1) {
-                            return <div key={index} className="bp3-tab-panel" role="tabpanel" aria-hidden={eachSelected === 'progress' ? false : true}>
-                                <div className="bp3-card bp3-elevation-2 .modifier">
-                                    <Link to={`/awardedgigs/${gig.id}`}><h1 className="bp3-heading">{gig.name}</h1></Link>
-                                    <span>create date: </span><span className="bp3-tag">{gig.createDate.substring(0, 10)}</span>
-                                    <span style={{ marginLeft: '1%' }} >genre:</span><span style={{ marginLeft: '1%' }} className="bp3-tag">{gig.genre}</span>
-                                    <span style={{ marginLeft: '1%' }} >bpm:</span><span style={{ marginLeft: '1%' }} className="bp3-tag">{gig.bpm}</span>
+                            return <div key={index} className="bp4-tab-panel" role="tabpanel" aria-hidden={eachSelected === 'progress' ? false : true}>
+                                <div className="bp4-card bp4-elevation-2 .modifier">
+                                    <Link to={`/awardedgigs/${gig.id}`}><h1 className="bp4-heading">{gig.name}</h1></Link>
+                                    <span>create date: </span><span className="bp4-tag">{gig.createDate.substring(0, 10)}</span>
+                                    <span style={{ marginLeft: '1%' }} >genre:</span><span style={{ marginLeft: '1%' }} className="bp4-tag">{gig.genre}</span>
+                                    <span style={{ marginLeft: '1%' }} >bpm:</span><span style={{ marginLeft: '1%' }} className="bp4-tag">{gig.bpm}</span>
                                 </div>
                             </div>
                         } else if (gig.active === 2 && gig.progress === 2) {
 
-                            return <div key={index} className="bp3-tab-panel" role="tabpanel" aria-hidden={eachSelected === 'completed' ? false : true}>
-                                <div className="bp3-card bp3-elevation-2 .modifier">
-                                    <Link to={`/awardedgigs/${gig.id}`}><h1 className="bp3-heading">{gig.name}</h1></Link>
-                                    <span>create date: </span><span className="bp3-tag">{gig.createDate.substring(0, 10)}</span>
-                                    <span style={{ marginLeft: '1%' }} >genre:</span><span style={{ marginLeft: '1%' }} className="bp3-tag">{gig.genre}</span>
-                                    <span style={{ marginLeft: '1%' }} >bpm:</span><span style={{ marginLeft: '1%' }} className="bp3-tag">{gig.bpm}</span>
+                            return <div key={index} className="bp4-tab-panel" role="tabpanel" aria-hidden={eachSelected === 'completed' ? false : true}>
+                                <div className="bp4-card bp4-elevation-2 .modifier">
+                                    <Link to={`/awardedgigs/${gig.id}`}><h1 className="bp4-heading">{gig.name}</h1></Link>
+                                    <span>create date: </span><span className="bp4-tag">{gig.createDate.substring(0, 10)}</span>
+                                    <span style={{ marginLeft: '1%' }} >genre:</span><span style={{ marginLeft: '1%' }} className="bp4-tag">{gig.genre}</span>
+                                    <span style={{ marginLeft: '1%' }} >bpm:</span><span style={{ marginLeft: '1%' }} className="bp4-tag">{gig.bpm}</span>
                                 </div>
                             </div>
                         } else if (gig.active === 0) {
-                            return <div key={index} className="bp3-tab-panel" role="tabpanel" aria-hidden={eachSelected === 'closed' ? false : true}>
-                                <div className="bp3-card bp3-elevation-2 .modifier">
-                                    <Link to={`/gigs/${gig.id}`}> <h1 className="bp3-heading">{gig.name}</h1></Link>
-                                    <span>create date: </span><span className="bp3-tag">{gig.createDate.substring(0, 10)}</span>
-                                    <span style={{ marginLeft: '1%' }} >genre:</span><span style={{ marginLeft: '1%' }} className="bp3-tag">{gig.genre}</span>
-                                    <span style={{ marginLeft: '1%' }} >bpm:</span><span style={{ marginLeft: '1%' }} className="bp3-tag">{gig.bpm}</span>
+                            return <div key={index} className="bp4-tab-panel" role="tabpanel" aria-hidden={eachSelected === 'closed' ? false : true}>
+                                <div className="bp4-card bp4-elevation-2 .modifier">
+                                    <Link to={`/gigs/${gig.id}`}> <h1 className="bp4-heading">{gig.name}</h1></Link>
+                                    <span>create date: </span><span className="bp4-tag">{gig.createDate.substring(0, 10)}</span>
+                                    <span style={{ marginLeft: '1%' }} >genre:</span><span style={{ marginLeft: '1%' }} className="bp4-tag">{gig.genre}</span>
+                                    <span style={{ marginLeft: '1%' }} >bpm:</span><span style={{ marginLeft: '1%' }} className="bp4-tag">{gig.bpm}</span>
                                 </div>
                             </div>
                         }
@@ -146,41 +146,41 @@ let GigCenter = () => {
 
                 </div> : selected === "created" && creatorGigs.length === 0 ? <p>no created gigs</p>:null}
              
-                { selected === 'bidded' && biddedGigs.length > 0 ? <div className="bp3-tabs">
-                    <ul className="bp3-tab-list bp3-large .modifier" role="tablist">
-                        <li onClick={() => setEachSelected('pending')} className="bp3-tab" role="tab" aria-selected={eachSelected === 'pending' ? true : false}>Pending</li>
-                        <li onClick={() => setEachSelected('progress')} className="bp3-tab" role="tab" aria-selected={eachSelected === 'progress' ? true : false}>Progress</li>
-                        <li onClick={() => setEachSelected('completed')} className="bp3-tab" role="tab" aria-selected={eachSelected === 'completed' ? true : false}>Completed</li>
+                { selected === 'bidded' && biddedGigs.length > 0 ? <div className="bp4-tabs">
+                    <ul className="bp4-tab-list bp4-large .modifier" role="tablist">
+                        <li onClick={() => setEachSelected('pending')} className="bp4-tab" role="tab" aria-selected={eachSelected === 'pending' ? true : false}>Pending</li>
+                        <li onClick={() => setEachSelected('progress')} className="bp4-tab" role="tab" aria-selected={eachSelected === 'progress' ? true : false}>Progress</li>
+                        <li onClick={() => setEachSelected('completed')} className="bp4-tab" role="tab" aria-selected={eachSelected === 'completed' ? true : false}>Completed</li>
 
                     </ul>
 
                     {biddedGigs.map((gig, index) => {
                         if (gig.active === 2 && gig.progress === 0) {
-                            return <div key={index} className="bp3-tab-panel" role="tabpanel" aria-hidden={eachSelected === 'pending' ? false : true}>
-                                <div className="bp3-card bp3-elevation-2 .modifier">
-                                    <Link to={`/awardedgigs/${gig.id}`}><h1 className="bp3-heading">{gig.name}</h1></Link>
-                                    <span>create date: </span><span className="bp3-tag">{gig.createDate.substring(0, 10)}</span>
-                                    <span style={{ marginLeft: '1%' }} >genre:</span><span style={{ marginLeft: '1%' }} className="bp3-tag">{gig.genre}</span>
-                                    <span style={{ marginLeft: '1%' }} >bpm:</span><span style={{ marginLeft: '1%' }} className="bp3-tag">{gig.bpm}</span>
+                            return <div key={index} className="bp4-tab-panel" role="tabpanel" aria-hidden={eachSelected === 'pending' ? false : true}>
+                                <div className="bp4-card bp4-elevation-2 .modifier">
+                                    <Link to={`/awardedgigs/${gig.id}`}><h1 className="bp4-heading">{gig.name}</h1></Link>
+                                    <span>create date: </span><span className="bp4-tag">{gig.createDate.substring(0, 10)}</span>
+                                    <span style={{ marginLeft: '1%' }} >genre:</span><span style={{ marginLeft: '1%' }} className="bp4-tag">{gig.genre}</span>
+                                    <span style={{ marginLeft: '1%' }} >bpm:</span><span style={{ marginLeft: '1%' }} className="bp4-tag">{gig.bpm}</span>
                                 </div>
                             </div>
                         } else if (gig.active === 2 && gig.progress === 1) {
-                            return <div key={index} className="bp3-tab-panel" role="tabpanel" aria-hidden={eachSelected === 'progress' ? false : true}>
-                                <div className="bp3-card bp3-elevation-2 .modifier">
-                                    <Link to={`/awardedgigs/${gig.id}`}><h1 className="bp3-heading">{gig.name}</h1></Link>
-                                    <span>create date: </span><span className="bp3-tag">{gig.createDate.substring(0, 10)}</span>
-                                    <span style={{ marginLeft: '1%' }} >genre:</span><span style={{ marginLeft: '1%' }} className="bp3-tag">{gig.genre}</span>
-                                    <span style={{ marginLeft: '1%' }} >bpm:</span><span style={{ marginLeft: '1%' }} className="bp3-tag">{gig.bpm}</span>
+                            return <div key={index} className="bp4-tab-panel" role="tabpanel" aria-hidden={eachSelected === 'progress' ? false : true}>
+                                <div className="bp4-card bp4-elevation-2 .modifier">
+                                    <Link to={`/awardedgigs/${gig.id}`}><h1 className="bp4-heading">{gig.name}</h1></Link>
+                                    <span>create date: </span><span className="bp4-tag">{gig.createDate.substring(0, 10)}</span>
+                                    <span style={{ marginLeft: '1%' }} >genre:</span><span style={{ marginLeft: '1%' }} className="bp4-tag">{gig.genre}</span>
+                                    <span style={{ marginLeft: '1%' }} >bpm:</span><span style={{ marginLeft: '1%' }} className="bp4-tag">{gig.bpm}</span>
                                 </div>
                             </div>
                         } else if (gig.active === 2 && gig.progress === 2) {
 
-                            return <div key={index} className="bp3-tab-panel" role="tabpanel" aria-hidden={eachSelected === 'completed' ? false : true}>
-                                <div className="bp3-card bp3-elevation-2 .modifier">
-                                    <Link to={`/awardedgigs/${gig.id}`}><h1 className="bp3-heading">{gig.name}</h1></Link>
-                                    <span>create date: </span><span className="bp3-tag">{gig.createDate.substring(0, 10)}</span>
-                                    <span style={{ marginLeft: '1%' }} >genre:</span><span style={{ marginLeft: '1%' }} className="bp3-tag">{gig.genre}</span>
-                                    <span style={{ marginLeft: '1%' }} >bpm:</span><span style={{ marginLeft: '1%' }} className="bp3-tag">{gig.bpm}</span>
+                            return <div key={index} className="bp4-tab-panel" role="tabpanel" aria-hidden={eachSelected === 'completed' ? false : true}>
+                                <div className="bp4-card bp4-elevation-2 .modifier">
+                                    <Link to={`/awardedgigs/${gig.id}`}><h1 className="bp4-heading">{gig.name}</h1></Link>
+                                    <span>create date: </span><span className="bp4-tag">{gig.createDate.substring(0, 10)}</span>
+                                    <span style={{ marginLeft: '1%' }} >genre:</span><span style={{ marginLeft: '1%' }} className="bp4-tag">{gig.genre}</span>
+                                    <span style={{ marginLeft: '1%' }} >bpm:</span><span style={{ marginLeft: '1%' }} className="bp4-tag">{gig.bpm}</span>
                                 </div>
                             </div>
                         }

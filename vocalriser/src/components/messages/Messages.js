@@ -153,7 +153,7 @@ let Messages = () => {
 
                 {messages.length > 0 ? <div className="message-container">
 
-                    <div className="bp3-card .modifier main-message-container">
+                    <div className="bp4-card .modifier main-message-container">
                         {messages.map((message, index) => {
 
                             if (message.sender === user.user.id && message.sender_active === 1) {
@@ -161,30 +161,30 @@ let Messages = () => {
 
 
 
-                                    <button style={{ width: '89%', position: 'relative' }} className={`bp3-button bp3-outlined bp3-intent-${selectedMessage === message.id ? 'success' : null}`} onClick={() => handleEachMessages(message.id)} key={index}>{message.reciever_fullname}</button>
+                                    <button style={{ width: '89%', position: 'relative' }} className={`bp4-button bp4-outlined bp4-intent-${selectedMessage === message.id ? 'success' : null}`} onClick={() => handleEachMessages(message.id)} key={index}>{message.reciever_fullname}</button>
 
-                                    <button style={{ float: 'right' }} onClick={() => handleDeleteMessage(message.id, 'sender_active')} className="bp3-button bp3-minimal bp3-icon-delete bp3-intent-danger"></button>
+                                    <button style={{ float: 'right' }} onClick={() => handleDeleteMessage(message.id, 'sender_active')} className="bp4-button bp4-minimal bp4-icon-delete bp4-intent-danger"></button>
                                 </div>
                             } else if (message.reciever === user.user.id && message.reciever_active === 1) {
                                 return <div key={index}  >
 
-                                    <button style={{ width: '89%', position: 'relative' }} className={`bp3-button bp3-outlined bp3-intent-${selectedMessage === message.id ? 'success' : null}`} onClick={() => handleEachMessages(message.id)} key={index}>{message.sender_fullname}</button>
+                                    <button style={{ width: '89%', position: 'relative' }} className={`bp4-button bp4-outlined bp4-intent-${selectedMessage === message.id ? 'success' : null}`} onClick={() => handleEachMessages(message.id)} key={index}>{message.sender_fullname}</button>
 
-                                    <button style={{ float: 'right' }} onClick={() => handleDeleteMessage(message.id, 'sender_active')} className="bp3-button bp3-minimal bp3-icon-delete bp3-intent-danger"></button>
+                                    <button style={{ float: 'right' }} onClick={() => handleDeleteMessage(message.id, 'sender_active')} className="bp4-button bp4-minimal bp4-icon-delete bp4-intent-danger"></button>
                                 </div>
                             }
                         })}
                     </div>
 
-                    {selectedMessage > 0 ? <div className="bp3-card .modifier each-message-container">
+                    {selectedMessage > 0 ? <div className="bp4-card .modifier each-message-container">
                         {eachMessages.length > 0 ? eachMessages.map((m, i) => <div key={i}>
                             <Link to={`/profiles/${m.sender_id}`}>{m.sender_fullname}</Link>
                             <p>{m.sender_message}</p>
                         </div>) : 'no Messages'}
                         <div style={{ marginTop: "10%" }}>
                             <form onSubmit={(e) => handleSendMessage(e, selectedMessage, user.user.id, `${user.user.first_name} ${user.user.last_name}`)}>
-                                <input ref={sendMessageInput} type="text" minLength={1} className="bp3-input" required />
-                                <button style={{ marginLeft: "1%" }} className="bp3-button ">send message</button>
+                                <input ref={sendMessageInput} type="text" minLength={1} className="bp4-input" required />
+                                <button style={{ marginLeft: "1%" }} className="bp4-button ">send message</button>
                             </form>
 
                         </div>

@@ -121,34 +121,34 @@ const Producers = () => {
                     <div className="producers-container">
 
                         {producers.length > 0 ? producers.slice((currentPage - 1) * 2, currentPage * 2).map((producer, index) => <div key={index}>
-                            <blockquote className="bp3-blockquote each-producer bp3-card bp3-interactive">
+                            <blockquote className="bp4-blockquote each-producer bp4-card bp4-interactive">
                                 <div className="each-producer-element" style={{ width: '100px' }}>
                                     <img alt="user" style={{ width: '100px' }} src="https://www.mountainheavensella.com/wp-content/uploads/2018/12/default-user.png" />
                                 </div>
                                 <div className="each-producer-element" style={{ width: '500px' }}>
-                                    <NavLink to={`/profiles/${producer.id}`}> <h1 className="bp3-heading">{producer.first_name} {producer.last_name} </h1></NavLink>
-                                    <span style={{ marginLeft: '1%' }} className="bp3-tag .modifier">{producer.age}</span>
-                                    <span style={{ marginLeft: '1%' }} className="bp3-tag .modifier">{producer.gender}</span>
+                                    <NavLink to={`/profiles/${producer.id}`}> <h1 className="bp4-heading">{producer.first_name} {producer.last_name} </h1></NavLink>
+                                    <span style={{ marginLeft: '1%' }} className="bp4-tag .modifier">{producer.age}</span>
+                                    <span style={{ marginLeft: '1%' }} className="bp4-tag .modifier">{producer.gender}</span>
 
-                                    <div className="bp3-tabs">
-                                        <ul className="bp3-tab-list .modifier" role="tablist">
-                                            <li onClick={() => panelSelect('genres')} className="bp3-tab" role="tab" aria-selected={selected === 'genres' ? true : false}>Genres</li>
-                                            <li onClick={() => panelSelect('microphones')} className="bp3-tab" role="tab" aria-selected={selected === 'microphones' ? true : false}>Microphone</li>
-                                            <li onClick={() => panelSelect('soundslike')} className="bp3-tab" role="tab" aria-selected={selected === 'soundslike' ? true : false}>Sounds like</li>
+                                    <div className="bp4-tabs">
+                                        <ul className="bp4-tab-list .modifier" role="tablist">
+                                            <li onClick={() => panelSelect('genres')} className="bp4-tab" role="tab" aria-selected={selected === 'genres' ? true : false}>Genres</li>
+                                            <li onClick={() => panelSelect('microphones')} className="bp4-tab" role="tab" aria-selected={selected === 'microphones' ? true : false}>Microphone</li>
+                                            <li onClick={() => panelSelect('soundslike')} className="bp4-tab" role="tab" aria-selected={selected === 'soundslike' ? true : false}>Sounds like</li>
                                         </ul>
-                                        <div className="bp3-tab-panel" role="tabpanel" aria-hidden={selected === 'genres' ? false : true}>
-                                            {producer.genres.split(',').map((g, i) => <span key={i} style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp3-tag .modifier">{g}</span>)}
+                                        <div className="bp4-tab-panel" role="tabpanel" aria-hidden={selected === 'genres' ? false : true}>
+                                            {producer.genres.split(',').map((g, i) => <span key={i} style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp4-tag .modifier">{g}</span>)}
                                         </div>
-                                        <div className="bp3-tab-panel" role="tabpanel" aria-hidden={selected === 'microphones' ? false : true}>
-                                            {producer.microphone.split(',').map((m, i) => <span key={i} style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp3-tag .modifier">{m}</span>)}
+                                        <div className="bp4-tab-panel" role="tabpanel" aria-hidden={selected === 'microphones' ? false : true}>
+                                            {producer.microphone.split(',').map((m, i) => <span key={i} style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp4-tag .modifier">{m}</span>)}
                                         </div>
-                                        <div className="bp3-tab-panel" role="tabpanel" aria-hidden={selected === 'soundslike' ? false : true}>
-                                            {producer.soundslike.split(',').map((s, i) => <span key={i} style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp3-tag .modifier">{s}</span>)}
+                                        <div className="bp4-tab-panel" role="tabpanel" aria-hidden={selected === 'soundslike' ? false : true}>
+                                            {producer.soundslike.split(',').map((s, i) => <span key={i} style={{ marginLeft: '1%', marginBottom: '1%' }} className="bp4-tag .modifier">{s}</span>)}
                                         </div>
                                     </div>
                                 </div>
                                 <div style={{ marginTop: '3%' }} >
-                                    {/* <button style={{marginTop:'7%',marginLeft:'10%',display:'block'}} type="button" className="bp3-button">Connect</button> */}
+                                    {/* <button style={{marginTop:'7%',marginLeft:'10%',display:'block'}} type="button" className="bp4-button">Connect</button> */}
 
 
                                     <Waveform url={producer.track_url} title={producer.track_title} />
@@ -163,10 +163,10 @@ const Producers = () => {
                     </div>
 
                     <div className="pagination">
-                        {/* {[...Array(pageSize)].map((p, i) => <span className="bp3-tag .modifier">{i + 1}</span>)} */}
+                        {/* {[...Array(pageSize)].map((p, i) => <span className="bp4-tag .modifier">{i + 1}</span>)} */}
 
-                        {currentPage === 1 ? null : <span onClick={() => changePage('prev')} className="bp3-tag .modifier page-change">previous page</span>}
-                        {currentPage === pageSize ? null : <span onClick={() => changePage('next')} className="bp3-tag .modifier page-change">next page</span>}
+                        {currentPage === 1 ? null : <span onClick={() => changePage('prev')} className="bp4-tag .modifier page-change">previous page</span>}
+                        {currentPage === pageSize ? null : <span onClick={() => changePage('next')} className="bp4-tag .modifier page-change">next page</span>}
                     </div>
                 </div>
 

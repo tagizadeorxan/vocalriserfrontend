@@ -63,31 +63,31 @@ let Register = () => {
     return (
 
         <div className="register-container">
-            <div className="bp3-input-group .modifier register-general">
-                <input ref={username} type={"text"} className="bp3-input" placeholder="Enter your username..." autoComplete="on" />
-                <button className={`bp3-button bp3-minimal bp3-intent-warning bp3-icon-user .modifier`}></button>
+            <div className="bp4-input-group .modifier register-general">
+                <input ref={username} type={"text"} className="bp4-input" placeholder="Enter your username..." autoComplete="on" />
+                <button className={`bp4-button bp4-minimal bp4-intent-warning bp4-icon-user .modifier`}></button>
             </div>
 
-            <div className="bp3-input-group .modifier register-general">
-                <input ref={email} type={"email"} className="bp3-input" placeholder="Enter your email..." autoComplete="on" />
-                <button className={`bp3-button bp3-minimal bp3-intent-warning bp3-icon-envelope .modifier`}></button>
+            <div className="bp4-input-group .modifier register-general">
+                <input ref={email} type={"email"} className="bp4-input" placeholder="Enter your email..." autoComplete="on" />
+                <button className={`bp4-button bp4-minimal bp4-intent-warning bp4-icon-envelope .modifier`}></button>
             </div>
 
-            <div className="bp3-input-group .modifier register-general">
-                <input ref={first_name} type={"text"} className="bp3-input" placeholder="Enter your first name..." autoComplete="on" />
-                <button className={`bp3-button bp3-minimal bp3-intent-warning bp3-icon-user .modifier`}></button>
+            <div className="bp4-input-group .modifier register-general">
+                <input ref={first_name} type={"text"} className="bp4-input" placeholder="Enter your first name..." autoComplete="on" />
+                <button className={`bp4-button bp4-minimal bp4-intent-warning bp4-icon-user .modifier`}></button>
             </div>
 
-            <div className="bp3-input-group .modifier register-general">
-                <input ref={last_name} type={"text"} className="bp3-input" placeholder="Enter your last name..." autoComplete="on" />
-                <button className={`bp3-button bp3-minimal bp3-intent-warning bp3-icon-user .modifier`}></button>
+            <div className="bp4-input-group .modifier register-general">
+                <input ref={last_name} type={"text"} className="bp4-input" placeholder="Enter your last name..." autoComplete="on" />
+                <button className={`bp4-button bp4-minimal bp4-intent-warning bp4-icon-user .modifier`}></button>
             </div>
 
-            <div className="bp3-input-group .modifier register-general">
-                <input ref={age} type={"number"} className="bp3-input" placeholder="Enter your feeling age..." autoComplete="on" />
-                <button className={`bp3-button bp3-minimal bp3-intent-warning bp3-icon-user .modifier`}></button>
+            <div className="bp4-input-group .modifier register-general">
+                <input ref={age} type={"number"} className="bp4-input" placeholder="Enter your feeling age..." autoComplete="on" />
+                <button className={`bp4-button bp4-minimal bp4-intent-warning bp4-icon-user .modifier`}></button>
             </div>
-            <div className="bp3-select .modifier register-general">
+            <div className="bp4-select .modifier register-general">
                 <select ref={gender}>
                     <option value="">Gender...</option>
                     <option value="M">Male</option>
@@ -95,7 +95,7 @@ let Register = () => {
                 </select>
             </div>
 
-            <div className="bp3-select .modifier register-general">
+            <div className="bp4-select .modifier register-general">
                 <select ref={type}>
                     <option selected value="">Type...</option>
                     <option value="V">Vocalist</option>
@@ -104,20 +104,20 @@ let Register = () => {
                 </select>
             </div>
 
-            <div className="bp3-input-group .modifier register-general">
-                <input ref={password}  type={passwordShow ? "text" : "password"} className="bp3-input" placeholder="Enter your password..." autoComplete="on" />
-                <button onClick={showPassword} className={`bp3-button bp3-minimal bp3-intent-warning ${passwordShow ? 'bp3-icon-unlock' : 'bp3-icon-lock'} .modifier`}></button>
+            <div className="bp4-input-group .modifier register-general">
+                <input ref={password}  type={passwordShow ? "text" : "password"} className="bp4-input" placeholder="Enter your password..." autoComplete="on" />
+                <button onClick={showPassword} className={`bp4-button bp4-minimal bp4-intent-warning ${passwordShow ? 'bp4-icon-unlock' : 'bp4-icon-lock'} .modifier`}></button>
             </div>
            
-            <div className="bp3-input-group .modifier register-general">
-                <input ref={confirm_password} type={passwordShow ? "text" : "password"} className="bp3-input" placeholder="Confirm your password..." autoComplete="on" />
-                <button onClick={showPassword} className={`bp3-button bp3-minimal bp3-intent-warning ${passwordShow ? 'bp3-icon-unlock' : 'bp3-icon-lock'} .modifier`}></button>
+            <div className="bp4-input-group .modifier register-general">
+                <input ref={confirm_password} type={passwordShow ? "text" : "password"} className="bp4-input" placeholder="Confirm your password..." autoComplete="on" />
+                <button onClick={showPassword} className={`bp4-button bp4-minimal bp4-intent-warning ${passwordShow ? 'bp4-icon-unlock' : 'bp4-icon-lock'} .modifier`}></button>
             </div>
 
 
-            <button type="button" onClick={signup} className={`bp3-button .modifier login-general ${error? 'bp3-intent-danger':'bp3-intent-success'}`}>Sign up</button>
+            <button type="button" onClick={signup} className={`bp4-button .modifier login-general ${error? 'bp4-intent-danger':'bp4-intent-success'}`}>Sign up</button>
 
-            {error? <p className="register-general register-error"><i className="bp3-icon-error"></i> {errorMessage}</p>:null}
+            {error? <p className="register-general register-error"><i className="bp4-icon-error"></i> {errorMessage}</p>:null}
             {success ? <Navigate push to="/" /> : null}
         </div>
 

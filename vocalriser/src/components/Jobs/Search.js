@@ -24,25 +24,25 @@ const Search = ({ search }) => {
     return (
         <div className="search-container">
 
-            <div className="bp3-input-group .modifier search-container-field">
-                <span className="bp3-icon bp3-icon-filter"></span>
-                <input ref={name} type="text" className="bp3-input" placeholder="Name..." />
+            <div className="bp4-input-group .modifier search-container-field">
+                <span className="bp4-icon bp4-icon-filter"></span>
+                <input ref={name} type="text" className="bp4-input" placeholder="Name..." />
             </div>
 
-            <div className="bp3-input-group .modifier search-container-field">
-                <span className="bp3-icon bp3-icon-filter"></span>
-                <input ref={language} type="text" className="bp3-input" placeholder="Language..." />
+            <div className="bp4-input-group .modifier search-container-field">
+                <span className="bp4-icon bp4-icon-filter"></span>
+                <input ref={language} type="text" className="bp4-input" placeholder="Language..." />
             </div>
 
-            <div className="bp3-input-group .modifier search-container-field">
-                <span className="bp3-icon bp3-icon-filter"></span>
-                <input ref={genre} type="text" className="bp3-input" placeholder="Genre..." />
+            <div className="bp4-input-group .modifier search-container-field">
+                <span className="bp4-icon bp4-icon-filter"></span>
+                <input ref={genre} type="text" className="bp4-input" placeholder="Genre..." />
             </div>
 
 
 
             <div className="search-container-field">
-                <button onClick={handleSearch} type="button" className="bp3-button bp3-icon-search .modifier">Search</button>
+                <button onClick={handleSearch} type="button" className="bp4-button bp4-icon-search .modifier">Search</button>
             </div>
 
         </div>
